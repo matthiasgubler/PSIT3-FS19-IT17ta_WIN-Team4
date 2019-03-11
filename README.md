@@ -1,5 +1,5 @@
 # PSIT3-FS19-IT17ta_WIN-Team3
-# SkillsSearch (Name TBD)
+# Skill7
 
 ## Authors
 * **Nicolas Salvisberg** - *Project Lead* - [salvinic](https://github.engineering.zhaw.ch/salvinic)
