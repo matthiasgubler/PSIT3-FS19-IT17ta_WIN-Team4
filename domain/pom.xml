@@ -11,5 +11,14 @@
     </parent>
     <groupId>com.zhaw.ch.skill7</groupId>
     <artifactId>domain</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.zhaw.ch.skill7</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zhaw.ch.skill7</groupId>
+            <artifactId>persistence</artifactId>
+        </dependency>
+    </dependencies>
 </project>

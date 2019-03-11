@@ -11,4 +11,10 @@
     </parent>
     <artifactId>persistence</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.zhaw.ch.skill7</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+    </dependencies>
 </project>
