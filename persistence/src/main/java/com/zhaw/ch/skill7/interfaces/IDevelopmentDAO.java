@@ -1,4 +1,4 @@
 package com.zhaw.ch.skill7.interfaces;
 
-public interface ITeamService {
+public interface IDevelopmentDAO {
 }
