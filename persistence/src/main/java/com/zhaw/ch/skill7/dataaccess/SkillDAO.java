@@ -34,7 +34,6 @@ public class SkillDAO implements ISkillDAO {
             if (currentSkill.getId() == skill.getId()) {
                 currentSkill.setName(skill.getName());
             }
-
         }
     }
 }
