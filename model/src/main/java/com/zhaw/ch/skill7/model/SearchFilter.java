@@ -13,6 +13,8 @@ public class SearchFilter {
 
     private List<AvailabilityPlan> availabilityPlanList = new ArrayList<>();
 
+
+
     public long getId() {
         return id;
     }

@@ -14,25 +14,24 @@ public class SkillRating {
 
     private SearchFilter searchFilter;
 
-    private SkillRating(long id, int rating, Skill skill){
-        this.id = id;
+    private SkillRating(int rating, Skill skill){
         this.rating = rating;
         this.skill = skill;
 
     }
 
-    public SkillRating(long id, int rating, Skill skill, Employee employee){
-        this(id, rating, skill);
+    public SkillRating(int rating, Skill skill, Employee employee){
+        this(rating, skill);
         this.employee = employee;
     }
 
-    public SkillRating(long id, int rating, Skill skill, Team team){
-        this(id, rating, skill);
+    public SkillRating(int rating, Skill skill, Team team){
+        this(rating, skill);
         this.team = team;
     }
 
-    public SkillRating(long id, int rating, Skill skill, SearchFilter searchFilter){
-        this(id, rating, skill);
+    public SkillRating(int rating, Skill skill, SearchFilter searchFilter){
+        this(rating, skill);
         this.searchFilter = searchFilter;
     }
 

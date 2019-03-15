@@ -2,18 +2,34 @@ package com.zhaw.ch.skill7.model;
 
 public class Development {
 
-    private String name;
+    private long id;
+
+    private Skill skill;
 
     private DevelopmentRating developmentRating;
 
     private Employee employee;
 
-    public String getName() {
-        return name;
+    public Development(Skill skill, DevelopmentRating developmentRating, Employee employee) {
+        this.skill = skill;
+        this.developmentRating = developmentRating;
+        this.employee = employee;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 
     public DevelopmentRating getDevelopmentRating() {

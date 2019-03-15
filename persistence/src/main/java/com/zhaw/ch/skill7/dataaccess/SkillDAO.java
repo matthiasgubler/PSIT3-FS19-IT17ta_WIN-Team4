@@ -12,18 +12,6 @@ public class SkillDAO implements ISkillDAO {
 
     private List<Skill> skillsDatabase = new ArrayList<>();
 
-    public SkillDAO() {
-        initializeDatabase();
-    }
-
-    private void initializeDatabase() {
-        addSkill(new Skill("React"));
-        addSkill(new Skill("Java"));
-        addSkill(new Skill("Blockchain"));
-        addSkill(new Skill("Oracle"));
-        addSkill(new Skill("Microservice"));
-    }
-
     @Override
     public List<Skill> readSkills() {
         return skillsDatabase;

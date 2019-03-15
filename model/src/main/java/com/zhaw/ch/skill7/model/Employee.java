@@ -13,6 +13,18 @@ public class Employee {
 
     private List<SkillRating> skillRatingList = new ArrayList<>();
 
+    private Team team;
+
+    private AvailabilityPlan availabilityPlan;
+
+    public Employee(String surname, String firstname, Team team, AvailabilityPlan availabilityPlan) {
+        this.surname = surname;
+        this.firstname = firstname;
+        this.team = team;
+        this.availabilityPlan = availabilityPlan;
+    }
+
+
     public long getId() {
         return id;
     }
@@ -43,5 +55,21 @@ public class Employee {
 
     public void setSkillRatingList(List<SkillRating> skillRatingList) {
         this.skillRatingList = skillRatingList;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public AvailabilityPlan getAvailabilityPlan() {
+        return availabilityPlan;
+    }
+
+    public void setAvailabilityPlan(AvailabilityPlan availabilityPlan) {
+        this.availabilityPlan = availabilityPlan;
     }
 }

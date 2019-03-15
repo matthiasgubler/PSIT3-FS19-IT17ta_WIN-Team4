@@ -13,6 +13,10 @@ public class Team {
 
     private List<SkillRating> skillRatingList = new ArrayList<>();
 
+    public Team(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
