@@ -21,13 +21,21 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
                 <configuration>
-                    <mainClass>com.zhaw.ch.skill7.model.Launcher</mainClass>
+                    <mainClass>com.zhaw.ch.skill7.view.Launcher</mainClass>
                     <vendor>skill7</vendor>
                 </configuration>
             </plugin>
