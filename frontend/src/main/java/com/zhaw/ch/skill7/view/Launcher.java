@@ -19,15 +19,11 @@ public class Launcher extends Application {
     private IBootable bootable;
 
     public Launcher() {
-        bootable = new ServiceRegistry();
+        bootable = ServiceRegistry.getInstance();
         bootable.boot();
-
     }
 
-    /**
-     * Initializes the root layout.
-     */
-    public void initRootLayout() {
+    private void initRootLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -44,7 +40,7 @@ public class Launcher extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Skill7");

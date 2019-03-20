@@ -9,49 +9,49 @@
                <Tab fx:id="skillsTab" text="Skills">
                    <content>
                        <AnchorPane>
-                           <fx:include source="SkillsOverview.fxml"/>
+                           <fx:include source="skill/SkillsOverview.fxml"/>
                        </AnchorPane>
                    </content>
                </Tab>
                <Tab fx:id="skillSetsTab" text="SkillSets">
                    <content>
                        <AnchorPane>
-                           <fx:include source="SkillSetsOverview.fxml"/>
+                           <fx:include source="skillset/SkillSetsOverview.fxml"/>
                        </AnchorPane>
                    </content>
                </Tab>
                <Tab fx:id="teamsTab" text="Teams">
                    <content>
                        <AnchorPane>
-                           <fx:include source="TeamsOverview.fxml"/>
+                           <fx:include source="team/TeamsOverview.fxml"/>
                        </AnchorPane>
                    </content>
                </Tab>
                <Tab fx:id="mitarbeiterTab" text="Mitarbeiter">
                    <content>
                        <AnchorPane>
-                           <fx:include source="EmployeesOverview.fxml"/>
+                           <fx:include source="employee/EmployeesOverview.fxml"/>
                        </AnchorPane>
                    </content>
                </Tab>
                <Tab fx:id="sucheTab" text="Suche">
                    <content>
                        <AnchorPane>
-                           <fx:include source="SearchOverview.fxml"/>
+                           <fx:include source="search/SearchOverview.fxml"/>
                        </AnchorPane>
                    </content>
                </Tab>
                <Tab fx:id="managementTab" text="Management">
                    <content>
                        <AnchorPane>
-                           <fx:include source="ManagementOverview.fxml"/>
+                           <fx:include source="management/ManagementOverview.fxml"/>
                        </AnchorPane>
                    </content>
                </Tab>
                <Tab fx:id="adminTab" text="Admin">
                    <content>
                        <AnchorPane>
-                           <fx:include source="AdminOverview.fxml"/>
+                           <fx:include source="admin/AdminOverview.fxml"/>
                        </AnchorPane>
                    </content>
                </Tab>

@@ -1,4 +1,4 @@
-package com.zhaw.ch.skill7.view;
+package com.zhaw.ch.skill7.view.skill;
 
 public class SkillsOverviewController {
 }

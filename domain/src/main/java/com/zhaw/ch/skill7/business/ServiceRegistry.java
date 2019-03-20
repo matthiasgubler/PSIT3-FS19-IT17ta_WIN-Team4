@@ -6,6 +6,8 @@ import com.zhaw.ch.skill7.interfaces.*;
 
 public class ServiceRegistry implements IBootable {
 
+    private static final ServiceRegistry instance = new ServiceRegistry();
+
     private IAvailabilityPlanDAO availabilityPlanDAO;
     private IDevelopmentDAO developmentDAO;
     private IEmployeeDAO employeeDAO;
@@ -14,7 +16,7 @@ public class ServiceRegistry implements IBootable {
     private ITeamDAO teamDAO;
     private DatabaseInit databaseInit;
 
-    public ServiceRegistry(){
+    private ServiceRegistry() {
         availabilityPlanDAO = new AvailabilityPlanDAO();
         developmentDAO = new DevelopmentDAO();
         employeeDAO = new EmployeeDAO();
@@ -24,32 +26,36 @@ public class ServiceRegistry implements IBootable {
         databaseInit = new DatabaseInit(developmentDAO, skillDAO, skillRatingDAO, teamDAO, employeeDAO, availabilityPlanDAO);
     }
 
+    public static ServiceRegistry getInstance() {
+        return instance;
+    }
+
     @Override
     public void boot() {
         databaseInit.initializeDatabase();
     }
 
-    public IAvailabilityPlanDAO getAvailabilityPlanDAO() {
+    IAvailabilityPlanDAO getAvailabilityPlanDAO() {
         return availabilityPlanDAO;
     }
 
-    public IDevelopmentDAO getDevelopmentDAO() {
+    IDevelopmentDAO getDevelopmentDAO() {
         return developmentDAO;
     }
 
-    public IEmployeeDAO getEmployeeDAO() {
+    IEmployeeDAO getEmployeeDAO() {
         return employeeDAO;
     }
 
-    public ISkillDAO getSkillDAO() {
+    ISkillDAO getSkillDAO() {
         return skillDAO;
     }
 
-    public ISkillRatingDAO getSkillRatingDAO() {
+    ISkillRatingDAO getSkillRatingDAO() {
         return skillRatingDAO;
     }
 
-    public ITeamDAO getTeamDAO() {
+    ITeamDAO getTeamDAO() {
         return teamDAO;
     }
 }
