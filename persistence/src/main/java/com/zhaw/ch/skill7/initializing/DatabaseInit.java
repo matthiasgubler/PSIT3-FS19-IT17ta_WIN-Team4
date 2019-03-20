@@ -2,7 +2,6 @@ package com.zhaw.ch.skill7.initializing;
 
 import com.zhaw.ch.skill7.interfaces.*;
 import com.zhaw.ch.skill7.model.*;
-import com.zhaw.ch.skill7.view.*;
 import com.zhaw.ch.skill7.model.builder.AvailabilityPlanBuilder;
 
 import java.util.Arrays;
