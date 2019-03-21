@@ -7,8 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Observable;
 
-public class SkillCreationController {
+
+public class SkillCreationController extends Observable {
 
     private ISkillService skillService;
 
@@ -30,6 +32,8 @@ public class SkillCreationController {
         if (!StringUtils.isEmpty(skillNameValue)) {
             skillService.createSkill(new Skill(skillNameValue));
             newSkillTextField.setText("");
+            setChanged();
+            notifyObservers();
         }
     }
 

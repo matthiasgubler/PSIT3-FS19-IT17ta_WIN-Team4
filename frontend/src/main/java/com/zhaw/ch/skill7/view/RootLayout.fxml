@@ -2,60 +2,63 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhaw.ch.skill7.view.RootLayoutController">
-   <center>
-       <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-           <tabs>
-               <Tab fx:id="skillsTab" text="Skills">
-                   <content>
-                       <AnchorPane>
-                           <fx:include source="skill/SkillsOverview.fxml"/>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab fx:id="skillSetsTab" text="SkillSets">
-                   <content>
-                       <AnchorPane>
-                           <fx:include source="skillset/SkillSetsOverview.fxml"/>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab fx:id="teamsTab" text="Teams">
-                   <content>
-                       <AnchorPane>
-                           <fx:include source="team/TeamsOverview.fxml"/>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab fx:id="mitarbeiterTab" text="Mitarbeiter">
-                   <content>
-                       <AnchorPane>
-                           <fx:include source="employee/EmployeesOverview.fxml"/>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab fx:id="sucheTab" text="Suche">
-                   <content>
-                       <AnchorPane>
-                           <fx:include source="search/SearchOverview.fxml"/>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab fx:id="managementTab" text="Management">
-                   <content>
-                       <AnchorPane>
-                           <fx:include source="management/ManagementOverview.fxml"/>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab fx:id="adminTab" text="Admin">
-                   <content>
-                       <AnchorPane>
-                           <fx:include source="admin/AdminOverview.fxml"/>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-           </tabs>
-       </TabPane>
-   </center>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            fx:controller="com.zhaw.ch.skill7.view.RootLayoutController">
+    <center>
+        <TabPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity"
+                 minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE"
+                 xmlns="http://javafx.com/javafx/8">
+            <tabs>
+                <Tab fx:id="skillsTab" text="Skills">
+                    <content>
+                        <AnchorPane>
+                            <fx:include source="skill/SkillsOverview.fxml"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="skillSetsTab" text="SkillSets">
+                    <content>
+                        <AnchorPane>
+                            <fx:include source="skillset/SkillSetsOverview.fxml"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="teamsTab" text="Teams">
+                    <content>
+                        <AnchorPane>
+                            <fx:include source="team/TeamsOverview.fxml"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="mitarbeiterTab" text="Mitarbeiter">
+                    <content>
+                        <AnchorPane>
+                            <fx:include source="employee/EmployeesOverview.fxml"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="sucheTab" text="Suche">
+                    <content>
+                        <AnchorPane>
+                            <fx:include source="search/SearchOverview.fxml"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="managementTab" text="Management">
+                    <content>
+                        <AnchorPane>
+                            <fx:include source="management/ManagementOverview.fxml"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="adminTab" text="Admin">
+                    <content>
+                        <AnchorPane>
+                            <fx:include source="admin/AdminOverview.fxml"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>

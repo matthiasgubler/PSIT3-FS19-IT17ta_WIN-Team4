@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class Launcher extends Application {
 
-
     private Stage primaryStage;
     private BorderPane rootLayout;
 
