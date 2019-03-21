@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="126.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.172-ea"
             fx:controller="com.zhaw.ch.skill7.view.skill.SkillCreationController">
     <GridPane prefHeight="347.0" prefWidth="600.0">
@@ -17,11 +17,9 @@
             <RowConstraints fillHeight="false" maxHeight="313.0" minHeight="10.0" prefHeight="313.0" valignment="TOP"
                             vgrow="SOMETIMES"/>
         </rowConstraints>
-        <children>
-            <Label text="Titel"/>
-            <TextField fx:id="newSkillTextField" GridPane.rowIndex="1"/>
-            <Button mnemonicParsing="false" onAction="#creationButtonClicked" prefHeight="27.0" prefWidth="146.0"
-                    text="Erfassen" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        </children>
+        <Label text="Titel"/>
+        <TextField fx:id="newSkillTextField" GridPane.rowIndex="1"/>
+        <Button mnemonicParsing="false" onAction="#creationButtonClicked" prefHeight="27.0" prefWidth="146.0"
+                text="Erfassen" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
     </GridPane>
 </AnchorPane>

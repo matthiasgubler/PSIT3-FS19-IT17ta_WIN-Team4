@@ -1,17 +1,15 @@
 package com.zhaw.ch.skill7.model;
 
-public class Development {
+public class Development extends SkillReference {
 
     private long id;
-
-    private Skill skill;
 
     private DevelopmentRating developmentRating;
 
     private Employee employee;
 
     public Development(Skill skill, DevelopmentRating developmentRating, Employee employee) {
-        this.skill = skill;
+        super(skill);
         this.developmentRating = developmentRating;
         this.employee = employee;
     }
@@ -22,14 +20,6 @@ public class Development {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public void setSkill(Skill skill) {
-        this.skill = skill;
     }
 
     public DevelopmentRating getDevelopmentRating() {

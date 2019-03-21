@@ -10,15 +10,19 @@ public class DatabaseInit {
 
     private IDevelopmentDAO developmentDAO;
     private ISkillDAO skillDAO;
-    private ISkillRatingDAO skillRatingDAO;
+    private ISkillRatingDAO skillTeamRatingDAO;
+    private ISkillRatingDAO skillEmployeeRatingDAO;
+    private ISkillRatingDAO skillSearchFilterRatingDAO;
     private ITeamDAO teamDAO;
     private IEmployeeDAO employeeDAO;
     private IAvailabilityPlanDAO availabilityPlanDAO;
 
-    public DatabaseInit(IDevelopmentDAO developmentDAO, ISkillDAO skillDAO, ISkillRatingDAO skillRatingDAO, ITeamDAO teamDAO, IEmployeeDAO employeeDAO, IAvailabilityPlanDAO availabilityPlanDAO) {
+    public DatabaseInit(IDevelopmentDAO developmentDAO, ISkillDAO skillDAO, ISkillRatingDAO skillTeamRatingDAO, ISkillRatingDAO skillEmployeeRatingDAO, ISkillRatingDAO skillSearchFilterRatingDAO, ITeamDAO teamDAO, IEmployeeDAO employeeDAO, IAvailabilityPlanDAO availabilityPlanDAO) {
         this.developmentDAO = developmentDAO;
         this.skillDAO = skillDAO;
-        this.skillRatingDAO = skillRatingDAO;
+        this.skillTeamRatingDAO = skillTeamRatingDAO;
+        this.skillEmployeeRatingDAO = skillEmployeeRatingDAO;
+        this.skillSearchFilterRatingDAO = skillSearchFilterRatingDAO;
         this.teamDAO = teamDAO;
         this.employeeDAO = employeeDAO;
         this.availabilityPlanDAO = availabilityPlanDAO;
@@ -31,12 +35,13 @@ public class DatabaseInit {
         Skill skillOracleDB = new Skill("Oracle DB");
         Skill skillMicroservice = new Skill("Microservice");
 
-        addAllSkills(skillReact, skillJava, skillBlockchain, skillOracleDB, skillMicroservice);
+        addAll(skillDAO, skillReact, skillJava, skillBlockchain, skillOracleDB, skillMicroservice);
 
         Team teamSkill7 = new Team("Skill7");
         Team teamFooBar = new Team("FooBar");
         Team teamEForce = new Team("EForce");
-        addAllTeams(teamSkill7, teamFooBar, teamEForce);
+        Team teamFred = new Team("Fred");
+        addAll(teamDAO, teamSkill7, teamFooBar, teamEForce, teamFred);
 
         AvailabilityPlan availabilityPlan1 = AvailabilityPlanBuilder.anAvailabilityPlan().withMondayAvailability(Availability.AFTERNOON).build();
         AvailabilityPlan availabilityPlan2 = AvailabilityPlanBuilder.anAvailabilityPlan().withMondayAvailability(Availability.NOT_AVAILABLE).build();
@@ -49,9 +54,9 @@ public class DatabaseInit {
         AvailabilityPlan availabilityPlan9 = AvailabilityPlanBuilder.anAvailabilityPlan().withFridayAvailability(Availability.NOT_AVAILABLE).build();
         AvailabilityPlan availabilityPlan10 = AvailabilityPlanBuilder.anAvailabilityPlan().build();
         AvailabilityPlan availabilityPlan11 = AvailabilityPlanBuilder.anAvailabilityPlan().build();
-        AvailabilityPlan availabilityPlan12 = AvailabilityPlanBuilder.anAvailabilityPlan().build();
+        AvailabilityPlan availabilityPlan12 = AvailabilityPlanBuilder.anAvailabilityPlan().withTuesdayAvailability(Availability.MORNING).build();
 
-        addAllAvailabilityPlans(availabilityPlan1,availabilityPlan2,availabilityPlan3,availabilityPlan4,availabilityPlan5,availabilityPlan6,availabilityPlan7,availabilityPlan8,availabilityPlan9,availabilityPlan10,availabilityPlan11,availabilityPlan12);
+        addAll(availabilityPlanDAO, availabilityPlan1,availabilityPlan2,availabilityPlan3,availabilityPlan4,availabilityPlan5,availabilityPlan6,availabilityPlan7,availabilityPlan8,availabilityPlan9,availabilityPlan10,availabilityPlan11,availabilityPlan12);
 
         Employee employeeMischa = new Employee("Kolb", "Mischa", teamSkill7, availabilityPlan1);
         Employee employeeNicolas = new Employee("Salvisberg", "Nicolas", teamSkill7, availabilityPlan2);
@@ -68,7 +73,7 @@ public class DatabaseInit {
         Employee employeeThomas = new Employee("Deutsch", "Thomas", teamEForce, availabilityPlan11);
         Employee employeeFred = new Employee("Heierli", "Fred", teamEForce, availabilityPlan12);
 
-        addAllEmployees(employeeMischa,employeeNicolas,employeeOliver,employeeValentino,employeeMatthias,employeeJunior,employeeMarkus,employeePhilipp,employeeJames,employeeDaniela,employeeThomas,employeeFred);
+        addAll(employeeDAO, employeeMischa,employeeNicolas,employeeOliver,employeeValentino,employeeMatthias,employeeJunior,employeeMarkus,employeePhilipp,employeeJames,employeeDaniela,employeeThomas,employeeFred);
 
         Development development1 = new Development(skillReact, DevelopmentRating.HIGH, employeeMischa);
         Development development2 = new Development(skillReact, DevelopmentRating.LOW, employeeDaniela);
@@ -81,58 +86,40 @@ public class DatabaseInit {
         Development development9 = new Development(skillJava, DevelopmentRating.MEDIUM, employeePhilipp);
         Development development10 = new Development(skillOracleDB, DevelopmentRating.LOW, employeeDaniela);
 
-        addAllDevelopments(development1,development2,development3,development4,development5,development6,development7,development8,development9,development10);
+        addAll(developmentDAO, development1,development2,development3,development4,development5,development6,development7,development8,development9,development10);
 
-        SkillRating skillRatingTeam1 = new SkillRating(8, skillJava, teamSkill7);
-        SkillRating skillRatingTeam2 = new SkillRating(2, skillOracleDB, teamSkill7);
-        SkillRating skillRatingTeam3 = new SkillRating(6, skillReact, teamFooBar);
-        SkillRating skillRatingTeam4 = new SkillRating(4, skillMicroservice, teamFooBar);
-        SkillRating skillRatingTeam5 = new SkillRating(10, skillJava, teamFooBar);
-        SkillRating skillRatingTeam6 = new SkillRating(9, skillBlockchain, teamEForce);
-        SkillRating skillRatingTeam7 = new SkillRating(5, skillReact, teamEForce);
+        SkillRating skillRatingTeam1 = new SkillTeamRating(8, skillJava, teamSkill7);
+        SkillRating skillRatingTeam2 = new SkillTeamRating(2, skillOracleDB, teamSkill7);
+        SkillRating skillRatingTeam3 = new SkillTeamRating(6, skillReact, teamFooBar);
+        SkillRating skillRatingTeam4 = new SkillTeamRating(4, skillMicroservice, teamFooBar);
+        SkillRating skillRatingTeam5 = new SkillTeamRating(10, skillJava, teamFooBar);
+        SkillRating skillRatingTeam6 = new SkillTeamRating(9, skillBlockchain, teamEForce);
+        SkillRating skillRatingTeam7 = new SkillTeamRating(5, skillReact, teamEForce);
 
-        SkillRating skillRatingEmployee1 = new SkillRating(9, skillJava, employeeMatthias);
-        SkillRating skillRatingEmployee2 = new SkillRating(5, skillReact, employeeMatthias);
-        SkillRating skillRatingEmployee3 = new SkillRating(4, skillMicroservice, employeeMatthias);
-        SkillRating skillRatingEmployee4 = new SkillRating(7, skillJava, employeeMischa);
-        SkillRating skillRatingEmployee5 = new SkillRating(6, skillJava, employeeNicolas);
-        SkillRating skillRatingEmployee6 = new SkillRating(9, skillJava, employeeOliver);
-        SkillRating skillRatingEmployee7 = new SkillRating(6, skillJava, employeeValentino);
-        SkillRating skillRatingEmployee8 = new SkillRating(3, skillJava, employeeJunior);
-        SkillRating skillRatingEmployee9 = new SkillRating(5, skillJava, employeeMarkus);
-        SkillRating skillRatingEmployee10 = new SkillRating(2, skillReact, employeePhilipp);
-        SkillRating skillRatingEmployee11 = new SkillRating(9, skillBlockchain, employeePhilipp);
-        SkillRating skillRatingEmployee12 = new SkillRating(4, skillJava, employeePhilipp);
-        SkillRating skillRatingEmployee13 = new SkillRating(7, skillJava, employeeJames);
-        SkillRating skillRatingEmployee14 = new SkillRating(2, skillJava, employeeDaniela);
-        SkillRating skillRatingEmployee15 = new SkillRating(9, skillJava, employeeThomas);
-        SkillRating skillRatingEmployee16 = new SkillRating(6, skillJava, employeeFred);
+        SkillRating skillRatingEmployee1 = new SkillEmployeeRating(9, skillJava, employeeMatthias);
+        SkillRating skillRatingEmployee2 = new SkillEmployeeRating(5, skillReact, employeeMatthias);
+        SkillRating skillRatingEmployee3 = new SkillEmployeeRating(4, skillMicroservice, employeeMatthias);
+        SkillRating skillRatingEmployee4 = new SkillEmployeeRating(7, skillJava, employeeMischa);
+        SkillRating skillRatingEmployee5 = new SkillEmployeeRating(6, skillJava, employeeNicolas);
+        SkillRating skillRatingEmployee6 = new SkillEmployeeRating(9, skillJava, employeeOliver);
+        SkillRating skillRatingEmployee7 = new SkillEmployeeRating(6, skillJava, employeeValentino);
+        SkillRating skillRatingEmployee8 = new SkillEmployeeRating(3, skillJava, employeeJunior);
+        SkillRating skillRatingEmployee9 = new SkillEmployeeRating(5, skillJava, employeeMarkus);
+        SkillRating skillRatingEmployee10 = new SkillEmployeeRating(2, skillReact, employeePhilipp);
+        SkillRating skillRatingEmployee11 = new SkillEmployeeRating(9, skillBlockchain, employeePhilipp);
+        SkillRating skillRatingEmployee12 = new SkillEmployeeRating(4, skillJava, employeePhilipp);
+        SkillRating skillRatingEmployee13 = new SkillEmployeeRating(7, skillJava, employeeJames);
+        SkillRating skillRatingEmployee14 = new SkillEmployeeRating(2, skillJava, employeeDaniela);
+        SkillRating skillRatingEmployee15 = new SkillEmployeeRating(9, skillJava, employeeThomas);
+        SkillRating skillRatingEmployee16 = new SkillEmployeeRating(6, skillJava, employeeFred);
 
-        addAllSkillRatings(skillRatingTeam1, skillRatingTeam2, skillRatingTeam3, skillRatingTeam4, skillRatingTeam5, skillRatingTeam6, skillRatingTeam7, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16);
+        addAll(skillTeamRatingDAO, skillRatingTeam1, skillRatingTeam2, skillRatingTeam3, skillRatingTeam4, skillRatingTeam5, skillRatingTeam6, skillRatingTeam7);
+        addAll(skillEmployeeRatingDAO, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16);
     }
 
-    private void addAllSkills(Skill... skills) {
-        Arrays.asList(skills).forEach(skillDAO::addSkill);
-    }
-
-    private void addAllTeams(Team... teams) {
-        Arrays.asList(teams).forEach(teamDAO::addTeam);
-    }
-
-    private void addAllAvailabilityPlans(AvailabilityPlan... availabilityPlans) {
-        Arrays.asList(availabilityPlans).forEach(availabilityPlanDAO::addAvailabilityPlan);
-    }
-
-    private void addAllEmployees(Employee... employees) {
-        Arrays.asList(employees).forEach(employeeDAO::addEmployee);
-    }
-
-    private void addAllDevelopments(Development... developments) {
-        Arrays.asList(developments).forEach(developmentDAO::addDevelopment);
-    }
-
-    private void addAllSkillRatings(SkillRating... skillRatings) {
-        Arrays.asList(skillRatings).forEach(skillRatingDAO::addSkillRating);
+    @SafeVarargs
+    private final <T> void addAll(IGenericDAO<T> dao, T... objects){
+        Arrays.asList(objects).forEach(dao::add);
     }
 
 }

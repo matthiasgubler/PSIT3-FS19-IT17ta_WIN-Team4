@@ -12,7 +12,9 @@ public class ServiceRegistry implements IBootable {
     private IDevelopmentDAO developmentDAO;
     private IEmployeeDAO employeeDAO;
     private ISkillDAO skillDAO;
-    private ISkillRatingDAO skillRatingDAO;
+    private ISkillRatingDAO skillTeamRatingDAO;
+    private ISkillRatingDAO skillEmployeeRatingDAO;
+    private ISkillRatingDAO skillSearchFilterRatingDAO;
     private ITeamDAO teamDAO;
     private DatabaseInit databaseInit;
 
@@ -21,9 +23,11 @@ public class ServiceRegistry implements IBootable {
         developmentDAO = new DevelopmentDAO();
         employeeDAO = new EmployeeDAO();
         skillDAO = new SkillDAO();
-        skillRatingDAO = new SkillRatingDAO();
+        skillTeamRatingDAO = new SkillRatingDAO();
+        skillEmployeeRatingDAO = new SkillRatingDAO();
+        skillSearchFilterRatingDAO = new SkillRatingDAO();
         teamDAO = new TeamDAO();
-        databaseInit = new DatabaseInit(developmentDAO, skillDAO, skillRatingDAO, teamDAO, employeeDAO, availabilityPlanDAO);
+        databaseInit = new DatabaseInit(developmentDAO, skillDAO, skillTeamRatingDAO, skillEmployeeRatingDAO, skillSearchFilterRatingDAO, teamDAO, employeeDAO, availabilityPlanDAO);
     }
 
     public static ServiceRegistry getInstance() {
@@ -51,8 +55,16 @@ public class ServiceRegistry implements IBootable {
         return skillDAO;
     }
 
-    ISkillRatingDAO getSkillRatingDAO() {
-        return skillRatingDAO;
+    public ISkillRatingDAO getSkillTeamRatingDAO() {
+        return skillTeamRatingDAO;
+    }
+
+    public ISkillRatingDAO getSkillEmployeeRatingDAO() {
+        return skillEmployeeRatingDAO;
+    }
+
+    public ISkillRatingDAO getSkillSearchFilterRatingDAO() {
+        return skillSearchFilterRatingDAO;
     }
 
     ITeamDAO getTeamDAO() {

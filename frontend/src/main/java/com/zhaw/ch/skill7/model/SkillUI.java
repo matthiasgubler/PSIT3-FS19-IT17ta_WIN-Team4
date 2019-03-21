@@ -2,7 +2,7 @@ package com.zhaw.ch.skill7.model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class SkillUI {
+public class SkillUI extends Skill{
     private final SimpleStringProperty id = new SimpleStringProperty("");
     private final SimpleStringProperty name = new SimpleStringProperty("");
 
@@ -11,11 +11,11 @@ public class SkillUI {
         setName(skill.getName());
     }
 
-    public String getId() {
-        return id.get();
+    public long getId() {
+        return Long.valueOf(id.get());
     }
 
-    public void setId(String id) {
+    private void setId(String id) {
         this.id.set(id);
     }
 
@@ -23,7 +23,7 @@ public class SkillUI {
         return id;
     }
 
-    public String getName() {
+    public String getNameProperty() {
         return name.get();
     }
 

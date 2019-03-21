@@ -1,0 +1,20 @@
+package com.zhaw.ch.skill7.model;
+
+public class SkillEmployeeRating extends SkillRating{
+
+    private Employee employee;
+
+    public SkillEmployeeRating(int rating, Skill skill, Employee employee){
+        super(rating, skill);
+        this.employee = employee;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+}

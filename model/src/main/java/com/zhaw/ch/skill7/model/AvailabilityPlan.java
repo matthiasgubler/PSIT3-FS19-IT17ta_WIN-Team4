@@ -1,8 +1,6 @@
 package com.zhaw.ch.skill7.model;
 
-public class AvailabilityPlan {
-
-    private long id;
+public class AvailabilityPlan extends Identifyable {
 
     private Availability mondayAvailability;
 
@@ -13,14 +11,6 @@ public class AvailabilityPlan {
     private Availability thursdayAvailability;
 
     private Availability fridayAvailability;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Availability getMondayAvailability() {
         return mondayAvailability;

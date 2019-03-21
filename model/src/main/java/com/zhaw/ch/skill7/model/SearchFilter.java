@@ -3,25 +3,13 @@ package com.zhaw.ch.skill7.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFilter {
-
-    private long id;
+public class SearchFilter extends Identifyable {
 
     private String name;
 
     private List<SkillRating> skillRatingList = new ArrayList<>();
 
     private List<AvailabilityPlan> availabilityPlanList = new ArrayList<>();
-
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

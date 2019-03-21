@@ -20,10 +20,10 @@ public class SkillService implements ISkillService {
 
     @Override
     public void createSkill(Skill skill) {
-        skillDAO.addSkill(skill);
+        skillDAO.add(skill);
     }
 
     public List<Skill> readSkills() {
-        return skillDAO.readSkills();
+        return skillDAO.read();
     }
 }

@@ -3,9 +3,7 @@ package com.zhaw.ch.skill7.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee {
-
-    private long id;
+public class Employee extends Identifyable{
 
     private String surname;
 
@@ -22,15 +20,6 @@ public class Employee {
         this.firstname = firstname;
         this.team = team;
         this.availabilityPlan = availabilityPlan;
-    }
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getSurname() {
