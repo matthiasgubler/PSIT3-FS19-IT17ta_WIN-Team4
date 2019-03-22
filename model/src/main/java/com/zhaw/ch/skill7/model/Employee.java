@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Employee extends IdUpdateableEntity<Employee> {
 
-    private String surname;
+    private String lastname;
 
     private String firstname;
 
@@ -15,19 +15,23 @@ public class Employee extends IdUpdateableEntity<Employee> {
 
     private AvailabilityPlan availabilityPlan;
 
-    public Employee(String surname, String firstname, Team team, AvailabilityPlan availabilityPlan) {
-        this.surname = surname;
+    public Employee(String lastname, String firstname) {
+        this.lastname = lastname;
         this.firstname = firstname;
+    }
+
+    public Employee(String lastname, String firstname, Team team, AvailabilityPlan availabilityPlan) {
+        this(lastname, firstname);
         this.team = team;
         this.availabilityPlan = availabilityPlan;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getFirstname() {
@@ -62,10 +66,14 @@ public class Employee extends IdUpdateableEntity<Employee> {
         this.availabilityPlan = availabilityPlan;
     }
 
+    public SkillEmployeeRating createSkillRating(int rating, Skill skill) {
+        return new SkillEmployeeRating(rating, skill, this);
+    }
+
     @Override
     public void update(Employee objectWithNewData) {
         this.setFirstname(objectWithNewData.getFirstname());
-        this.setSurname(objectWithNewData.getSurname());
+        this.setLastname(objectWithNewData.getLastname());
         this.setTeam(objectWithNewData.getTeam());
     }
 }

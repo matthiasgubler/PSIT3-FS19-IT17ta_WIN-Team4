@@ -1,8 +1,7 @@
 package com.zhaw.ch.skill7.view.skill;
 
-import com.zhaw.ch.skill7.business.SkillService;
-import com.zhaw.ch.skill7.interfaces.ISkillService;
-import com.zhaw.ch.skill7.model.Skill;
+import com.zhaw.ch.skill7.domain.CompanyData;
+import com.zhaw.ch.skill7.interfaces.ICompany;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.apache.commons.lang3.StringUtils;
@@ -12,17 +11,17 @@ import java.util.Observable;
 
 public class SkillCreationController extends Observable {
 
-    private final ISkillService skillService;
+    private final ICompany company;
 
     @FXML
     private TextField newSkillTextField;
 
     public SkillCreationController() {
-        this.skillService = new SkillService();
+        this.company = new CompanyData();
     }
 
-    public SkillCreationController(ISkillService skillService) {
-        this.skillService = skillService;
+    public SkillCreationController(ICompany company) {
+        this.company = company;
     }
 
     @FXML
@@ -30,7 +29,7 @@ public class SkillCreationController extends Observable {
         String skillNameValue = newSkillTextField.getText();
         System.out.println("Creation Button Clicked with value of TextField: " + skillNameValue);
         if (!StringUtils.isEmpty(skillNameValue)) {
-            skillService.createSkill(new Skill(skillNameValue));
+            company.createSkill(skillNameValue);
             newSkillTextField.setText("");
             setChanged();
             notifyObservers();

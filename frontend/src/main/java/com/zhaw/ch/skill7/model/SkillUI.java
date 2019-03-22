@@ -2,7 +2,7 @@ package com.zhaw.ch.skill7.model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class SkillUI extends Skill{
+public class SkillUI extends Skill {
     private final SimpleStringProperty id = new SimpleStringProperty("");
     private final SimpleStringProperty name = new SimpleStringProperty("");
 

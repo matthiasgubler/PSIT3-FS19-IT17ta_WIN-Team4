@@ -41,19 +41,19 @@ public class ServiceRegistry implements IBootable {
         databaseInit.initializeDatabase();
     }
 
-    IGenericDAO<AvailabilityPlan> getAvailabilityPlanDAO() {
+    public IGenericDAO<AvailabilityPlan> getAvailabilityPlanDAO() {
         return availabilityPlanDAO;
     }
 
-    IGenericDAO<Development> getDevelopmentDAO() {
+    public IGenericDAO<Development> getDevelopmentDAO() {
         return developmentDAO;
     }
 
-    IGenericDAO<Employee> getEmployeeDAO() {
+    public IGenericDAO<Employee> getEmployeeDAO() {
         return employeeDAO;
     }
 
-    IGenericDAO<Skill> getSkillDAO() {
+    public IGenericDAO<Skill> getSkillDAO() {
         return skillDAO;
     }
 
@@ -69,7 +69,7 @@ public class ServiceRegistry implements IBootable {
         return skillSearchFilterRatingDAO;
     }
 
-    IGenericDAO<Team> getTeamDAO() {
+    public IGenericDAO<Team> getTeamDAO() {
         return teamDAO;
     }
 }

@@ -35,6 +35,10 @@ public class SearchFilter extends IdUpdateableEntity<SearchFilter> {
         this.availabilityPlanList = availabilityPlanList;
     }
 
+    public SkillSearchFilterRating createSkillRating(int rating, Skill skill) {
+        return new SkillSearchFilterRating(rating, skill, this);
+    }
+
     @Override
     public void update(SearchFilter objectWithNewData) {
         this.setName(objectWithNewData.getName());

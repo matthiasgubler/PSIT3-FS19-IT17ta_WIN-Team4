@@ -1,7 +1,7 @@
 package com.zhaw.ch.skill7.view.skill;
 
-import com.zhaw.ch.skill7.business.SkillService;
-import com.zhaw.ch.skill7.interfaces.ISkillService;
+import com.zhaw.ch.skill7.domain.CompanyData;
+import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.model.SkillUI;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -18,17 +18,17 @@ public class SkillsTableController implements Observer {
     @FXML
     private ObservableList<SkillUI> skillUIObservableList;
 
-    private final ISkillService skillService;
+    private final ICompany company;
 
     @FXML
     private TableView<SkillUI> tableView;
 
     public SkillsTableController() {
-        this.skillService = new SkillService();
+        this.company = new CompanyData();
     }
 
-    public SkillsTableController(ISkillService skillService) {
-        this.skillService = skillService;
+    public SkillsTableController(ICompany company) {
+        this.company = company;
     }
 
     @FXML
@@ -53,7 +53,7 @@ public class SkillsTableController implements Observer {
     }
 
     private List<SkillUI> loadAndMapSkills() {
-        return skillService.readSkills().stream().map(SkillUI::new).collect(Collectors.toList());
+        return company.getSkills().stream().map(SkillUI::new).collect(Collectors.toList());
     }
 
     @Override

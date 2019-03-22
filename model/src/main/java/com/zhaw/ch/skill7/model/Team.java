@@ -39,6 +39,10 @@ public class Team extends IdUpdateableEntity<Team> {
         this.skillRatingList = skillRatingList;
     }
 
+    public SkillTeamRating createSkillRating(int rating, Skill skill) {
+        return new SkillTeamRating(rating, skill, this);
+    }
+
     @Override
     public void update(Team objectWithNewData) {
         this.setName(objectWithNewData.getName());
