@@ -12,7 +12,7 @@ import java.util.Observable;
 
 public class SkillCreationController extends Observable {
 
-    private ISkillService skillService;
+    private final ISkillService skillService;
 
     @FXML
     private TextField newSkillTextField;

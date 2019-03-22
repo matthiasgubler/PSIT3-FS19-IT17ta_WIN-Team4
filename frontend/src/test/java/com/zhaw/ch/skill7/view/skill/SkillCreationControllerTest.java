@@ -22,7 +22,7 @@ class SkillCreationControllerTest extends BaseJavaFXTest {
     @Mock
     private ISkillService skillServiceMock;
 
-    private TextField newSkillTextFieldStub = new TextField();
+    private final TextField newSkillTextFieldStub = new TextField();
 
     @BeforeEach
     void setUp() {

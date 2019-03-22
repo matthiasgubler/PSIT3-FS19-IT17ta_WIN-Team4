@@ -1,6 +1,6 @@
 package com.zhaw.ch.skill7.model;
 
-public class Development extends SkillReference {
+public class Development extends SkillReference<Development> {
 
     private long id;
 
@@ -36,5 +36,10 @@ public class Development extends SkillReference {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    @Override
+    public void update(Development objectWithNewData) {
+        this.setDevelopmentRating(objectWithNewData.getDevelopmentRating());
     }
 }

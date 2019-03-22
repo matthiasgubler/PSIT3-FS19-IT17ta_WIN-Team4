@@ -3,7 +3,7 @@ package com.zhaw.ch.skill7.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFilter extends Identifyable {
+public class SearchFilter extends IdUpdateableEntity<SearchFilter> {
 
     private String name;
 
@@ -33,5 +33,12 @@ public class SearchFilter extends Identifyable {
 
     public void setAvailabilityPlanList(List<AvailabilityPlan> availabilityPlanList) {
         this.availabilityPlanList = availabilityPlanList;
+    }
+
+    @Override
+    public void update(SearchFilter objectWithNewData) {
+        this.setName(objectWithNewData.getName());
+        this.setAvailabilityPlanList(objectWithNewData.getAvailabilityPlanList());
+        this.setSkillRatingList(objectWithNewData.getSkillRatingList());
     }
 }

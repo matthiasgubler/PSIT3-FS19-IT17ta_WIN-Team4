@@ -18,4 +18,8 @@ public class Identifyable {
     public void setId(long id) {
         this.id = id;
     }
+
+    public boolean isIdEquals(Identifyable identifyable) {
+        return this.getId() == identifyable.getId();
+    }
 }

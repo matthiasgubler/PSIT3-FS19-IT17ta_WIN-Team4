@@ -1,11 +1,9 @@
 package com.zhaw.ch.skill7.view;
 
 import com.zhaw.ch.skill7.business.ServiceRegistry;
-import com.zhaw.ch.skill7.interfaces.IBootable;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,13 +11,9 @@ import java.io.IOException;
 public class Launcher extends Application {
 
     private Stage primaryStage;
-    private BorderPane rootLayout;
-
-    private IBootable bootable;
 
     public Launcher() {
-        bootable = ServiceRegistry.getInstance();
-        bootable.boot();
+        ServiceRegistry.getInstance().boot();
     }
 
     private void initRootLayout() {
@@ -27,10 +21,7 @@ public class Launcher extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("RootLayout.fxml"));
-            rootLayout = loader.load();
-
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
+            Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

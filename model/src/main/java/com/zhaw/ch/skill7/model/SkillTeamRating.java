@@ -1,10 +1,10 @@
 package com.zhaw.ch.skill7.model;
 
-public class SkillTeamRating extends SkillRating{
+public class SkillTeamRating extends SkillRating {
 
     private Team team;
 
-    public SkillTeamRating(int rating, Skill skill, Team team){
+    public SkillTeamRating(int rating, Skill skill, Team team) {
         super(rating, skill);
         this.team = team;
     }

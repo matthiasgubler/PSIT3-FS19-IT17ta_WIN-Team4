@@ -18,7 +18,7 @@ public class SkillsTableController implements Observer {
     @FXML
     private ObservableList<SkillUI> skillUIObservableList;
 
-    private ISkillService skillService;
+    private final ISkillService skillService;
 
     @FXML
     private TableView<SkillUI> tableView;

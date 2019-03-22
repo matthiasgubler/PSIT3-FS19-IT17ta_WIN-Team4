@@ -1,6 +1,6 @@
 package com.zhaw.ch.skill7.model;
 
-public class AvailabilityPlan extends Identifyable {
+public class AvailabilityPlan extends IdUpdateableEntity<AvailabilityPlan> {
 
     private Availability mondayAvailability;
 
@@ -52,4 +52,12 @@ public class AvailabilityPlan extends Identifyable {
         this.fridayAvailability = fridayAvailability;
     }
 
+    @Override
+    public void update(AvailabilityPlan objectWithNewData) {
+        this.setMondayAvailability(objectWithNewData.getMondayAvailability());
+        this.setTuesdayAvailability(objectWithNewData.getTuesdayAvailability());
+        this.setWednesdayAvailability(objectWithNewData.getWednesdayAvailability());
+        this.setThursdayAvailability(objectWithNewData.getThursdayAvailability());
+        this.setFridayAvailability(objectWithNewData.getFridayAvailability());
+    }
 }

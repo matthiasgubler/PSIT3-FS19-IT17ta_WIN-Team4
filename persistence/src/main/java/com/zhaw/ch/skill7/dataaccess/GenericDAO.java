@@ -1,16 +1,16 @@
 package com.zhaw.ch.skill7.dataaccess;
 
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
-import com.zhaw.ch.skill7.model.Identifyable;
+import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GenericDAO<T extends Identifyable> implements IGenericDAO<T> {
+public class GenericDAO<T extends IdUpdateableEntity<T>> implements IGenericDAO<T> {
 
     private int currentId = 1;
 
-    private List<T> objectDatabase = new ArrayList<>();
+    private final List<T> objectDatabase = new ArrayList<>();
 
 
     @Override
@@ -32,11 +32,10 @@ public abstract class GenericDAO<T extends Identifyable> implements IGenericDAO<
     @Override
     public void update(T object) {
         for (T currentObject : objectDatabase) {
-            if (currentObject.getId() == object.getId()) {
-                updateObject(currentObject, object);
+            if (currentObject.isIdEquals(object)) {
+                currentObject.update(object);
             }
         }
     }
 
-    protected abstract void updateObject(T object, T newValuesObject);
 }

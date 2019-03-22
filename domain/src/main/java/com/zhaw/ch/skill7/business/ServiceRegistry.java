@@ -1,32 +1,34 @@
 package com.zhaw.ch.skill7.business;
 
-import com.zhaw.ch.skill7.dataaccess.*;
+import com.zhaw.ch.skill7.dataaccess.GenericDAO;
 import com.zhaw.ch.skill7.initializing.DatabaseInit;
-import com.zhaw.ch.skill7.interfaces.*;
+import com.zhaw.ch.skill7.interfaces.IBootable;
+import com.zhaw.ch.skill7.interfaces.IGenericDAO;
+import com.zhaw.ch.skill7.model.*;
 
 public class ServiceRegistry implements IBootable {
 
     private static final ServiceRegistry instance = new ServiceRegistry();
 
-    private IAvailabilityPlanDAO availabilityPlanDAO;
-    private IDevelopmentDAO developmentDAO;
-    private IEmployeeDAO employeeDAO;
-    private ISkillDAO skillDAO;
-    private ISkillRatingDAO skillTeamRatingDAO;
-    private ISkillRatingDAO skillEmployeeRatingDAO;
-    private ISkillRatingDAO skillSearchFilterRatingDAO;
-    private ITeamDAO teamDAO;
-    private DatabaseInit databaseInit;
+    private final IGenericDAO<AvailabilityPlan> availabilityPlanDAO;
+    private final IGenericDAO<Development> developmentDAO;
+    private final IGenericDAO<Employee> employeeDAO;
+    private final IGenericDAO<Skill> skillDAO;
+    private final IGenericDAO<SkillTeamRating> skillTeamRatingDAO;
+    private final IGenericDAO<SkillEmployeeRating> skillEmployeeRatingDAO;
+    private final IGenericDAO<SkillSearchFilterRating> skillSearchFilterRatingDAO;
+    private final IGenericDAO<Team> teamDAO;
+    private final DatabaseInit databaseInit;
 
     private ServiceRegistry() {
-        availabilityPlanDAO = new AvailabilityPlanDAO();
-        developmentDAO = new DevelopmentDAO();
-        employeeDAO = new EmployeeDAO();
-        skillDAO = new SkillDAO();
-        skillTeamRatingDAO = new SkillRatingDAO();
-        skillEmployeeRatingDAO = new SkillRatingDAO();
-        skillSearchFilterRatingDAO = new SkillRatingDAO();
-        teamDAO = new TeamDAO();
+        availabilityPlanDAO = new GenericDAO<>();
+        developmentDAO = new GenericDAO<>();
+        employeeDAO = new GenericDAO<>();
+        skillDAO = new GenericDAO<>();
+        skillTeamRatingDAO = new GenericDAO<>();
+        skillEmployeeRatingDAO = new GenericDAO<>();
+        skillSearchFilterRatingDAO = new GenericDAO<>();
+        teamDAO = new GenericDAO<>();
         databaseInit = new DatabaseInit(developmentDAO, skillDAO, skillTeamRatingDAO, skillEmployeeRatingDAO, skillSearchFilterRatingDAO, teamDAO, employeeDAO, availabilityPlanDAO);
     }
 
@@ -39,35 +41,35 @@ public class ServiceRegistry implements IBootable {
         databaseInit.initializeDatabase();
     }
 
-    IAvailabilityPlanDAO getAvailabilityPlanDAO() {
+    IGenericDAO<AvailabilityPlan> getAvailabilityPlanDAO() {
         return availabilityPlanDAO;
     }
 
-    IDevelopmentDAO getDevelopmentDAO() {
+    IGenericDAO<Development> getDevelopmentDAO() {
         return developmentDAO;
     }
 
-    IEmployeeDAO getEmployeeDAO() {
+    IGenericDAO<Employee> getEmployeeDAO() {
         return employeeDAO;
     }
 
-    ISkillDAO getSkillDAO() {
+    IGenericDAO<Skill> getSkillDAO() {
         return skillDAO;
     }
 
-    public ISkillRatingDAO getSkillTeamRatingDAO() {
+    public IGenericDAO<SkillTeamRating> getSkillTeamRatingDAO() {
         return skillTeamRatingDAO;
     }
 
-    public ISkillRatingDAO getSkillEmployeeRatingDAO() {
+    public IGenericDAO<SkillEmployeeRating> getSkillEmployeeRatingDAO() {
         return skillEmployeeRatingDAO;
     }
 
-    public ISkillRatingDAO getSkillSearchFilterRatingDAO() {
+    public IGenericDAO<SkillSearchFilterRating> getSkillSearchFilterRatingDAO() {
         return skillSearchFilterRatingDAO;
     }
 
-    ITeamDAO getTeamDAO() {
+    IGenericDAO<Team> getTeamDAO() {
         return teamDAO;
     }
 }

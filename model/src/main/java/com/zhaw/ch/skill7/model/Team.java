@@ -3,7 +3,7 @@ package com.zhaw.ch.skill7.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team extends Identifyable{
+public class Team extends IdUpdateableEntity<Team> {
 
     private String name;
 
@@ -37,5 +37,10 @@ public class Team extends Identifyable{
 
     public void setSkillRatingList(List<SkillRating> skillRatingList) {
         this.skillRatingList = skillRatingList;
+    }
+
+    @Override
+    public void update(Team objectWithNewData) {
+        this.setName(objectWithNewData.getName());
     }
 }

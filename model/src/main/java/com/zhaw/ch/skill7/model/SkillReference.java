@@ -1,6 +1,6 @@
 package com.zhaw.ch.skill7.model;
 
-public abstract class SkillReference extends Identifyable{
+public abstract class SkillReference<T> extends IdUpdateableEntity<T> {
 
     private Skill skill;
 

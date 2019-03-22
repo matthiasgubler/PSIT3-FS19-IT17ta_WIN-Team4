@@ -10,7 +10,7 @@ public class BaseJavaFXTest {
     public static void initJFX() {
         Thread t = new Thread("JavaFX Init Thread") {
             public void run() {
-                Application.launch(AsNonApp.class, new String[0]);
+                Application.launch(AsNonApp.class);
             }
         };
         t.setDaemon(true);
@@ -19,7 +19,7 @@ public class BaseJavaFXTest {
 
     public static class AsNonApp extends Application {
         @Override
-        public void start(Stage primaryStage) throws Exception {
+        public void start(Stage primaryStage) {
             // noop
         }
     }

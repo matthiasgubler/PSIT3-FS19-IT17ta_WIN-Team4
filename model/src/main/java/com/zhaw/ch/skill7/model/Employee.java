@@ -3,7 +3,7 @@ package com.zhaw.ch.skill7.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee extends Identifyable{
+public class Employee extends IdUpdateableEntity<Employee> {
 
     private String surname;
 
@@ -60,5 +60,12 @@ public class Employee extends Identifyable{
 
     public void setAvailabilityPlan(AvailabilityPlan availabilityPlan) {
         this.availabilityPlan = availabilityPlan;
+    }
+
+    @Override
+    public void update(Employee objectWithNewData) {
+        this.setFirstname(objectWithNewData.getFirstname());
+        this.setSurname(objectWithNewData.getSurname());
+        this.setTeam(objectWithNewData.getTeam());
     }
 }

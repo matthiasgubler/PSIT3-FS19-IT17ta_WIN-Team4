@@ -1,10 +1,10 @@
 package com.zhaw.ch.skill7.model;
 
-public abstract class SkillRating extends SkillReference{
+public abstract class SkillRating<T> extends SkillReference<SkillRating> {
 
     private int rating;
 
-    protected SkillRating(int rating, Skill skill){
+    SkillRating(int rating, Skill skill) {
         super(skill);
         this.rating = rating;
     }
@@ -15,5 +15,10 @@ public abstract class SkillRating extends SkillReference{
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public void update(SkillRating objectWithNewData) {
+        this.setRating(objectWithNewData.getRating());
     }
 }

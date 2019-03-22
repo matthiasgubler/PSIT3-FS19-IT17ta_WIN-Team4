@@ -2,16 +2,15 @@
 
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="com.zhaw.ch.skill7.view.skill.SkillsOverviewController">
-    <children>
-        <BorderPane prefHeight="400.0" prefWidth="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <center>
-                <fx:include fx:id="skillsTable" source="SkillsTableView.fxml"/>
-            </center>
-            <bottom>
-                <fx:include fx:id="skillCreation" source="SkillCreationView.fxml"/>
-            </bottom>
-        </BorderPane>
-    </children>
+            xmlns="http://javafx.com/javafx/8.0.172-ea"
+            fx:controller="com.zhaw.ch.skill7.view.skill.SkillsOverviewController">
+    <BorderPane prefHeight="400.0" prefWidth="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <center>
+            <fx:include fx:id="skillsTable" source="SkillsTableView.fxml"/>
+        </center>
+        <bottom>
+            <fx:include fx:id="skillCreation" source="SkillCreationView.fxml"/>
+        </bottom>
+    </BorderPane>
 </AnchorPane>

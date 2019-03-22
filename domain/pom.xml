@@ -9,7 +9,6 @@
         <artifactId>skill7</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.zhaw.ch.skill7</groupId>
     <artifactId>domain</artifactId>
     <dependencies>
         <dependency>
