@@ -10,7 +10,7 @@
             <fx:include fx:id="skillsTable" source="SkillsTableView.fxml"/>
         </center>
         <bottom>
-            <fx:include fx:id="skillCreation" source="SkillCreationView.fxml"/>
+            <fx:include fx:id="skillEdit" source="SkillEditView.fxml"/>
         </bottom>
     </BorderPane>
 </AnchorPane>

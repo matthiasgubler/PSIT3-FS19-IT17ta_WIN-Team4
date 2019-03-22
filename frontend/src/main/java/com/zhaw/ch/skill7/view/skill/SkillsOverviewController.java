@@ -9,17 +9,18 @@ public class SkillsOverviewController {
     private AnchorPane skillsTable;
 
     @FXML
-    private AnchorPane skillCreation;
+    private AnchorPane skillEdit;
 
     @FXML
     private SkillsTableController skillsTableController;
 
     @FXML
-    private SkillCreationController skillCreationController;
+    private SkillEditController skillEditController;
 
     @FXML
     private void initialize() {
-        skillCreationController.addObserver(skillsTableController);
+        skillEditController.addObserver(skillsTableController);
+        skillEditController.setSkillsTableController(skillsTableController);
     }
 
 }

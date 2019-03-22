@@ -31,6 +31,11 @@ public class CompanyData implements ICompany {
         skillIGenericDAO.add(new Skill(name));
     }
 
+    public void deleteSkill(Skill skill) {
+        skillIGenericDAO.remove(skill);
+    }
+
+
     public List<Skill> getSkills() {
         return skillIGenericDAO.read();
     }

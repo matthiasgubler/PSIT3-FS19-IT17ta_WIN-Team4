@@ -15,12 +15,11 @@
                     <PropertyValueFactory property="id"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="450.0" text="Name">
+            <TableColumn prefWidth="524.0" text="Name">
                 <cellValueFactory>
                     <PropertyValueFactory property="name"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="75.0" text="Delete"/>
         </columns>
         <items>
             <FXCollections fx:id="skillUIObservableList" fx:factory="observableArrayList"/>

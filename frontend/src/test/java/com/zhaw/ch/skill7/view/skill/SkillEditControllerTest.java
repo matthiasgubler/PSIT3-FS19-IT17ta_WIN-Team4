@@ -15,9 +15,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class SkillCreationControllerTest extends BaseJavaFXTest {
+class SkillEditControllerTest extends BaseJavaFXTest {
 
-    private SkillCreationController testee;
+    private SkillEditController testee;
 
     @Mock
     private ICompany companyMock;
@@ -26,7 +26,7 @@ class SkillCreationControllerTest extends BaseJavaFXTest {
 
     @BeforeEach
     void setUp() {
-        testee = new SkillCreationController(companyMock);
+        testee = new SkillEditController(companyMock);
         testee.setNewSkillTextField(newSkillTextFieldStub);
     }
 

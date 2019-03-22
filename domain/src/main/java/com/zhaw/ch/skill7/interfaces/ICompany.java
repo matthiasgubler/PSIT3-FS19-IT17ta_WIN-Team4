@@ -10,6 +10,8 @@ public interface ICompany {
 
     void createSkill(String name);
 
+    void deleteSkill(Skill skill);
+
     List<Skill> getSkills();
 
     void createTeam(String name);

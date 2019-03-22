@@ -7,6 +7,7 @@ public class SkillUI extends Skill {
     private final SimpleStringProperty name = new SimpleStringProperty("");
 
     public SkillUI(Skill skill) {
+        super(skill.getId(), skill.getName());
         setId(String.valueOf(skill.getId()));
         setName(skill.getName());
     }

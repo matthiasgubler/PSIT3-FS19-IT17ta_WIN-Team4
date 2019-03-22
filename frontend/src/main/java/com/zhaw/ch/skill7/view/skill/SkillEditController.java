@@ -2,6 +2,7 @@ package com.zhaw.ch.skill7.view.skill;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.interfaces.ICompany;
+import com.zhaw.ch.skill7.model.Skill;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.apache.commons.lang3.StringUtils;
@@ -9,18 +10,20 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Observable;
 
 
-public class SkillCreationController extends Observable {
+public class SkillEditController extends Observable {
 
     private final ICompany company;
+
+    private SkillsTableController skillsTableController;
 
     @FXML
     private TextField newSkillTextField;
 
-    public SkillCreationController() {
+    public SkillEditController() {
         this.company = new CompanyData();
     }
 
-    public SkillCreationController(ICompany company) {
+    public SkillEditController(ICompany company) {
         this.company = company;
     }
 
@@ -31,8 +34,16 @@ public class SkillCreationController extends Observable {
         if (!StringUtils.isEmpty(skillNameValue)) {
             company.createSkill(skillNameValue);
             newSkillTextField.setText("");
-            setChanged();
-            notifyObservers();
+            setChangedAndNotify();
+        }
+    }
+
+    @FXML
+    public void deleteButtonClicked() {
+        Skill selectedSkill = skillsTableController.getSelectedValue();
+        if (selectedSkill != null) {
+            company.deleteSkill(selectedSkill);
+            setChangedAndNotify();
         }
     }
 
@@ -42,5 +53,18 @@ public class SkillCreationController extends Observable {
 
     void setNewSkillTextField(TextField newSkillTextField) {
         this.newSkillTextField = newSkillTextField;
+    }
+
+    private void setChangedAndNotify() {
+        setChanged();
+        notifyObservers();
+    }
+
+    public SkillsTableController getSkillsTableController() {
+        return skillsTableController;
+    }
+
+    public void setSkillsTableController(SkillsTableController skillsTableController) {
+        this.skillsTableController = skillsTableController;
     }
 }

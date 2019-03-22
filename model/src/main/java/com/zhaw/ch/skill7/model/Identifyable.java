@@ -1,5 +1,7 @@
 package com.zhaw.ch.skill7.model;
 
+import java.util.Objects;
+
 public class Identifyable {
 
     private long id;
@@ -21,5 +23,18 @@ public class Identifyable {
 
     public boolean isIdEquals(Identifyable identifyable) {
         return this.getId() == identifyable.getId();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Identifyable)) return false;
+        Identifyable that = (Identifyable) o;
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

@@ -2,6 +2,7 @@ package com.zhaw.ch.skill7.view.skill;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.interfaces.ICompany;
+import com.zhaw.ch.skill7.model.Skill;
 import com.zhaw.ch.skill7.model.SkillUI;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -34,14 +35,14 @@ public class SkillsTableController implements Observer {
     @FXML
     private void initialize() {
         reloadTable();
-        tableView.getSelectionModel()
+        /*tableView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (observable != null &&
                             observable.getValue() != null) {
                         reloadTable();
                     }
-                });
+                });*/
     }
 
     private void reloadTable() {
@@ -49,11 +50,14 @@ public class SkillsTableController implements Observer {
             skillUIObservableList.clear();
             skillUIObservableList.addAll(loadAndMapSkills());
         });
-
     }
 
     private List<SkillUI> loadAndMapSkills() {
         return company.getSkills().stream().map(SkillUI::new).collect(Collectors.toList());
+    }
+
+    public Skill getSelectedValue() {
+        return tableView.getSelectionModel().getSelectedItem();
     }
 
     @Override
