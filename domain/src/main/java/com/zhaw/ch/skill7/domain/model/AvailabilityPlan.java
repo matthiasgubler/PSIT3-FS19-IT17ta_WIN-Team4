@@ -1,4 +1,6 @@
-package com.zhaw.ch.skill7.model;
+package com.zhaw.ch.skill7.domain.model;
+
+import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
 public class AvailabilityPlan extends IdUpdateableEntity<AvailabilityPlan> {
 

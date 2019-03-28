@@ -1,8 +1,8 @@
-package com.zhaw.ch.skill7.initializing;
+package com.zhaw.ch.skill7.database;
 
+import com.zhaw.ch.skill7.domain.model.*;
+import com.zhaw.ch.skill7.domain.model.builder.AvailabilityPlanBuilder;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
-import com.zhaw.ch.skill7.model.*;
-import com.zhaw.ch.skill7.model.builder.AvailabilityPlanBuilder;
 
 import java.util.Arrays;
 

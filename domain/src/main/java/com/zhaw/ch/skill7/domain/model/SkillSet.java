@@ -1,4 +1,6 @@
-package com.zhaw.ch.skill7.model;
+package com.zhaw.ch.skill7.domain.model;
+
+import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
 import java.util.ArrayList;
 import java.util.List;

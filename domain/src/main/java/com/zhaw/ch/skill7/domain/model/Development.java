@@ -1,4 +1,4 @@
-package com.zhaw.ch.skill7.model;
+package com.zhaw.ch.skill7.domain.model;
 
 public class Development extends SkillReference<Development> {
 

@@ -1,5 +1,6 @@
 package com.zhaw.ch.skill7.model;
 
+import com.zhaw.ch.skill7.domain.model.Skill;
 import javafx.beans.property.SimpleStringProperty;
 
 public class SkillUI extends Skill {

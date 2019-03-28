@@ -1,13 +1,16 @@
 package com.zhaw.ch.skill7.domain;
 
 import com.zhaw.ch.skill7.business.ServiceRegistry;
+import com.zhaw.ch.skill7.domain.model.Employee;
+import com.zhaw.ch.skill7.domain.model.Skill;
+import com.zhaw.ch.skill7.domain.model.SkillEmployeeRating;
+import com.zhaw.ch.skill7.domain.model.Team;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
-import com.zhaw.ch.skill7.model.Employee;
-import com.zhaw.ch.skill7.model.Skill;
-import com.zhaw.ch.skill7.model.Team;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CompanyData implements ICompany {
 
@@ -35,7 +38,6 @@ public class CompanyData implements ICompany {
         skillIGenericDAO.remove(skill);
     }
 
-
     public List<Skill> getSkills() {
         return skillIGenericDAO.read();
     }
@@ -58,6 +60,19 @@ public class CompanyData implements ICompany {
     @Override
     public List<Employee> getEmployees() {
         return employeeIGenericDAO.read();
+    }
+
+    @Override
+    public Map<String, Integer> getSkillDistribution() {
+        Map<String, Integer> result = new HashMap<>();
+
+        List<Skill> skillList = getSkills();
+        for (Skill skill : skillList) {
+            List<SkillEmployeeRating> skillEmployeeRatingList = skill.getSkillEmployeeRatings();
+            result.put(skill.getName(), skillEmployeeRatingList.size());
+        }
+
+        return result;
     }
 
 

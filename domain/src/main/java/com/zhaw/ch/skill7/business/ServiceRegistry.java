@@ -1,10 +1,10 @@
 package com.zhaw.ch.skill7.business;
 
 import com.zhaw.ch.skill7.dataaccess.GenericDAO;
-import com.zhaw.ch.skill7.initializing.DatabaseInit;
+import com.zhaw.ch.skill7.database.DatabaseInit;
+import com.zhaw.ch.skill7.domain.model.*;
 import com.zhaw.ch.skill7.interfaces.IBootable;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
-import com.zhaw.ch.skill7.model.*;
 
 public class ServiceRegistry implements IBootable {
 

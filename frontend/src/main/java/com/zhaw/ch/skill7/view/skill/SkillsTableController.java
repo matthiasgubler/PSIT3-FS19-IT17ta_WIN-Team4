@@ -1,8 +1,8 @@
 package com.zhaw.ch.skill7.view.skill;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
+import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
-import com.zhaw.ch.skill7.model.Skill;
 import com.zhaw.ch.skill7.model.SkillUI;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;

@@ -1,8 +1,7 @@
-package com.zhaw.ch.skill7.domain;
+package com.zhaw.ch.skill7.domain.model;
 
 import com.zhaw.ch.skill7.business.ServiceRegistry;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
-import com.zhaw.ch.skill7.model.Employee;
 
 public class EmployeeData extends Employee {
 

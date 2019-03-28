@@ -1,10 +1,11 @@
 package com.zhaw.ch.skill7.interfaces;
 
-import com.zhaw.ch.skill7.model.Employee;
-import com.zhaw.ch.skill7.model.Skill;
-import com.zhaw.ch.skill7.model.Team;
+import com.zhaw.ch.skill7.domain.model.Employee;
+import com.zhaw.ch.skill7.domain.model.Skill;
+import com.zhaw.ch.skill7.domain.model.Team;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ICompany {
 
@@ -22,4 +23,5 @@ public interface ICompany {
 
     List<Employee> getEmployees();
 
+    Map<String, Integer> getSkillDistribution();
 }

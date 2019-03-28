@@ -1,8 +1,8 @@
 package com.zhaw.ch.skill7.view.skill;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
+import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
-import com.zhaw.ch.skill7.model.Skill;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.apache.commons.lang3.StringUtils;

@@ -13,10 +13,6 @@
     <dependencies>
         <dependency>
             <groupId>com.zhaw.ch.skill7</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zhaw.ch.skill7</groupId>
             <artifactId>domain</artifactId>
         </dependency>
     </dependencies>

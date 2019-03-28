@@ -1,7 +1,7 @@
-package com.zhaw.ch.skill7.model.builder;
+package com.zhaw.ch.skill7.domain.model.builder;
 
-import com.zhaw.ch.skill7.model.Availability;
-import com.zhaw.ch.skill7.model.AvailabilityPlan;
+import com.zhaw.ch.skill7.domain.model.Availability;
+import com.zhaw.ch.skill7.domain.model.AvailabilityPlan;
 
 public final class AvailabilityPlanBuilder {
     private Availability mondayAvailability = Availability.FULL_DAY;
