@@ -23,5 +23,7 @@ public interface ICompany {
 
     List<Employee> getEmployees();
 
-    Map<String, Integer> getSkillDistribution();
+    Map<String, Long> getSkillDistribution();
+
+    Map<String, Long> getDevelopmentDistribution();
 }

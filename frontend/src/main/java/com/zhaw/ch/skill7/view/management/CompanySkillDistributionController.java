@@ -1,22 +1,16 @@
 package com.zhaw.ch.skill7.view.management;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
-import com.zhaw.ch.skill7.helper.MapSupport;
 import com.zhaw.ch.skill7.interfaces.ICompany;
-import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
+import com.zhaw.ch.skill7.view.barchart.AbstractBarChartController;
 
 import java.util.Map;
 
-public class CompanySkillDistributionController {
+public class CompanySkillDistributionController extends AbstractBarChartController {
+
+    public static final String TITLE = "Skillverteilung in der Unternehmung pro Mitarbeiter";
 
     private final ICompany company;
-
-    private Map<String, Integer> sortedSkillsCountMap;
-
-    @FXML
-    private BarChart barChart;
 
     public CompanySkillDistributionController() {
         this.company = new CompanyData();
@@ -26,29 +20,14 @@ public class CompanySkillDistributionController {
         this.company = company;
     }
 
-    @FXML
-    private void initialize() {
-        reloadBarChartData();
+    @Override
+    protected String getTitle() {
+        return TITLE;
     }
 
-    private void reloadBarChartData() {
-        sortedSkillsCountMap = MapSupport.sortByValue(company.getSkillDistribution());
-        fillBarChart();
-    }
-
-    @FXML
-    private void reloadSkillDistribution() {
-        reloadBarChartData();
-    }
-
-    private void fillBarChart() {
-        barChart.getData().clear();
-
-        for (Map.Entry<String, Integer> entry : sortedSkillsCountMap.entrySet()) {
-            XYChart.Series series = new XYChart.Series();
-            series.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-            barChart.getData().add(series);
-        }
+    @Override
+    protected Map<String, Long> loadBarChartDataWithCount() {
+        return company.getSkillDistribution();
     }
 
 }

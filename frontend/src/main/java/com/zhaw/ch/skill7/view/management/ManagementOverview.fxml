@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.172-ea"
             fx:controller="com.zhaw.ch.skill7.view.management.ManagementOverviewController">
     <children>
-        <VBox prefHeight="407.0" prefWidth="609.0">
-            <children>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                    <fx:include source="CompanySkillDistributionView.fxml"/>
-                </AnchorPane>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                    <fx:include source="TeamSkillDistributionView.fxml"/>
-                </AnchorPane>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                    <fx:include source="CompanyDevelopmentDistributionView.fxml"/>
-                </AnchorPane>
-            </children>
-        </VBox>
+        <Accordion prefHeight="81.0" prefWidth="600.0">
+            <panes>
+                <TitledPane animated="false" text="Skillverteilung im Unternehmen (pro MA)">
+                    <content>
+                        <fx:include source="CompanySkillDistributionView.fxml"/>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Entwicklungsbedürfnisse Unternehmen">
+                    <content>
+                        <fx:include source="CompanyDevelopmentDistributionView.fxml"/>
+                    </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Verteilung der Skills pro Team">
+                    <content>
+                        <fx:include source="TeamSkillDistributionView.fxml"/>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
     </children>
 </AnchorPane>
