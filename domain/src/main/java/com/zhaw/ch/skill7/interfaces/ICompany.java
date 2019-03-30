@@ -6,6 +6,7 @@ import com.zhaw.ch.skill7.domain.model.Team;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface ICompany {
 
@@ -18,6 +19,8 @@ public interface ICompany {
     void createTeam(String name);
 
     List<Team> getTeams();
+
+    Optional<Team> getTeamById(long id);
 
     void createEmployee(String firstname, String lastname);
 

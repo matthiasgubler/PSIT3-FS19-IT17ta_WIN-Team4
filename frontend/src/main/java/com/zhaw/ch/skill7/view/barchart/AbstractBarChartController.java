@@ -3,7 +3,6 @@ package com.zhaw.ch.skill7.view.barchart;
 import com.zhaw.ch.skill7.helper.MapSupport;
 import javafx.fxml.FXML;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 
 import java.util.Map;
 
@@ -18,10 +17,9 @@ public abstract class AbstractBarChartController {
     private void initialize() {
         barChartDistributionView.getBarChart().setTitle(getTitle());
         reloadBarChartData();
-        new Button();
     }
 
-    private void reloadBarChartData() {
+    protected void reloadBarChartData() {
         sortedBarChartData = MapSupport.sortByValue(loadBarChartDataWithCount());
         fillBarChart();
     }

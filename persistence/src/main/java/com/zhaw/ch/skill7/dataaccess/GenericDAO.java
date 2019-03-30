@@ -5,6 +5,7 @@ import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GenericDAO<T extends IdUpdateableEntity<T>> implements IGenericDAO<T> {
 
@@ -16,6 +17,11 @@ public class GenericDAO<T extends IdUpdateableEntity<T>> implements IGenericDAO<
     @Override
     public List<T> read() {
         return objectDatabase;
+    }
+
+    @Override
+    public Optional<T> byId(long id) {
+        return read().stream().filter(object -> object.getId() == id).findFirst();
     }
 
     @Override

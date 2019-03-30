@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.zhaw.ch.skill7.view.barchart.BarChartDistributionView?>
+<BarChartDistributionView xmlns:fx="http://javafx.com/fxml/1"
+                          fx:controller="com.zhaw.ch.skill7.view.management.TeamSkillNeedsController"
+                          onReloadButtonAction="#refreshButtonClicked" fx:id="barChartDistributionView"
+/>

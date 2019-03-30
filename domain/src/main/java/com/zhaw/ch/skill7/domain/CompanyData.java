@@ -8,6 +8,7 @@ import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CompanyData implements ICompany {
@@ -58,6 +59,11 @@ public class CompanyData implements ICompany {
     }
 
     @Override
+    public Optional<Team> getTeamById(long id) {
+        return teamIGenericDAO.byId(id);
+    }
+
+    @Override
     public void createEmployee(String lastname, String firstname) {
         employeeIGenericDAO.add(new Employee(lastname, firstname));
     }
@@ -83,7 +89,7 @@ public class CompanyData implements ICompany {
     @Override
     public Map<String, Long> getDevelopmentDistribution() {
         List<Development> develompentList = getDevelompents();
-        return develompentList.stream().collect(Collectors.groupingBy(developmentDistribution -> ((Development) developmentDistribution).getSkill().getName(), Collectors.counting()));
+        return develompentList.stream().collect(Collectors.groupingBy(developmentDistribution -> developmentDistribution.getSkill().getName(), Collectors.counting()));
     }
 
 }

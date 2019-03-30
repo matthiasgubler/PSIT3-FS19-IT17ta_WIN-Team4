@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class CompanySkillDistributionController extends AbstractBarChartController {
 
-    public static final String TITLE = "Skillverteilung in der Unternehmung pro Mitarbeiter";
+    private static final String TITLE = "Skillverteilung in der Unternehmung pro Mitarbeiter";
 
     private final ICompany company;
 

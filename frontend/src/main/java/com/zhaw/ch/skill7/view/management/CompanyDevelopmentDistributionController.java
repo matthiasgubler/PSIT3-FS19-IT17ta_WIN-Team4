@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class CompanyDevelopmentDistributionController extends AbstractBarChartController {
 
-    public static final String TITLE = "Enticklungsbedarf in der Unternehmung pro Mitarbeiter";
+    private static final String TITLE = "Enticklungsbedarf in der Unternehmung pro Mitarbeiter";
 
     private final ICompany company;
 
