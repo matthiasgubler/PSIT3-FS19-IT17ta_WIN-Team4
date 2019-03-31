@@ -125,13 +125,6 @@ class CompanyDataTest {
         assertEquals(0, result.size());
     }
 
-    /*
-
-List<Development> develompentList = getDevelompents();
-        return develompentList.stream().collect(Collectors.groupingBy(developmentDistribution -> developmentDistribution.getSkill().getName(), Collectors.counting()));
-
-     */
-
     @Test
     void getDevelopmentDistribution_empty() {
         Map result = testee.getDevelopmentDistribution();

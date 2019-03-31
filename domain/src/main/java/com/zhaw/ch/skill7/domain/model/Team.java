@@ -73,7 +73,7 @@ public class Team extends IdUpdateableEntity<Team> {
         return Objects.hash(super.hashCode(), getName());
     }
 
-    public Map getSkillNeeds() {
+    public Map<String, Long> getSkillNeeds() {
         return getSkillRatingList().stream().collect(Collectors.toMap(skillRating -> skillRating.getSkill().getName(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
     }
 
