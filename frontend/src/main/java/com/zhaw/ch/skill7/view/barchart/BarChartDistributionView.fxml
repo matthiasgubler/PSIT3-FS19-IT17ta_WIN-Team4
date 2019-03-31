@@ -17,6 +17,7 @@
                 <NumberAxis side="LEFT"/>
             </yAxis>
         </BarChart>
-        <Button fx:id="reloadButton" layoutX="455.0" layoutY="24.0" mnemonicParsing="false" text="Reload"/>
+        <Button fx:id="reloadButton" layoutX="455.0" layoutY="24.0" mnemonicParsing="false" text="Reload"
+                visible="reloadButtonVisible"/>
     </children>
 </fx:root>

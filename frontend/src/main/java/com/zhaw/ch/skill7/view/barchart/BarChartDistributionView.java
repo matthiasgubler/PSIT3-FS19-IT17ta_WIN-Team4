@@ -14,6 +14,8 @@ import java.io.IOException;
 
 public class BarChartDistributionView extends AnchorPane {
 
+    @FXML
+    private boolean reloadButtonVisible = true;
 
     @FXML
     private BarChart barChart;
@@ -73,5 +75,13 @@ public class BarChartDistributionView extends AnchorPane {
 
     public final void setOnReloadButtonAction(EventHandler<ActionEvent> value) {
         onReloadButtonActionProperty().set(value);
+    }
+
+    public boolean isReloadButtonVisible() {
+        return reloadButtonVisible;
+    }
+
+    public void setReloadButtonVisible(boolean reloadButtonVisible) {
+        this.reloadButtonVisible = reloadButtonVisible;
     }
 }

@@ -19,7 +19,7 @@ public abstract class AbstractBarChartController {
         reloadBarChartData();
     }
 
-    protected void reloadBarChartData() {
+    public void reloadBarChartData() {
         sortedBarChartData = MapSupport.sortByValue(loadBarChartDataWithCount());
         fillBarChart();
     }

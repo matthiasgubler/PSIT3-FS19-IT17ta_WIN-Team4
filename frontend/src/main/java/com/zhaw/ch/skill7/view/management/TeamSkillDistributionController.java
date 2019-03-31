@@ -46,6 +46,7 @@ public class TeamSkillDistributionController {
     @FXML
     private void reloadButtonClicked() {
         reloadTeams();
+        teamSkillNeedsBarChartController.reloadBarChartData();
     }
 
     private void reloadTeams() {
