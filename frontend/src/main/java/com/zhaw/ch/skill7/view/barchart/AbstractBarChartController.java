@@ -42,4 +42,12 @@ public abstract class AbstractBarChartController {
             barChartDistributionView.getBarChart().getData().add(series);
         }
     }
+
+    public BarChartDistributionView getBarChartDistributionView() {
+        return barChartDistributionView;
+    }
+
+    public void setBarChartDistributionView(BarChartDistributionView barChartDistributionView) {
+        this.barChartDistributionView = barChartDistributionView;
+    }
 }
