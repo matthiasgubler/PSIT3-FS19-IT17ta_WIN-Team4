@@ -4,27 +4,25 @@ import com.zhaw.ch.skill7.business.ServiceRegistry;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Team extends IdUpdateableEntity<Team> {
 
     private final IGenericDAO<SkillTeamRating> skillRatingIGenericDAO;
+    private final IGenericDAO<Employee> employeeIGenericDAO;
 
     public Team() {
         skillRatingIGenericDAO = ServiceRegistry.getInstance().getSkillTeamRatingDAO();
+        employeeIGenericDAO = ServiceRegistry.getInstance().getEmployeeDAO();
     }
 
-    public Team(IGenericDAO<SkillTeamRating> skillRatingIGenericDAO) {
+    public Team(IGenericDAO<SkillTeamRating> skillRatingIGenericDAO, IGenericDAO<Employee> employeeIGenericDAO) {
         this.skillRatingIGenericDAO = skillRatingIGenericDAO;
+        this.employeeIGenericDAO = employeeIGenericDAO;
     }
 
     private String name;
-
-    private List<Employee> employeeList = new ArrayList<>();
 
     public Team(String name) {
         this();
@@ -40,11 +38,7 @@ public class Team extends IdUpdateableEntity<Team> {
     }
 
     public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+        return employeeIGenericDAO.read().stream().filter(employee -> employee.getTeam().equals(this)).collect(Collectors.toList());
     }
 
     public List<SkillTeamRating> getSkillRatingList() {
@@ -81,5 +75,23 @@ public class Team extends IdUpdateableEntity<Team> {
 
     public Map getSkillNeeds() {
         return getSkillRatingList().stream().collect(Collectors.toMap(skillRating -> skillRating.getSkill().getName(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
+    }
+
+    public Map<String, Map<String, Long>> getMemberSkills() {
+        Map<String, Map<String, Long>> result = new HashMap<>();
+
+        List<SkillEmployeeRating> allSkillEmployeeRatingList = new ArrayList<>();
+        for (Employee employee : getEmployeeList()) {
+            allSkillEmployeeRatingList.addAll(employee.getSkillRatingList());
+        }
+
+        List<Skill> allSkillsInTeamList = allSkillEmployeeRatingList.stream().map(SkillEmployeeRating::getSkill).distinct().collect(Collectors.toList());
+        for (Skill skill : allSkillsInTeamList) {
+            Map<String, Long> employeePerSkillRating = allSkillEmployeeRatingList.stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(skill)).collect(Collectors.toMap(skillRating -> skillRating.getEmployee().getFirstname() + " " + skillRating.getEmployee().getLastname(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
+
+            result.put(skill.getName(), employeePerSkillRating);
+        }
+
+        return result;
     }
 }

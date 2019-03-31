@@ -99,10 +99,14 @@ public class DatabaseInit {
         SkillEmployeeRating skillRatingEmployee1 = new SkillEmployeeRating(9, skillJava, employeeMatthias);
         SkillEmployeeRating skillRatingEmployee2 = new SkillEmployeeRating(5, skillReact, employeeMatthias);
         SkillEmployeeRating skillRatingEmployee3 = new SkillEmployeeRating(4, skillMicroservice, employeeMatthias);
-        SkillEmployeeRating skillRatingEmployee4 = new SkillEmployeeRating(7, skillJava, employeeMischa);
-        SkillEmployeeRating skillRatingEmployee5 = new SkillEmployeeRating(6, skillJava, employeeNicolas);
+        SkillEmployeeRating skillRatingEmployee41 = new SkillEmployeeRating(7, skillJava, employeeMischa);
+        SkillEmployeeRating skillRatingEmployee4 = new SkillEmployeeRating(8, skillBlockchain, employeeMischa);
+        SkillEmployeeRating skillRatingEmployee51 = new SkillEmployeeRating(6, skillJava, employeeNicolas);
+        SkillEmployeeRating skillRatingEmployee5 = new SkillEmployeeRating(8, skillOracleDB, employeeNicolas);
+        SkillEmployeeRating skillRatingEmployee61 = new SkillEmployeeRating(5, skillReact, employeeOliver);
         SkillEmployeeRating skillRatingEmployee6 = new SkillEmployeeRating(9, skillJava, employeeOliver);
         SkillEmployeeRating skillRatingEmployee7 = new SkillEmployeeRating(6, skillJava, employeeValentino);
+        SkillEmployeeRating skillRatingEmployee71 = new SkillEmployeeRating(3, skillBlockchain, employeeValentino);
         SkillEmployeeRating skillRatingEmployee8 = new SkillEmployeeRating(3, skillJava, employeeJunior);
         SkillEmployeeRating skillRatingEmployee9 = new SkillEmployeeRating(5, skillJava, employeeMarkus);
         SkillEmployeeRating skillRatingEmployee10 = new SkillEmployeeRating(2, skillReact, employeePhilipp);
@@ -114,7 +118,7 @@ public class DatabaseInit {
         SkillEmployeeRating skillRatingEmployee16 = new SkillEmployeeRating(6, skillJava, employeeFred);
 
         addAll(skillTeamRatingDAO, skillRatingTeam1, skillRatingTeam2, skillRatingTeam3, skillRatingTeam4, skillRatingTeam5, skillRatingTeam6, skillRatingTeam7);
-        addAll(skillEmployeeRatingDAO, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16);
+        addAll(skillEmployeeRatingDAO, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16, skillRatingEmployee41, skillRatingEmployee51, skillRatingEmployee61, skillRatingEmployee71);
     }
 
     @SafeVarargs

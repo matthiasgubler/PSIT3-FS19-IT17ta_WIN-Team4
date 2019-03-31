@@ -1,23 +1,30 @@
 package com.zhaw.ch.skill7.domain.model;
 
+import com.zhaw.ch.skill7.business.ServiceRegistry;
+import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Employee extends IdUpdateableEntity<Employee> {
+
+    private final IGenericDAO<SkillEmployeeRating> skillRatingIGenericDAO;
 
     private String lastname;
 
     private String firstname;
 
-    private List<SkillRating> skillRatingList = new ArrayList<>();
-
     private Team team;
 
     private AvailabilityPlan availabilityPlan;
 
+    public Employee() {
+        this.skillRatingIGenericDAO = ServiceRegistry.getInstance().getSkillEmployeeRatingDAO();
+    }
+
     public Employee(String lastname, String firstname) {
+        this();
         this.lastname = lastname;
         this.firstname = firstname;
     }
@@ -44,12 +51,8 @@ public class Employee extends IdUpdateableEntity<Employee> {
         this.firstname = firstname;
     }
 
-    public List<SkillRating> getSkillRatingList() {
-        return skillRatingList;
-    }
-
-    public void setSkillRatingList(List<SkillRating> skillRatingList) {
-        this.skillRatingList = skillRatingList;
+    public List<SkillEmployeeRating> getSkillRatingList() {
+        return skillRatingIGenericDAO.read().stream().filter(skillEmployeeRating -> skillEmployeeRating.getEmployee().equals(this)).collect(Collectors.toList());
     }
 
     public Team getTeam() {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="227.0" prefWidth="530.0"
+            xmlns="http://javafx.com/javafx/8.0.172-ea"
+            fx:controller="com.zhaw.ch.skill7.view.management.TeamMemberSkillsController">
+    <children>
+        <BarChart fx:id="barChartMemberSkills" animated="false" barGap="1.0" categoryGap="1.0" legendSide="RIGHT"
+                  prefHeight="279.0" prefWidth="530.0" title="TITLE">
+            <xAxis>
+                <CategoryAxis side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT"/>
+            </yAxis>
+        </BarChart>
+    </children>
+</AnchorPane>
