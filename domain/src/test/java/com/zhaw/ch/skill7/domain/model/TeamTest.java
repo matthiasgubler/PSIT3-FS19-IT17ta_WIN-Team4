@@ -72,14 +72,6 @@ class TeamTest {
         verify(skillRatingIGenericDAOMock).read();
     }
 
-    /*
-
-    public Map getSkillNeeds() {
-        return getSkillRatingList().stream().collect(Collectors.toMap(skillRating -> skillRating.getSkill().getName(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
-    }
-
-     */
-
     @Test
     void getSkillNeeds_empty() {
         Map<String, Long> result = testee.getSkillNeeds();
