@@ -2,7 +2,7 @@ package com.zhaw.ch.skill7.model;
 
 import java.util.Objects;
 
-public class Identifyable {
+public abstract class Identifyable {
 
     private long id;
 

@@ -112,28 +112,6 @@ class TeamTest {
         verify(employeeIGenericDAOMock).read();
     }
 
-    /*
-
-    public Map<String, Map<String, Long>> getMemberSkills() {
-        Map<String, Map<String, Long>> result = new HashMap<>();
-
-        List<SkillEmployeeRating> allSkillEmployeeRatingList = new ArrayList<>();
-        for (Employee employee : getEmployeeList()) {
-            allSkillEmployeeRatingList.addAll(employee.getSkillRatingList());
-        }
-
-        List<Skill> allSkillsInTeamList = allSkillEmployeeRatingList.stream().map(SkillEmployeeRating::getSkill).distinct().collect(Collectors.toList());
-        for (Skill skill : allSkillsInTeamList) {
-            Map<String, Long> employeePerSkillRating = allSkillEmployeeRatingList.stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(skill)).collect(Collectors.toMap(skillRating -> skillRating.getEmployee().getFirstname() + " " + skillRating.getEmployee().getLastname(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
-
-            result.put(skill.getName(), employeePerSkillRating);
-        }
-
-        return result;
-    }
-
-     */
-
     @Test
     void getMemberSkills() {
         Skill skill1 = mock(Skill.class);
