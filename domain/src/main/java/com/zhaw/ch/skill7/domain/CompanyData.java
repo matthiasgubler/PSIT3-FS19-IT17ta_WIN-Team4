@@ -48,31 +48,58 @@ public class CompanyData implements ICompany {
         return developmentIGenericDAO.read();
     }
 
+    /**
+     * Erstellt ein neues Team anhand des Teamnames
+     *
+     * @param name Name des Teams
+     */
     @Override
     public void createTeam(String name) {
         teamIGenericDAO.add(new Team(name));
     }
 
+    /**
+     * Gibt eine Liste von allen Teams innerhalb des Unternehmens statt.
+     * @return Liste der Teams
+     */
     @Override
     public List<Team> getTeams() {
         return teamIGenericDAO.read();
     }
 
+    /**
+     * Gibt einen Optional eines Teams innerhalb des Unternehmens zurück anhand dessen ID.
+     * @param id ID des gesuchten Teams
+     * @return Optional des Teams, welches abgefüllt ist, wenn das Team gefunden ist und sonst wird Optinal.empty() zurückgegeben.
+     */
     @Override
     public Optional<Team> getTeamById(long id) {
         return teamIGenericDAO.byId(id);
     }
 
+    /**
+     * Erstellt einen neuen Mitarbeiter anhand des Vor- und des Nachnamens.
+     * @param lastname Nachname des Mitarbeiters
+     * @param firstname Vorname des Mitarbeiters
+     */
     @Override
     public void createEmployee(String lastname, String firstname) {
         employeeIGenericDAO.add(new Employee(lastname, firstname));
     }
 
+    /**
+     * Gibt eine Liste aller Mitarbeiter in der Unternehmung zurück
+     * @return Liste aller Mitarbeiter der Unternehmung
+     */
     @Override
     public List<Employee> getEmployees() {
         return employeeIGenericDAO.read();
     }
 
+    /**
+     * Erstellt eine Map von allen Skills innerhalb der Unternehmung mit der Anzahl der Personen, welche diese besitzen.
+     * @return Map&lt;String, Long&gt; der Skills, wobei der Key der Name des Skills als String ist und die Value die Anzahl der Mitarbeiter ist, welche den Skill innehaben.
+     */
     @Override
     public Map<String, Long> getSkillDistribution() {
         Map<String, Long> result = new HashMap<>();
@@ -86,6 +113,10 @@ public class CompanyData implements ICompany {
         return result;
     }
 
+    /**
+     * Erstellt eine Map von allen Entwicklungsbedürfnisse innerhalb der Unternehmung
+     * @return Map&lt;String, Long&gt; der Entwicklungsbedürfnisse, wobei der Key der Name des Bedarfs ist und die Value die Anzahl der Interessenten
+     */
     @Override
     public Map<String, Long> getDevelopmentDistribution() {
         List<Development> develompentList = getDevelompents();

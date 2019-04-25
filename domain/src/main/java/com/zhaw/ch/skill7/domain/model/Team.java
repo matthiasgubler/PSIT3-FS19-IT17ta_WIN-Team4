@@ -51,10 +51,19 @@ public class Team extends IdUpdateableEntity<Team> {
         this.name = name;
     }
 
+    /**
+     * Gibt die Liste aller Mitarbeiter des Teams zurück
+     *
+     * @return Liste der Mitarbeiter
+     */
     public List<Employee> getEmployeeList() {
         return employeeIGenericDAO.read().stream().filter(employee -> employee.getTeam().equals(this)).collect(Collectors.toList());
     }
 
+    /**
+     * Gibt die Liste aller Skills die das Team benötigt zurück
+     * @return Liste der SkillTeamRatings
+     */
     public List<SkillTeamRating> getSkillRatingList() {
         return skillRatingIGenericDAO.read().stream().filter(skillTeamRating -> skillTeamRating.getTeam().equals(this)).collect(Collectors.toList());
     }

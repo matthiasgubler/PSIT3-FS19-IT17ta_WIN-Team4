@@ -65,6 +65,11 @@ public class Skill extends IdUpdateableEntity<Skill> {
         return Objects.hash(super.hashCode(), getName());
     }
 
+    /**
+     * Gibt eine Liste der SkillEmployeeRating zurück zu diesem Skill
+     *
+     * @return Die Liste der SkillEmployeeRatings
+     */
     public List<SkillEmployeeRating> getSkillEmployeeRatings() {
         return skillEmployeeRatingIGenericDAO.read().stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(this)).collect(Collectors.toList());
     }
