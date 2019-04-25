@@ -51,6 +51,11 @@ public class Employee extends IdUpdateableEntity<Employee> {
         this.firstname = firstname;
     }
 
+    /**
+     * Gibt eine Liste der Skill Ratings pro Employee zurück
+     *
+     * @return Liste der Skill Ratings
+     */
     public List<SkillEmployeeRating> getSkillRatingList() {
         return skillRatingIGenericDAO.read().stream().filter(skillEmployeeRating -> skillEmployeeRating.getEmployee().equals(this)).collect(Collectors.toList());
     }

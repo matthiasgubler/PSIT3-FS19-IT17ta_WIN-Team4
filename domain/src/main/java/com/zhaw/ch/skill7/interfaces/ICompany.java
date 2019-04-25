@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Interface für eine Company / Unternehmung
+ */
 public interface ICompany {
 
     /**
