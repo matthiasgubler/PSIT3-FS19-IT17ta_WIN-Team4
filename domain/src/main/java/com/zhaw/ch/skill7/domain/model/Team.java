@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class Team extends IdUpdateableEntity<Team> {
 
     private final IGenericDAO<SkillTeamRating> skillRatingIGenericDAO;
+
     private final IGenericDAO<Employee> employeeIGenericDAO;
 
     public Team() {
