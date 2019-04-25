@@ -7,6 +7,9 @@ import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Repräsentation eines Teams innerhalb einer Company
+ */
 public class Team extends IdUpdateableEntity<Team> {
 
     private final IGenericDAO<SkillTeamRating> skillRatingIGenericDAO;
@@ -17,6 +20,12 @@ public class Team extends IdUpdateableEntity<Team> {
         employeeIGenericDAO = ServiceRegistry.getInstance().getEmployeeDAO();
     }
 
+    /**
+     * Konstuktor eines Teams mit DAO's als Parameter
+     *
+     * @param skillRatingIGenericDAO SkillRating DAO für das Handling der Skill Ratings des Teams
+     * @param employeeIGenericDAO    Employee DAO für das Handling der Mitarbeiter des Teams
+     */
     public Team(IGenericDAO<SkillTeamRating> skillRatingIGenericDAO, IGenericDAO<Employee> employeeIGenericDAO) {
         this.skillRatingIGenericDAO = skillRatingIGenericDAO;
         this.employeeIGenericDAO = employeeIGenericDAO;
@@ -24,6 +33,11 @@ public class Team extends IdUpdateableEntity<Team> {
 
     private String name;
 
+    /**
+     * Instanziert ein Team mit einem Teamnamen
+     *
+     * @param name Name des Teams
+     */
     public Team(String name) {
         this();
         this.name = name;
@@ -73,10 +87,21 @@ public class Team extends IdUpdateableEntity<Team> {
         return Objects.hash(super.hashCode(), getName());
     }
 
+    /**
+     * Lädt die Liste aller Skills die ein Team benötigt als Map&lt;String, Long&gt;
+     *
+     * @return Map der Skills die ein Team benötigt. Der Key ist der Name des Skills als String und der Long ist die Bewertung der Wichtigkeit des Skills
+     */
     public Map<String, Long> getSkillNeeds() {
         return getSkillRatingList().stream().collect(Collectors.toMap(skillRating -> skillRating.getSkill().getName(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
     }
 
+    /**
+     * Lädt die Skills der Mitarbeiter im Team und bereitet diese als Map&lt;String, Map&lt;String, Long&gt;&gt; aufbereitet
+     *
+     * @return Verschachtelte Map der Mitarbeiter und deren Skills
+     * Der Key ist jeweils der Skill-Name als String um Value befindet sich eine weitere Map, dessen Key der Name des Mitarbeiters als String ist und der Value das SkillRating des Mitarbeiter ist.
+     */
     public Map<String, Map<String, Long>> getMemberSkills() {
         Map<String, Map<String, Long>> result = new HashMap<>();
 
