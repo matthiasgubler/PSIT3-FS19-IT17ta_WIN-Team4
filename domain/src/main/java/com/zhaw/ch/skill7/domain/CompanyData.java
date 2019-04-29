@@ -5,11 +5,10 @@ import com.zhaw.ch.skill7.domain.model.*;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class CompanyData implements ICompany {
 
@@ -101,6 +100,21 @@ public class CompanyData implements ICompany {
     public Map<String, Long> getDevelopmentDistribution() {
         List<Development> develompentList = getDevelompents();
         return develompentList.stream().collect(Collectors.groupingBy(developmentDistribution -> developmentDistribution.getSkill().getName(), Collectors.counting()));
+    }
+
+    @Override
+    public List<Skill> getSkillsForDevelopmentWorkshop() {
+        List<Development> develompentList = getDevelompents();
+        List<Skill> skillList = new ArrayList<>();
+        for (Development development : develompentList) {
+            skillList.add(development.getSkill());
+        }
+        return skillList.stream().distinct().collect(Collectors.toList());
+
+                //develompentList.stream().distinct().forEach(development -> development.getSkill());
+//        List<Skill> skillList = getSkills();
+//        skillList.stream().filter(skill -> skill.getDevelopment() != null).;
+//        return skillList;
     }
 
 }

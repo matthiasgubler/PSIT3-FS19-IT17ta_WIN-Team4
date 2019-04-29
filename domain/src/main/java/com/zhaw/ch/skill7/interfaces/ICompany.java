@@ -78,4 +78,6 @@ public interface ICompany {
      * @return Map&lt;String, Long&gt; der Entwicklungsbedürfnisse, wobei der Key der Name des Bedarfs ist und die Value die Anzahl der Interessenten
      */
     Map<String, Long> getDevelopmentDistribution();
+
+    List<Skill> getSkillsForDevelopmentWorkshop();
 }
