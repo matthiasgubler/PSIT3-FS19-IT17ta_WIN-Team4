@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="126.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.172-ea"
-            fx:controller="com.zhaw.ch.skill7.view.skill.SkillEditController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="126.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhaw.ch.skill7.view.skill.SkillEditController">
     <GridPane prefHeight="347.0" prefWidth="600.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.0" minWidth="10.0" prefWidth="431.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="169.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.0" minWidth="10.0" prefWidth="431.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="169.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="170.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES"/>
-            <RowConstraints fillHeight="false" maxHeight="313.0" minHeight="10.0" prefHeight="313.0" valignment="TOP"
-                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="170.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" maxHeight="313.0" minHeight="10.0" prefHeight="313.0" valignment="TOP" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Label text="Titel"/>
-        <TextField fx:id="newSkillTextField" GridPane.rowIndex="1"/>
+        <Label text="Skill Name">
+         <padding>
+            <Insets left="10.0" />
+         </padding></Label>
+        <TextField fx:id="newSkillTextField" prefHeight="27.0" prefWidth="431.0" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin></TextField>
         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <Button mnemonicParsing="false" onAction="#creationButtonClicked" prefHeight="27.0" prefWidth="84.0"
-                    text="Erfassen"/>
-            <Button mnemonicParsing="false" onAction="#deleteButtonClicked" text="Löschen"/>
+            <Button mnemonicParsing="false" onAction="#creationButtonClicked" prefHeight="27.0" prefWidth="84.0" text="Erfassen">
+            <HBox.margin>
+               <Insets left="5.0" />
+            </HBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="27.0" prefWidth="84.0" text="Löschen">
+            <HBox.margin>
+               <Insets left="5.0" right="10.0" />
+            </HBox.margin></Button>
         </HBox>
     </GridPane>
 </AnchorPane>
