@@ -34,8 +34,9 @@ public class DatabaseInit {
         Skill skillBlockchain = new Skill("Blockchain");
         Skill skillOracleDB = new Skill("Oracle DB");
         Skill skillMicroservice = new Skill("Microservice");
+        Skill skillCSharp = new Skill("C#");
 
-        addAll(skillDAO, skillReact, skillJava, skillBlockchain, skillOracleDB, skillMicroservice);
+        addAll(skillDAO, skillReact, skillJava, skillBlockchain, skillOracleDB, skillMicroservice, skillCSharp);
 
         Team teamSkill7 = new Team("Skill7");
         Team teamFooBar = new Team("FooBar");
