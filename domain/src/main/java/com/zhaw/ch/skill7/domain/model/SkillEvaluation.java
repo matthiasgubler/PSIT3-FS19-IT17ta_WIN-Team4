@@ -28,6 +28,10 @@ public class SkillEvaluation {
         this.statusMessage = new SimpleStringProperty(statusMessage);
     }
 
+    public String getName() { return name.get(); }
+
+    public void setName(String name) { this.name.set(name); }
+
     public Long getActualRating() {
         return actualRating.get();
     }
