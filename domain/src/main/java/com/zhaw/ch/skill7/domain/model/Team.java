@@ -144,7 +144,7 @@ public class Team extends IdUpdateableEntity<Team> {
         Map<String, Long> specificMemberSkills;
 
         for(Map.Entry<String, Long> need : skillNeeds.entrySet()) {
-            SkillEvaluation skillEvaluation = new SkillEvaluation();
+            SkillEvaluation skillEvaluation = new SkillEvaluation(need.getKey());
             skillEvaluation.setRequiredRating(need.getValue());
             skillEvaluation.setActualRating(0L);
 
@@ -153,8 +153,7 @@ public class Team extends IdUpdateableEntity<Team> {
             if(specificMemberSkills != null) {
                 for(Map.Entry<String, Long> specificSkill : specificMemberSkills.entrySet()) {
                     Long rating = specificSkill.getValue();
-                    if(rating >= skillEvaluation.getRequiredRating()
-                            && rating > skillEvaluation.getActualRating()) {
+                    if(rating > skillEvaluation.getActualRating()) {
                         skillEvaluation.setActualRating(specificSkill.getValue());
                     }
                 }
