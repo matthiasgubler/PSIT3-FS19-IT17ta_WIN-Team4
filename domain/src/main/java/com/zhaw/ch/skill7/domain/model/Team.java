@@ -129,4 +129,49 @@ public class Team extends IdUpdateableEntity<Team> {
 
         return result;
     }
+
+    /**
+     * Evaluiert das Team-Objekt in Bezug auf dessen Skill-Needs und Skills der Mitglieder.
+     *
+     * @return TeamEvaluation Objekt, welches eine Map<String, SkillEvaluation> enthält.
+     * Diese Map enthält die Evaluation jedes Skill-Needs des Teams.
+     */
+    public TeamEvaluation evaluateTeam() {
+        TeamEvaluation teamEvaluation = new TeamEvaluation(this);
+
+        Map<String, Long> skillNeeds = getSkillNeeds();
+        Map<String, Map<String, Long>> memberSkills = getMemberSkills();
+        Map<String, Long> specificMemberSkills;
+
+        for(Map.Entry<String, Long> need : skillNeeds.entrySet()) {
+            SkillEvaluation skillEvaluation = new SkillEvaluation();
+            skillEvaluation.setRequiredRating(need.getValue());
+            skillEvaluation.setActualRating(0L);
+
+            specificMemberSkills = memberSkills.get(need.getKey());
+
+            if(specificMemberSkills != null) {
+                for(Map.Entry<String, Long> specificSkill : specificMemberSkills.entrySet()) {
+                    Long rating = specificSkill.getValue();
+                    if(rating >= skillEvaluation.getRequiredRating()
+                            && rating > skillEvaluation.getActualRating()) {
+                        skillEvaluation.setActualRating(specificSkill.getValue());
+                    }
+                }
+            }
+
+            if(skillEvaluation.getActualRating() >= skillEvaluation.getRequiredRating()) {
+                skillEvaluation.setStatusMessage(Semaphore.GREEN.toString());
+            } else if((skillEvaluation.getRequiredRating() - skillEvaluation.getActualRating() <= 2)) {
+                skillEvaluation.setStatusMessage(Semaphore.YELLOW.toString());
+            } else {
+                skillEvaluation.setStatusMessage(Semaphore.RED.toString());
+            }
+
+            teamEvaluation.addEvaluation(need.getKey(), skillEvaluation);
+        }
+
+
+        return teamEvaluation;
+    }
 }
