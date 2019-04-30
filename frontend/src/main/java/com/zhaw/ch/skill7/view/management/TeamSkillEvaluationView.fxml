@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhaw.ch.skill7.view.management.TeamSkillEvaluationController">
+   <children>
+      <SplitPane dividerPositions="0.07551020408163266" orientation="VERTICAL" prefHeight="492.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="31.0" prefWidth="598.0">
+               <children>
+                  <ComboBox fx:id="teamComboBox" layoutY="1.0" prefHeight="26.0" prefWidth="458.0" />
+                  <Button layoutX="500.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Reload" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.0" prefWidth="598.0">
+               <children>
+                  <VBox layoutX="46.0" layoutY="30.0" prefHeight="390.0" prefWidth="506.0">
+                     <children>
+                        <TableView prefHeight="228.0" prefWidth="506.0">
+                          <columns>
+                            <TableColumn fx:id="skillNameColumn" prefWidth="131.0" text="Skill" />
+                            <TableColumn fx:id="skillActualRating" prefWidth="111.0" text="Actual Rating" />
+                              <TableColumn fx:id="skillRequiredRating" prefWidth="121.0" text="Required Rating" />
+                              <TableColumn fx:id="skillEvaluationStatus" prefWidth="142.0" text="Status" />
+                          </columns>
+                        </TableView>
+                        <TextArea prefHeight="200.0" prefWidth="200.0" text="Legend (Status)&#10;&#10;Green - Optimal&#10;&#10;Orange - Improvements needed&#10;&#10;Red - Critical | Team not operational" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
