@@ -1,6 +1,7 @@
 package com.zhaw.ch.skill7.view.admin;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
+import com.zhaw.ch.skill7.domain.model.Development;
 import com.zhaw.ch.skill7.domain.model.DevelopmentRating;
 import com.zhaw.ch.skill7.domain.model.Employee;
 import com.zhaw.ch.skill7.domain.model.Skill;
@@ -11,9 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.stream.Collectors;
 
 public class AdminEmployeeTableController implements Observer {
 
@@ -49,9 +52,9 @@ public class AdminEmployeeTableController implements Observer {
 
     private void loadAndMapEmployee() {
         Skill skill = adminDevelopmentTableController.getSelectedSkill();
-        Map<Employee, DevelopmentRating> employeeDevelopmentList = skill.getSkillDevelopmentEmployees();
-        for (Employee employee : employeeDevelopmentList.keySet()) {
-            adminEmployeeUIObservableList.add(new EmployeeAdminDevelopmentUI(employee, employeeDevelopmentList.get(employee)));
+        List<Development> developmentList = company.getDevelopments().stream().filter(development -> development.getSkill() == skill).collect(Collectors.toList());
+        for (Development development : developmentList) {
+            adminEmployeeUIObservableList.add(new EmployeeAdminDevelopmentUI(development.getEmployee(), development.getDevelopmentRating()));
         }
     }
 

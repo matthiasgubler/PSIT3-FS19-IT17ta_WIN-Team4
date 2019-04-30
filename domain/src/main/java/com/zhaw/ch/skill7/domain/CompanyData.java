@@ -54,7 +54,7 @@ public class CompanyData implements ICompany {
         return skillIGenericDAO.read();
     }
 
-    private List<Development> getDevelompents() {
+    public List<Development> getDevelopments() {
         return developmentIGenericDAO.read();
     }
 
@@ -98,13 +98,13 @@ public class CompanyData implements ICompany {
 
     @Override
     public Map<String, Long> getDevelopmentDistribution() {
-        List<Development> develompentList = getDevelompents();
+        List<Development> develompentList = getDevelopments();
         return develompentList.stream().collect(Collectors.groupingBy(developmentDistribution -> developmentDistribution.getSkill().getName(), Collectors.counting()));
     }
 
     @Override
     public List<Skill> getSkillsForDevelopmentWorkshop() {
-        List<Development> developmentList = getDevelompents();
+        List<Development> developmentList = getDevelopments();
 
         Map<Skill, Integer> skillCountMap = new HashMap<>();
         for (Development development : developmentList) {

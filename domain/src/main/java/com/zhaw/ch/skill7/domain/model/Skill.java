@@ -79,19 +79,6 @@ public class Skill extends IdUpdateableEntity<Skill> {
     }
 
     /**
-     * Gibt die Liste der Personen zurück die, diesen Skill als Weiterbildungswunsch eingetragen haben.
-     *
-     * @return Liste Mitarbeiter
-     */
-    public Map<Employee, DevelopmentRating> getSkillDevelopmentEmployees() {
-        Map<Employee, DevelopmentRating> employeeDevelopmentList = new HashMap<>();
-        for (Development development : getDevelopments()) {
-            employeeDevelopmentList.put(development.getEmployee(), development.getDevelopmentRating());
-        }
-        return employeeDevelopmentList;
-    }
-
-    /**
      * Gibt die Anzahl der Personen zurück die diesen Skill als Weiterbildungswunsch eingetragen haben.
      *
      * @return Anzahl Weiterbildungswünsche
