@@ -8,15 +8,14 @@ import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 public class CompanyData implements ICompany {
 
     private final IGenericDAO<Skill> skillIGenericDAO;
     private final IGenericDAO<Employee> employeeIGenericDAO;
     private final IGenericDAO<Team> teamIGenericDAO;
     private final IGenericDAO<Development> developmentIGenericDAO;
-    private final int THRESHOLD = 3;
+    private final int THRESHOLD_COUNT_EMPLOYEES = 3;
+    private final int THRESHOLD_DEVELOPMENT_RATING = 2;
 
     /**
      * Konstruktor zur Instanzierung einer CompanyData / Unternehmung
@@ -109,13 +108,15 @@ public class CompanyData implements ICompany {
 
         Map<Skill, Integer> SkillCountMap = new HashMap<>();
         for (Development development : develompentList) {
-            Integer count = SkillCountMap.get(development.getSkill());
-            SkillCountMap.put(development.getSkill(), (count == null) ? 1 : count + 1);
+            if (development.getDevelopmentRating().getIntValue() >= THRESHOLD_DEVELOPMENT_RATING) {
+                Integer count = SkillCountMap.get(development.getSkill());
+                SkillCountMap.put(development.getSkill(), (count == null) ? 1 : count + 1);
+            }
         }
 
         List<Skill> skillList = new ArrayList<>();
         for (Skill skill : SkillCountMap.keySet()) {
-            if (SkillCountMap.get(skill) >= THRESHOLD) {
+            if (SkillCountMap.get(skill) >= THRESHOLD_COUNT_EMPLOYEES) {
                 skillList.add(skill);
             }
         }

@@ -4,15 +4,25 @@ public enum DevelopmentRating {
     /**
      * Tiefer Entwicklungsbedarf
      */
-    LOW,
+    LOW(1),
 
     /**
      * Mittlerer Entwicklungsbedarf
      */
-    MEDIUM,
+    MEDIUM(2),
 
     /**
      * Hoher Entwicklungsbedarf
      */
-    HIGH
+    HIGH(3);
+
+    private final int intValue;
+
+    private DevelopmentRating(int value) {
+        this.intValue = value;
+    }
+
+    public int getIntValue() {
+        return intValue;
+    }
 }
