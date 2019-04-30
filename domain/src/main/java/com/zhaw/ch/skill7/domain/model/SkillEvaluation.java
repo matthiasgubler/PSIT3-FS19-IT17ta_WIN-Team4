@@ -1,41 +1,54 @@
 package com.zhaw.ch.skill7.domain.model;
 
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class SkillEvaluation {
 
-    private String name;
-    private Long actualRating;
-    private Long requiredRating;
-    private String statusMessage;
+    private SimpleStringProperty name;
+    private SimpleLongProperty actualRating;
+    private SimpleLongProperty requiredRating;
+    private SimpleStringProperty statusMessage;
 
     public SkillEvaluation() {
 
     }
 
     public SkillEvaluation(String name) {
-        this.name = name;
+        this.name = new SimpleStringProperty(name);
+        this.actualRating = new SimpleLongProperty(0L);
+        this.requiredRating = new SimpleLongProperty(0L);
+        this.statusMessage = new SimpleStringProperty("");
+    }
+
+    public SkillEvaluation(String name, Long actualRating, Long requiredRating, String statusMessage) {
+        this.name = new SimpleStringProperty(name);
+        this.actualRating = new SimpleLongProperty(actualRating);
+        this.requiredRating = new SimpleLongProperty(requiredRating);
+        this.statusMessage = new SimpleStringProperty(statusMessage);
     }
 
     public Long getActualRating() {
-        return actualRating;
+        return actualRating.get();
     }
 
     public void setActualRating(Long actualRating) {
-        this.actualRating = actualRating;
+        this.actualRating = new SimpleLongProperty(actualRating);
     }
 
     public Long getRequiredRating() {
-        return requiredRating;
+        return requiredRating.get();
     }
 
     public void setRequiredRating(Long requiredRating) {
-        this.requiredRating = requiredRating;
+        this.requiredRating = new SimpleLongProperty(requiredRating);
     }
 
     public String getStatusMessage() {
-        return statusMessage;
+        return statusMessage.get();
     }
 
     public void setStatusMessage(String statusMessage) {
-        this.statusMessage = statusMessage;
+        this.statusMessage = new SimpleStringProperty(statusMessage);
     }
 }
