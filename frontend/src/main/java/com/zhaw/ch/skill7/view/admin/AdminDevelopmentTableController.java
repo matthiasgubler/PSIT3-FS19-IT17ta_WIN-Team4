@@ -5,18 +5,15 @@ import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.model.SkillAdminDevelopmentUI;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public class AdminDevelopmentTableController implements Observer {
+public class AdminDevelopmentTableController {
 
     @FXML
-    private ObservableList<SkillAdminDevelopmentUI> developmentSkillUIObservableList;
+    private List<SkillAdminDevelopmentUI> developmentSkillUIObservableList;
 
     private final ICompany company;
 
@@ -59,11 +56,6 @@ public class AdminDevelopmentTableController implements Observer {
 
     private void skillChanged() {
         adminEmployeeTableController.reloadTable();
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        reloadTable();
     }
 
     public void setAdminEmployeeTableController(AdminEmployeeTableController adminEmployeeTableController) {

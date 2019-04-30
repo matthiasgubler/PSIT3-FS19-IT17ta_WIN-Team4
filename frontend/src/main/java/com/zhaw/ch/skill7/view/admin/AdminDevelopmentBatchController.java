@@ -5,9 +5,7 @@ import com.zhaw.ch.skill7.interfaces.ICompany;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import java.util.Observable;
-
-public class AdminDevelopmentBatchController extends Observable {
+public class AdminDevelopmentBatchController {
     private final ICompany company;
 
     private AdminDevelopmentTableController adminDevelopmentTableController;
@@ -21,11 +19,6 @@ public class AdminDevelopmentBatchController extends Observable {
 
     public AdminDevelopmentBatchController(ICompany company) {
         this.company = company;
-    }
-
-    private void setChangedAndNotify() {
-        setChanged();
-        notifyObservers();
     }
 
     public AdminDevelopmentTableController getAdminDevelopmentTableController() {

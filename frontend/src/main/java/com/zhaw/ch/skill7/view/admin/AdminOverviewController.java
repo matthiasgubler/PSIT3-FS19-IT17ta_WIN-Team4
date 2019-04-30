@@ -24,8 +24,8 @@ public class AdminOverviewController {
 
     @FXML
     private void initialize() {
-        adminDevelopmentBatchController.addObserver(adminDevelopmentTableController);
-        adminDevelopmentBatchController.setAdminDevelopmentTableController(adminDevelopmentTableController);
+//        adminDevelopmentBatchController.addObserver(adminDevelopmentTableController);
+//        adminDevelopmentBatchController.setAdminDevelopmentTableController(adminDevelopmentTableController);
         adminDevelopmentTableController.setAdminEmployeeTableController(adminEmployeeTableController);
         adminEmployeeTableController.setAdminDevelopmentTableController(adminDevelopmentTableController);
     }
