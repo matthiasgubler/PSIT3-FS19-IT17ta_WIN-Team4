@@ -86,8 +86,9 @@ public class DatabaseInit {
         Development development8 = new Development(skillReact, DevelopmentRating.LOW, employeeNicolas);
         Development development9 = new Development(skillJava, DevelopmentRating.MEDIUM, employeePhilipp);
         Development development10 = new Development(skillOracleDB, DevelopmentRating.LOW, employeeDaniela);
+        Development development11 = new Development(skillJava, DevelopmentRating.MEDIUM, employeeValentino);
 
-        addAll(developmentDAO, development1, development2, development3, development4, development5, development6, development7, development8, development9, development10);
+        addAll(developmentDAO, development1, development2, development3, development4, development5, development6, development7, development8, development9, development10, development11);
 
         SkillTeamRating skillRatingTeam1 = new SkillTeamRating(8, skillJava, teamSkill7);
         SkillTeamRating skillRatingTeam2 = new SkillTeamRating(2, skillOracleDB, teamSkill7);
