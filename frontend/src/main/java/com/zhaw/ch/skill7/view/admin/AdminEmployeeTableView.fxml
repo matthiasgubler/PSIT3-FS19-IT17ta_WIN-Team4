@@ -34,7 +34,7 @@
          </TableColumn>
       </columns>
       <items>
-         <FXCollections fx:id="AdminEmployeeUIObservableList" fx:factory="observableArrayList" />
+         <FXCollections fx:id="adminEmployeeUIObservableList" fx:factory="observableArrayList" />
       </items>
    </TableView>
    <Label layoutX="14.0" layoutY="14.0" text="Mitarbeiter die sich für diesen Skill interessieren">

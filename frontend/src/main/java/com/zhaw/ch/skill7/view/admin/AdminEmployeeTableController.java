@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,14 +18,14 @@ import java.util.Observer;
 public class AdminEmployeeTableController implements Observer {
 
     @FXML
-    private ObservableList<EmployeeAdminDevelopmentUI> AdminEmployeeUIObservableList;
+    private ObservableList<EmployeeAdminDevelopmentUI> adminEmployeeUIObservableList;
 
     private final ICompany company;
 
     @FXML
     private TableView<EmployeeAdminDevelopmentUI> tableView;
 
-    private AdminDevelopmentTableController AdminDevelopmentTableController;
+    private AdminDevelopmentTableController adminDevelopmentTableController;
 
     public AdminEmployeeTableController() {
         this.company = new CompanyData();
@@ -38,21 +37,21 @@ public class AdminEmployeeTableController implements Observer {
 
     @FXML
     private void initialize() {
-        AdminEmployeeUIObservableList.clear();
+        adminEmployeeUIObservableList.clear();
     }
 
     public void reloadTable() {
         Platform.runLater(() -> {
-            AdminEmployeeUIObservableList.clear();
+            adminEmployeeUIObservableList.clear();
             loadAndMapEmployee();
         });
     }
 
     private void loadAndMapEmployee() {
-        Skill skill = AdminDevelopmentTableController.getSelectedSkill();
+        Skill skill = adminDevelopmentTableController.getSelectedSkill();
         Map<Employee, DevelopmentRating> employeeDevelopmentList = skill.getSkillDevelopmentEmployees();
         for (Employee employee : employeeDevelopmentList.keySet()) {
-            AdminEmployeeUIObservableList.add(new EmployeeAdminDevelopmentUI(employee, employeeDevelopmentList.get(employee)));
+            adminEmployeeUIObservableList.add(new EmployeeAdminDevelopmentUI(employee, employeeDevelopmentList.get(employee)));
         }
     }
 
@@ -61,7 +60,7 @@ public class AdminEmployeeTableController implements Observer {
         reloadTable();
     }
 
-    public void setAdminDevelopmentTableController(AdminDevelopmentTableController AdminDevelopmentTableController) {
-        this.AdminDevelopmentTableController = AdminDevelopmentTableController;
+    public void setAdminDevelopmentTableController(AdminDevelopmentTableController adminDevelopmentTableController) {
+        this.adminDevelopmentTableController = adminDevelopmentTableController;
     }
 }

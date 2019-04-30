@@ -23,7 +23,7 @@ public class AdminDevelopmentTableController implements Observer {
     @FXML
     private TableView<SkillAdminDevelopmentUI> tableView;
 
-    private AdminEmployeeTableController AdminEmployeeTableController;
+    private AdminEmployeeTableController adminEmployeeTableController;
 
     public AdminDevelopmentTableController() {
         this.company = new CompanyData();
@@ -58,7 +58,7 @@ public class AdminDevelopmentTableController implements Observer {
     }
 
     private void skillChanged() {
-        AdminEmployeeTableController.reloadTable();
+        adminEmployeeTableController.reloadTable();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class AdminDevelopmentTableController implements Observer {
         reloadTable();
     }
 
-    public void setAdminEmployeeTableController(AdminEmployeeTableController AdminEmployeeTableController) {
-        this.AdminEmployeeTableController = AdminEmployeeTableController;
+    public void setAdminEmployeeTableController(AdminEmployeeTableController adminEmployeeTableController) {
+        this.adminEmployeeTableController = adminEmployeeTableController;
     }
 }

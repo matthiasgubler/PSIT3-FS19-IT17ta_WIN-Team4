@@ -10,7 +10,7 @@ import java.util.Observable;
 public class AdminDevelopmentBatchController extends Observable {
     private final ICompany company;
 
-    private AdminDevelopmentTableController AdminDevelopmentTableController;
+    private AdminDevelopmentTableController adminDevelopmentTableController;
 
     @FXML
     private TextField newDevelopmentSkillTextField;
@@ -29,10 +29,10 @@ public class AdminDevelopmentBatchController extends Observable {
     }
 
     public AdminDevelopmentTableController getAdminDevelopmentTableController() {
-        return AdminDevelopmentTableController;
+        return adminDevelopmentTableController;
     }
 
-    public void setAdminDevelopmentTableController(AdminDevelopmentTableController AdminDevelopmentTableController) {
-        this.AdminDevelopmentTableController = AdminDevelopmentTableController;
+    public void setAdminDevelopmentTableController(AdminDevelopmentTableController adminDevelopmentTableController) {
+        this.adminDevelopmentTableController = adminDevelopmentTableController;
     }
 }

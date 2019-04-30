@@ -5,28 +5,28 @@ import javafx.scene.layout.AnchorPane;
 
 public class AdminOverviewController {
     @FXML
-    private AnchorPane AdminDevelopmentTable;
+    private AnchorPane adminDevelopmentTable;
 
     @FXML
-    private AnchorPane AdminEmployeeTable;
+    private AnchorPane adminEmployeeTable;
 
     @FXML
-    private AnchorPane AdminDevelopmentBatch;
+    private AnchorPane adminDevelopmentBatch;
 
     @FXML
-    private AdminDevelopmentTableController AdminDevelopmentTableController;
+    private AdminDevelopmentTableController adminDevelopmentTableController;
 
     @FXML
-    private AdminDevelopmentBatchController AdminDevelopmentBatchController;
+    private AdminDevelopmentBatchController adminDevelopmentBatchController;
 
     @FXML
-    private AdminEmployeeTableController AdminEmployeeTableController;
+    private AdminEmployeeTableController adminEmployeeTableController;
 
     @FXML
     private void initialize() {
-        AdminDevelopmentBatchController.addObserver(AdminDevelopmentTableController);
-        AdminDevelopmentBatchController.setAdminDevelopmentTableController(AdminDevelopmentTableController);
-        AdminDevelopmentTableController.setAdminEmployeeTableController(AdminEmployeeTableController);
-        AdminEmployeeTableController.setAdminDevelopmentTableController(AdminDevelopmentTableController);
+        adminDevelopmentBatchController.addObserver(adminDevelopmentTableController);
+        adminDevelopmentBatchController.setAdminDevelopmentTableController(adminDevelopmentTableController);
+        adminDevelopmentTableController.setAdminEmployeeTableController(adminEmployeeTableController);
+        adminEmployeeTableController.setAdminDevelopmentTableController(adminDevelopmentTableController);
     }
 }

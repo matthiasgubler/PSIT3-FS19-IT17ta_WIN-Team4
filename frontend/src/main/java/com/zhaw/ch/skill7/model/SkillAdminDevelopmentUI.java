@@ -2,7 +2,6 @@ package com.zhaw.ch.skill7.model;
 
 import com.zhaw.ch.skill7.domain.model.Skill;
 import javafx.beans.property.SimpleStringProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SkillAdminDevelopmentUI extends SkillUI {
     private final SimpleStringProperty count = new SimpleStringProperty("");
