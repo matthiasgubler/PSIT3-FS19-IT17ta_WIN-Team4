@@ -14,9 +14,14 @@
                <PropertyValueFactory property="id" />
             </cellValueFactory>
          </TableColumn>
-         <TableColumn editable="false" prefWidth="525.0" text="Name des Skills">
+         <TableColumn editable="false" prefWidth="450.0" text="Name des Skills">
             <cellValueFactory>
                <PropertyValueFactory property="name" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn editable="false" prefWidth="75.0" text="Anz. MA">
+            <cellValueFactory>
+               <PropertyValueFactory property="count" />
             </cellValueFactory>
          </TableColumn>
       </columns>
