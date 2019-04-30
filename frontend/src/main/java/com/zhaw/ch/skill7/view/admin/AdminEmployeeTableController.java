@@ -50,7 +50,7 @@ public class AdminEmployeeTableController implements Observer {
 
     private void loadAndMapEmployee() {
         Skill skill = adminDevelopmentTableController.getSelectedSkill();
-        List<Development> developmentList = company.getDevelopments().stream().filter(development -> development.getSkill() == skill).collect(Collectors.toList());
+        List<Development> developmentList = company.getDevelopments().stream().filter(development -> development.getSkill().equals(skill)).collect(Collectors.toList());
         for (Development development : developmentList) {
             adminEmployeeUIObservableList.add(new EmployeeAdminDevelopmentUI(development.getEmployee(), development.getDevelopmentRating()));
         }
