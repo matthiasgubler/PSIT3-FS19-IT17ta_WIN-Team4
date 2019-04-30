@@ -143,4 +143,119 @@ class TeamTest {
 
         verify(employeeIGenericDAOMock).read();
     }
+
+    @Test
+    void evaluateTeam_yellowEvaluation() {
+        //mock Skill
+        Skill skill1 = mock(Skill.class);
+        when(skill1.getName()).thenReturn("1");
+
+        //mock SkillTeamRating
+        SkillTeamRating skillTeamRating1 = mock(SkillTeamRating.class);
+        when(skillTeamRating1.getTeam()).thenReturn(testee);
+        when(skillTeamRating1.getRating()).thenReturn(1);
+        when(skillTeamRating1.getSkill()).thenReturn(skill1);
+
+        //when skillRatingIGenericDAOMock
+        when(skillRatingIGenericDAOMock.read()).thenReturn(Arrays.asList(skillTeamRating1));
+
+        //mock Employee
+        Employee employee1 = mock(Employee.class);
+        when(employee1.getFirstname()).thenReturn("Fritz");
+        when(employee1.getLastname()).thenReturn("Fischer");
+        when(employee1.getTeam()).thenReturn(testee);
+
+        //mock SkillEmployeeRating
+        SkillEmployeeRating skillEmployeeRating1 = mock(SkillEmployeeRating.class);
+        when(skillEmployeeRating1.getEmployee()).thenReturn(employee1);
+        when(skillEmployeeRating1.getSkill()).thenReturn(skill1);
+
+        //when employee skillRatingList
+        when(employee1.getSkillRatingList()).thenReturn(Arrays.asList(skillEmployeeRating1));
+
+        //when employeeIGenericDAOMock
+        when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
+
+        //test
+        TeamEvaluation teamEvaluation1 = testee.evaluateTeam();
+        String actualStatusMessage = teamEvaluation1.getSkillEvaluations().get("1").getStatusMessage();
+        assertEquals("YELLOW", actualStatusMessage);
+    }
+
+    @Test
+    void evaluateTeam_redEvaluation() {
+        //mock Skill
+        Skill skill1 = mock(Skill.class);
+        when(skill1.getName()).thenReturn("1");
+
+        //mock SkillTeamRating
+        SkillTeamRating skillTeamRating1 = mock(SkillTeamRating.class);
+        when(skillTeamRating1.getTeam()).thenReturn(testee);
+        when(skillTeamRating1.getRating()).thenReturn(3);
+        when(skillTeamRating1.getSkill()).thenReturn(skill1);
+
+        //when skillRatingIGenericDAOMock
+        when(skillRatingIGenericDAOMock.read()).thenReturn(Arrays.asList(skillTeamRating1));
+
+        //mock Employee
+        Employee employee1 = mock(Employee.class);
+        when(employee1.getFirstname()).thenReturn("Fritz");
+        when(employee1.getLastname()).thenReturn("Fischer");
+        when(employee1.getTeam()).thenReturn(testee);
+
+        //mock SkillEmployeeRating
+        SkillEmployeeRating skillEmployeeRating1 = mock(SkillEmployeeRating.class);
+        when(skillEmployeeRating1.getEmployee()).thenReturn(employee1);
+        when(skillEmployeeRating1.getSkill()).thenReturn(skill1);
+
+        //when employee skillRatingList
+        when(employee1.getSkillRatingList()).thenReturn(Arrays.asList(skillEmployeeRating1));
+
+        //when employeeIGenericDAOMock
+        when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
+
+        //test
+        TeamEvaluation teamEvaluation1 = testee.evaluateTeam();
+        String actualStatusMessage = teamEvaluation1.getSkillEvaluations().get("1").getStatusMessage();
+        assertEquals("RED", actualStatusMessage);
+    }
+
+    @Test
+    void evaluateTeam_greenEvaluation() {
+        //mock Skill
+        Skill skill1 = mock(Skill.class);
+        when(skill1.getName()).thenReturn("1");
+
+        //mock SkillTeamRating
+        SkillTeamRating skillTeamRating1 = mock(SkillTeamRating.class);
+        when(skillTeamRating1.getTeam()).thenReturn(testee);
+        when(skillTeamRating1.getRating()).thenReturn(2);
+        when(skillTeamRating1.getSkill()).thenReturn(skill1);
+
+        //when skillRatingIGenericDAOMock
+        when(skillRatingIGenericDAOMock.read()).thenReturn(Arrays.asList(skillTeamRating1));
+
+        //mock Employee
+        Employee employee1 = mock(Employee.class);
+        when(employee1.getFirstname()).thenReturn("Fritz");
+        when(employee1.getLastname()).thenReturn("Fischer");
+        when(employee1.getTeam()).thenReturn(testee);
+
+        //mock SkillEmployeeRating
+        SkillEmployeeRating skillEmployeeRating1 = mock(SkillEmployeeRating.class);
+        when(skillEmployeeRating1.getEmployee()).thenReturn(employee1);
+        when(skillEmployeeRating1.getSkill()).thenReturn(skill1);
+        when(skillEmployeeRating1.getRating()).thenReturn(2);
+
+        //when employee skillRatingList
+        when(employee1.getSkillRatingList()).thenReturn(Arrays.asList(skillEmployeeRating1));
+
+        //when employeeIGenericDAOMock
+        when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
+
+        //test
+        TeamEvaluation teamEvaluation1 = testee.evaluateTeam();
+        String actualStatusMessage = teamEvaluation1.getSkillEvaluations().get("1").getStatusMessage();
+        assertEquals("GREEN", actualStatusMessage);
+    }
 }
