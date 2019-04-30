@@ -23,34 +23,6 @@ public class AdminDevelopmentBatchController extends Observable {
         this.company = company;
     }
 
-//    @FXML
-//    public void creationButtonClicked() {
-//        String skillNameValue = newDevelopmentSkillTextField.getText();
-//        System.out.println("Creation Button Clicked with value of TextField: " + skillNameValue);
-//        if (!StringUtils.isEmpty(skillNameValue)) {
-//            company.createSkill(skillNameValue);
-//            newDevelopmentSkillTextField.setText("");
-//            setChangedAndNotify();
-//        }
-//    }
-
-//    @FXML
-//    public void deleteButtonClicked() {
-//        Skill selectedSkill = AdminDevelopmentTableController.getSelectedValue();
-//        if (selectedSkill != null) {
-//            company.deleteSkill(selectedSkill);
-//            setChangedAndNotify();
-//        }
-//    }
-
-//    TextField getNewSkillTextField() {
-//        return newDevelopmentSkillTextField;
-//    }
-//
-//    void setNewSkillTextField(TextField newDevelopmentSkillTextField) {
-//        this.newDevelopmentSkillTextField = newDevelopmentSkillTextField;
-//    }
-
     private void setChangedAndNotify() {
         setChanged();
         notifyObservers();

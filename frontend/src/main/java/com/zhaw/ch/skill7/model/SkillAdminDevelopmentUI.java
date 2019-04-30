@@ -4,10 +4,10 @@ import com.zhaw.ch.skill7.domain.model.Skill;
 import javafx.beans.property.SimpleStringProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class AdminDevelopmentSkillUI extends SkillUI {
+public class SkillAdminDevelopmentUI extends SkillUI {
     private final SimpleStringProperty count = new SimpleStringProperty("");
 
-    public AdminDevelopmentSkillUI(Skill skill, int count) {
+    public SkillAdminDevelopmentUI(Skill skill, int count) {
         super(skill);
         setCount(String.valueOf(count));
     }

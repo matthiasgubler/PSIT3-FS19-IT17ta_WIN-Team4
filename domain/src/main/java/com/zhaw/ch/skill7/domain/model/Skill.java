@@ -4,9 +4,7 @@ import com.zhaw.ch.skill7.business.ServiceRegistry;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Skill extends IdUpdateableEntity<Skill> {
@@ -81,13 +79,29 @@ public class Skill extends IdUpdateableEntity<Skill> {
     }
 
     /**
+     * Gibt die Liste der Personen zurück die, diesen Skill als Weiterbildungswunsch eingetragen haben.
+     *
+     * @return Liste Mitarbeiter
+     */
+    public Map<Employee, DevelopmentRating> getSkillDevelopmentEmployees() {
+        Map<Employee, DevelopmentRating> employeeDevelopmentList = new HashMap<>();
+        for (Development development : getDevelopments()) {
+            employeeDevelopmentList.put(development.getEmployee(), development.getDevelopmentRating());
+        }
+        return employeeDevelopmentList;
+    }
+
+    /**
      * Gibt die Anzahl der Personen zurück die diesen Skill als Weiterbildungswunsch eingetragen haben.
      *
      * @return Anzahl Weiterbildungswünsche
      */
     public int getSkillDevelopmentCount() {
-        List<Development> developmentList = developmentIGenericDAO.read().stream().filter(development -> development.getSkill().equals(this)).collect(Collectors.toList());
-        return developmentList.size();
+        return getDevelopments().size();
+    }
+
+    private List<Development> getDevelopments() {
+        return developmentIGenericDAO.read().stream().filter(development -> development.getSkill().equals(this)).collect(Collectors.toList());
     }
 
     public void update() {

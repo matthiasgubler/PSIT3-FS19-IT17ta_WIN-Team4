@@ -3,27 +3,27 @@ package com.zhaw.ch.skill7.view.admin;
 import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
-import com.zhaw.ch.skill7.model.AdminDevelopmentSkillUI;
+import com.zhaw.ch.skill7.model.SkillAdminDevelopmentUI;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.stream.Collectors;
 
 public class AdminDevelopmentTableController implements Observer {
 
     @FXML
-    private ObservableList<AdminDevelopmentSkillUI> developmentSkillUIObservableList;
+    private ObservableList<SkillAdminDevelopmentUI> developmentSkillUIObservableList;
 
     private final ICompany company;
 
     @FXML
-    private TableView<AdminDevelopmentSkillUI> tableView;
+    private TableView<SkillAdminDevelopmentUI> tableView;
+
+    private AdminEmployeeTableController AdminEmployeeTableController;
 
     public AdminDevelopmentTableController() {
         this.company = new CompanyData();
@@ -35,6 +35,7 @@ public class AdminDevelopmentTableController implements Observer {
 
     @FXML
     private void initialize() {
+        tableView.getSelectionModel().selectedItemProperty().addListener(observer -> skillChanged());
         reloadTable();
     }
 
@@ -48,16 +49,24 @@ public class AdminDevelopmentTableController implements Observer {
     private void loadAndMapSkills() {
         List<Skill> skillList = company.getSkillsForDevelopmentWorkshop();
         for (Skill skill : skillList) {
-            developmentSkillUIObservableList.add(new AdminDevelopmentSkillUI(skill, skill.getSkillDevelopmentCount()));
+            developmentSkillUIObservableList.add(new SkillAdminDevelopmentUI(skill, skill.getSkillDevelopmentCount()));
         }
     }
 
-    public Skill getSelectedValue() {
+    public Skill getSelectedSkill() {
         return tableView.getSelectionModel().getSelectedItem();
+    }
+
+    private void skillChanged() {
+        AdminEmployeeTableController.reloadTable();
     }
 
     @Override
     public void update(Observable o, Object arg) {
         reloadTable();
+    }
+
+    public void setAdminEmployeeTableController(AdminEmployeeTableController AdminEmployeeTableController) {
+        this.AdminEmployeeTableController = AdminEmployeeTableController;
     }
 }

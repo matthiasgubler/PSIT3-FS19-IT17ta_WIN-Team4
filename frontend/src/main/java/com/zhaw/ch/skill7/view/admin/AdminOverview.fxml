@@ -7,8 +7,11 @@
             fx:controller="com.zhaw.ch.skill7.view.admin.AdminOverviewController">
     <BorderPane prefHeight="400.0" prefWidth="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <center>
+        <top>
             <fx:include fx:id="AdminDevelopmentTable" source="AdminDevelopmentTableView.fxml"/>
+        </top>
+        <center>
+            <fx:include fx:id="AdminEmployeeTable" source="AdminEmployeeTableView.fxml"/>
         </center>
         <bottom>
             <fx:include fx:id="AdminDevelopmentBatch" source="AdminDevelopmentBatchView.fxml"/>

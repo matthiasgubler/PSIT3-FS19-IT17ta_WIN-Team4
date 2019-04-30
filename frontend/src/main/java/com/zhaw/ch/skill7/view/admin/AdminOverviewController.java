@@ -8,6 +8,9 @@ public class AdminOverviewController {
     private AnchorPane AdminDevelopmentTable;
 
     @FXML
+    private AnchorPane AdminEmployeeTable;
+
+    @FXML
     private AnchorPane AdminDevelopmentBatch;
 
     @FXML
@@ -17,8 +20,13 @@ public class AdminOverviewController {
     private AdminDevelopmentBatchController AdminDevelopmentBatchController;
 
     @FXML
+    private AdminEmployeeTableController AdminEmployeeTableController;
+
+    @FXML
     private void initialize() {
         AdminDevelopmentBatchController.addObserver(AdminDevelopmentTableController);
         AdminDevelopmentBatchController.setAdminDevelopmentTableController(AdminDevelopmentTableController);
+        AdminDevelopmentTableController.setAdminEmployeeTableController(AdminEmployeeTableController);
+        AdminEmployeeTableController.setAdminDevelopmentTableController(AdminDevelopmentTableController);
     }
 }
