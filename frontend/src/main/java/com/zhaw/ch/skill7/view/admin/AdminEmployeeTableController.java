@@ -2,8 +2,6 @@ package com.zhaw.ch.skill7.view.admin;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.domain.model.Development;
-import com.zhaw.ch.skill7.domain.model.DevelopmentRating;
-import com.zhaw.ch.skill7.domain.model.Employee;
 import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.model.EmployeeAdminDevelopmentUI;
