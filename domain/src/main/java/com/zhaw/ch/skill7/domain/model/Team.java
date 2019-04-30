@@ -32,6 +32,8 @@ public class Team extends IdUpdateableEntity<Team> {
         this.employeeIGenericDAO = employeeIGenericDAO;
     }
 
+    private TeamEvaluation evaluation;
+
     private String name;
 
     /**
@@ -122,11 +124,54 @@ public class Team extends IdUpdateableEntity<Team> {
 
         List<Skill> allSkillsInTeamList = allSkillEmployeeRatingList.stream().map(SkillEmployeeRating::getSkill).distinct().collect(Collectors.toList());
         for (Skill skill : allSkillsInTeamList) {
-            Map<String, Long> employeePerSkillRating = allSkillEmployeeRatingList.stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(skill)).collect(Collectors.toMap(skillRating -> skillRating.getEmployee().getFirstname() + " " + skillRating.getEmployee().getLastname(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
+            Map<String, Long> employeePerSkillRating =
+                    allSkillEmployeeRatingList.stream()
+                            .filter(skillEmployeeRating ->
+                                    skillEmployeeRating.getSkill().equals(skill))
+                            .collect(Collectors.toMap(skillRating ->
+                                    skillRating.getEmployee().getFirstname() +
+                                            " "
+                                            + skillRating.getEmployee().getLastname(),
+                                    skillRating ->
+                                            Integer.valueOf(skillRating.getRating()).longValue()));
 
             result.put(skill.getName(), employeePerSkillRating);
         }
 
         return result;
     }
+
+    public TeamEvaluation getTeamEvaluation() {
+        evaluateTeam();
+        return this.evaluation;
+    }
+
+    private void evaluateTeam() {
+        Map<String, Long> skillNeeds = getSkillNeeds();
+        Map<String, Map<String, Long>> memberSkills = getMemberSkills();
+        TeamEvaluation teamEvaluation = new TeamEvaluation(this);
+        SkillEvaluation skillEvaluation = null;
+        List<String> qualifiedEmployees = new ArrayList<>();
+        long maxRating = 0;
+
+        /*
+        Extract employees who have the needed skill and the needed rating
+         */
+        for(Map.Entry<String, Long> need : skillNeeds.entrySet()) {
+            skillEvaluation = new SkillEvaluation(need.getKey());
+            skillEvaluation.setRequiredRating(need.getValue());
+            skillEvaluation.setActualRating(0L);
+            for(Map.Entry<String, Map<String, Long>> member : memberSkills.entrySet()) {
+                if(member.getValue().containsKey(need.getKey())
+                && member.getValue().get(need.getKey()) >= need.getValue()
+                && member.getValue().get(need.getKey()) > skillEvaluation.getActualRating()) {
+                   skillEvaluation.setActualRating(member.getValue().get(need.getKey()));
+                }
+            }
+            teamEvaluation.addEvaluation(need.getKey(), skillEvaluation);
+        }
+        this.evaluation = teamEvaluation;
+    }
+
+
 }
