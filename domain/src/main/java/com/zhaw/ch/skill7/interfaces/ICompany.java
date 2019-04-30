@@ -79,5 +79,9 @@ public interface ICompany {
      */
     Map<String, Long> getDevelopmentDistribution();
 
+    /**
+     * Erstellt eine Liste von Skills welche Entwicklungsbedürfnisse haben.
+     * @return Liste mit Skills.
+     */
     List<Skill> getSkillsForDevelopmentWorkshop();
 }

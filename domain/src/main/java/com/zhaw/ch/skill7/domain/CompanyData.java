@@ -16,6 +16,7 @@ public class CompanyData implements ICompany {
     private final IGenericDAO<Employee> employeeIGenericDAO;
     private final IGenericDAO<Team> teamIGenericDAO;
     private final IGenericDAO<Development> developmentIGenericDAO;
+    private final int THRESHOLD = 3;
 
     /**
      * Konstruktor zur Instanzierung einer CompanyData / Unternehmung
@@ -105,16 +106,21 @@ public class CompanyData implements ICompany {
     @Override
     public List<Skill> getSkillsForDevelopmentWorkshop() {
         List<Development> develompentList = getDevelompents();
-        List<Skill> skillList = new ArrayList<>();
-        for (Development development : develompentList) {
-            skillList.add(development.getSkill());
-        }
-        return skillList.stream().distinct().collect(Collectors.toList());
 
-                //develompentList.stream().distinct().forEach(development -> development.getSkill());
-//        List<Skill> skillList = getSkills();
-//        skillList.stream().filter(skill -> skill.getDevelopment() != null).;
-//        return skillList;
+        Map<Skill, Integer> SkillCountMap = new HashMap<>();
+        for (Development development : develompentList) {
+            Integer count = SkillCountMap.get(development.getSkill());
+            SkillCountMap.put(development.getSkill(), (count == null) ? 1 : count + 1);
+        }
+
+        List<Skill> skillList = new ArrayList<>();
+        for (Skill skill : SkillCountMap.keySet()) {
+            if (SkillCountMap.get(skill) >= THRESHOLD) {
+                skillList.add(skill);
+            }
+        }
+        skillList.sort(Comparator.comparing(Skill::getId));
+        return skillList;
     }
 
 }
