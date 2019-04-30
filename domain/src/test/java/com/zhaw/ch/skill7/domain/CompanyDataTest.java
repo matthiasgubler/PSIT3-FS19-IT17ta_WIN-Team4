@@ -8,10 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -99,7 +96,7 @@ class CompanyDataTest {
     void getSkillDistribution() {
         Skill skill1 = mock(Skill.class);
         when(skill1.getName()).thenReturn("1");
-        when(skill1.getSkillEmployeeRatings()).thenReturn(Arrays.asList(new SkillEmployeeRating(1, null, null)));
+        when(skill1.getSkillEmployeeRatings()).thenReturn(Collections.singletonList(new SkillEmployeeRating(1, null, null)));
         Skill skill2 = mock(Skill.class);
         when(skill2.getName()).thenReturn("2");
         when(skill2.getSkillEmployeeRatings()).thenReturn(Arrays.asList(new SkillEmployeeRating(1, null, null), new SkillEmployeeRating(1, null, null)));

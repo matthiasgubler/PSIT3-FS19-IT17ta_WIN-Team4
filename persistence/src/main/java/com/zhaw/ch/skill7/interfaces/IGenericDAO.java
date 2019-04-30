@@ -8,7 +8,7 @@ public interface IGenericDAO<T> {
     /**
      * Liest eine Liste aller Objekte T aus der Datenbank
      *
-     * @return
+     * @return Liste der T Objekte in der Datenbank
      */
     List<T> read();
 

@@ -6,7 +6,7 @@ import javafx.util.StringConverter;
 
 public class TeamComboBoxConverter extends StringConverter<Team> {
 
-    private ICompany company;
+    private final ICompany company;
 
     public TeamComboBoxConverter(ICompany company) {
         this.company = company;

@@ -20,7 +20,8 @@ public class BarChartDistributionView extends AnchorPane {
     @FXML
     private Button reloadButton;
     @FXML
-    private ObjectProperty<EventHandler<ActionEvent>> onReloadButtonAction = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
+    private final ObjectProperty<EventHandler<ActionEvent>> onReloadButtonAction = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
+
         @Override
         protected void invalidated() {
             setEventHandler(ActionEvent.ACTION, get());

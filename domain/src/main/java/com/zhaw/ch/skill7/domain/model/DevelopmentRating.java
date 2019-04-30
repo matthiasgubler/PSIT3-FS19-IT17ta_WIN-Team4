@@ -18,7 +18,7 @@ public enum DevelopmentRating {
 
     private final int intValue;
 
-    private DevelopmentRating(int value) {
+    DevelopmentRating(int value) {
         this.intValue = value;
     }
 
