@@ -51,6 +51,7 @@ public class TeamSkillEvaluationController {
     @FXML
     private void initialize() {
         teamComboBox.valueProperty().addListener((observable, oldValue, newValue) -> teamChanged(newValue));
+
         reloadTeams();
         teamComboBox.setItems(teamList);
         teamComboBox.setConverter(new TeamComboBoxConverter(company));
@@ -74,18 +75,14 @@ public class TeamSkillEvaluationController {
     private void teamChanged(Team newTeam) {
         if (newTeam != null) {
             selectedTeam = newTeam;
-            System.out.println("In tsec, entering evaluateSelectedTeam " + selectedTeam.getName());
             tableView.setItems(evaluateSelectedTeam());
         }
     }
 
     private ObservableList<SkillEvaluation> evaluateSelectedTeam() {
         // call team
-        System.out.println("Before teamEvaluation");
-        TeamEvaluation teamEvaluation = selectedTeam.getTeamEvaluation();
-        System.out.println("After teamEvaluation");
+        TeamEvaluation teamEvaluation = selectedTeam.evaluateTeam();
         Map<String, SkillEvaluation> evaluations = teamEvaluation.getSkillEvaluations();
-        System.out.println("Before observable population");
         ObservableList<SkillEvaluation> observableSkillEvaluations = FXCollections.observableArrayList();
         for(Map.Entry<String, SkillEvaluation> eval : evaluations.entrySet()) {
             observableSkillEvaluations.add(eval.getValue());

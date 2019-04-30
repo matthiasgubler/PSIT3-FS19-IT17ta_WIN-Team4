@@ -23,7 +23,7 @@
                <children>
                   <VBox layoutX="46.0" layoutY="30.0" prefHeight="390.0" prefWidth="506.0">
                      <children>
-                        <TableView prefHeight="228.0" prefWidth="506.0">
+                        <TableView fx:id="tableView" prefHeight="228.0" prefWidth="506.0">
                           <columns>
                             <TableColumn fx:id="skillNameColumn" prefWidth="131.0" text="Skill" />
                             <TableColumn fx:id="skillActualRating" prefWidth="111.0" text="Actual Rating" />
