@@ -103,8 +103,7 @@ public class CompanyData implements ICompany {
 
     @Override
     public List<Skill> getSkillsForDevelopmentWorkshop() {
-        List<Skill> skillList = getSkills();
-        skillList = skillList
+        List<Skill> skillList = getSkills()
                 .stream()
                 .filter(skill -> skill.getSkillDevelopmentCountByRating(THRESHOLD_DEVELOPMENT_RATING) >= THRESHOLD_COUNT_EMPLOYEES)
                 .collect(Collectors.toList());
