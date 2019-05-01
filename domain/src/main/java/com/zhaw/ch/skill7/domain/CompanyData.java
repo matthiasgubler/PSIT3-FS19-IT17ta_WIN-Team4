@@ -15,7 +15,7 @@ public class CompanyData implements ICompany {
     private final IGenericDAO<Team> teamIGenericDAO;
     private final IGenericDAO<Development> developmentIGenericDAO;
     private static final int THRESHOLD_COUNT_EMPLOYEES = 3;
-    private static final int THRESHOLD_DEVELOPMENT_RATING = 2;
+    private static final DevelopmentRating THRESHOLD_DEVELOPMENT_RATING = DevelopmentRating.MEDIUM;
 
     /**
      * Konstruktor zur Instanzierung einer CompanyData / Unternehmung
@@ -92,7 +92,6 @@ public class CompanyData implements ICompany {
             List<SkillEmployeeRating> skillEmployeeRatingList = skill.getSkillEmployeeRatings();
             result.put(skill.getName(), Integer.valueOf(skillEmployeeRatingList.size()).longValue());
         }
-
         return result;
     }
 
@@ -104,22 +103,12 @@ public class CompanyData implements ICompany {
 
     @Override
     public List<Skill> getSkillsForDevelopmentWorkshop() {
-        List<Development> developmentList = getDevelopments();
+        List<Skill> skillList = getSkills();
+        skillList = skillList
+                .stream()
+                .filter(skill -> skill.getSkillDevelopmentCountByRating(THRESHOLD_DEVELOPMENT_RATING) >= THRESHOLD_COUNT_EMPLOYEES)
+                .collect(Collectors.toList());
 
-        Map<Skill, Integer> skillCountMap = new HashMap<>();
-        for (Development development : developmentList) {
-            if (development.getDevelopmentRating().getIntValue() >= THRESHOLD_DEVELOPMENT_RATING) {
-                Integer count = skillCountMap.get(development.getSkill());
-                skillCountMap.put(development.getSkill(), (count == null) ? 1 : count + 1);
-            }
-        }
-
-        List<Skill> skillList = new ArrayList<>();
-        for (Skill skill : skillCountMap.keySet()) {
-            if (skillCountMap.get(skill) >= THRESHOLD_COUNT_EMPLOYEES) {
-                skillList.add(skill);
-            }
-        }
         skillList.sort(Comparator.comparing(Skill::getId));
         return skillList;
     }

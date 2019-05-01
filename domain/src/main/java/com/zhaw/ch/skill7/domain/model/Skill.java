@@ -75,11 +75,15 @@ public class Skill extends IdUpdateableEntity<Skill> {
      * @return Die Liste der SkillEmployeeRatings
      */
     public List<SkillEmployeeRating> getSkillEmployeeRatings() {
-        return skillEmployeeRatingIGenericDAO.read().stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(this)).collect(Collectors.toList());
+        return skillEmployeeRatingIGenericDAO
+                .read()
+                .stream()
+                .filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(this))
+                .collect(Collectors.toList());
     }
 
     /**
-     * Gibt die Anzahl der Personen zurück die diesen Skill als Weiterbildungswunsch eingetragen haben.
+     * Gibt die Anzahl der Mitarbeiter zurück die diesen Skill als Weiterbildungswunsch eingetragen haben.
      *
      * @return Anzahl Weiterbildungswünsche
      */
@@ -87,8 +91,33 @@ public class Skill extends IdUpdateableEntity<Skill> {
         return getDevelopments().size();
     }
 
+    /**
+     * Gibt die Anzahl der Mitarbeiter zurück die diesen Skill als Weiterbildungswunsch eingetragen haben und mindestens
+     * den mitgegebenen Rating Parameter entsprechen.
+     *
+     * @param developmentRating mindest Rating welches für die Rückgabe der Mitarbeiter berücksichtigt wird.
+     *
+     * @return Anzahl Weiterbildungswünsche
+     */
+    public int getSkillDevelopmentCountByRating(DevelopmentRating developmentRating) {
+        return getDevelopments()
+                .stream()
+                .filter(development -> development.getDevelopmentRating().getIntValue() >= developmentRating.getIntValue())
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    /**
+     * Gibt eine Liste von Weiterbildungswünschen zurück welche diesen Skill beinhalten
+     *
+     * @return Liste Weiterbildungswünsche
+     */
     private List<Development> getDevelopments() {
-        return developmentIGenericDAO.read().stream().filter(development -> development.getSkill().equals(this)).collect(Collectors.toList());
+        return developmentIGenericDAO
+                .read()
+                .stream()
+                .filter(development -> development.getSkill().equals(this))
+                .collect(Collectors.toList());
     }
 
     public void update() {
