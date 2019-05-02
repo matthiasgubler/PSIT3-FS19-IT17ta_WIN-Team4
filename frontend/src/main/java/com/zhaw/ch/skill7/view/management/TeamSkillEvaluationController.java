@@ -56,10 +56,10 @@ public class TeamSkillEvaluationController {
         teamComboBox.setItems(teamList);
         teamComboBox.setConverter(new TeamComboBoxConverter(company));
 
-        skillNameColumn.setCellValueFactory(new PropertyValueFactory<SkillEvaluation, String>("name"));
-        skillActualRating.setCellValueFactory(new PropertyValueFactory<SkillEvaluation, Long>("actualRating"));
-        skillRequiredRating.setCellValueFactory(new PropertyValueFactory<SkillEvaluation, Long>("requiredRating"));
-        skillEvaluationStatus.setCellValueFactory(new PropertyValueFactory<SkillEvaluation, String>("statusMessage"));
+        skillNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        skillActualRating.setCellValueFactory(new PropertyValueFactory<>("actualRating"));
+        skillRequiredRating.setCellValueFactory(new PropertyValueFactory<>("requiredRating"));
+        skillEvaluationStatus.setCellValueFactory(new PropertyValueFactory<>("statusMessage"));
     }
 
     @FXML
