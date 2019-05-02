@@ -161,7 +161,7 @@ public class Team extends IdUpdateableEntity<Team> {
                 }
             }
 
-            if(skillEvaluation.getActualRating() >= skillEvaluation.getRequiredRating()) {
+            if(skillRequirementMet(skillEvaluation)) {
                 skillEvaluation.setStatusMessage(Semaphore.GREEN.toString());
             } else if((skillEvaluation.getRequiredRating() - skillEvaluation.getActualRating() <= EVALUATION_THRESHOLD)) {
                 skillEvaluation.setStatusMessage(Semaphore.YELLOW.toString());
@@ -174,5 +174,9 @@ public class Team extends IdUpdateableEntity<Team> {
 
 
         return teamEvaluation;
+    }
+
+    private boolean skillRequirementMet(SkillEvaluation skillEvaluation) {
+        return skillEvaluation.getActualRating() >= skillEvaluation.getRequiredRating();
     }
 }
