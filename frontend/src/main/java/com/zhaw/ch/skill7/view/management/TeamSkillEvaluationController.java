@@ -20,7 +20,7 @@ import java.util.Map;
 public class TeamSkillEvaluationController {
 
     private final ICompany company;
-    private Team selectedTeam = null;
+    private Team selectedTeam;
 
     @FXML
     private ComboBox<Team> teamComboBox;
