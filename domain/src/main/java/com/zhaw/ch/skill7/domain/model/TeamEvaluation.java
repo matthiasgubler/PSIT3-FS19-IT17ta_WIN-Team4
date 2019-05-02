@@ -8,10 +8,9 @@ import java.util.Map;
 public class TeamEvaluation extends IdUpdateableEntity<TeamEvaluation> {
 
     private Team team;
-    private Map<String, SkillEvaluation> evaluation;
+    private final Map<String, SkillEvaluation> evaluation = new HashMap<>();
 
     public TeamEvaluation(Team team) {
-        this.evaluation = new HashMap<>();
         this.team = team;
     }
 
