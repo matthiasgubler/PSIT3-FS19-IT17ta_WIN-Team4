@@ -16,6 +16,8 @@ public class Team extends IdUpdateableEntity<Team> {
 
     private final IGenericDAO<Employee> employeeIGenericDAO;
 
+    private static final int EVALUATION_THRESHOLD = 2;
+
     public Team() {
         skillRatingIGenericDAO = ServiceRegistry.getInstance().getSkillTeamRatingDAO();
         employeeIGenericDAO = ServiceRegistry.getInstance().getEmployeeDAO();
@@ -161,7 +163,7 @@ public class Team extends IdUpdateableEntity<Team> {
 
             if(skillEvaluation.getActualRating() >= skillEvaluation.getRequiredRating()) {
                 skillEvaluation.setStatusMessage(Semaphore.GREEN.toString());
-            } else if((skillEvaluation.getRequiredRating() - skillEvaluation.getActualRating() <= 2)) {
+            } else if((skillEvaluation.getRequiredRating() - skillEvaluation.getActualRating() <= EVALUATION_THRESHOLD)) {
                 skillEvaluation.setStatusMessage(Semaphore.YELLOW.toString());
             } else {
                 skillEvaluation.setStatusMessage(Semaphore.RED.toString());
