@@ -36,7 +36,7 @@ public class TeamSkillEvaluationController {
     @FXML
     private TableColumn<SkillEvaluation, String> skillEvaluationStatus;
     @FXML
-    private ObservableList<Team> teamList = FXCollections.observableArrayList();
+    private final ObservableList<Team> teamList = FXCollections.observableArrayList();
 
     public TeamSkillEvaluationController() {
         this.company = new CompanyData();
