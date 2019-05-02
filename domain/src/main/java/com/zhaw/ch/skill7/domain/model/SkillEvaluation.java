@@ -14,18 +14,15 @@ public class SkillEvaluation {
 
     }
 
-    public SkillEvaluation(String name) {
-        this.name = new SimpleStringProperty(name);
-        this.actualRating = new SimpleLongProperty(0L);
-        this.requiredRating = new SimpleLongProperty(0L);
-        this.statusMessage = new SimpleStringProperty("");
-    }
-
     public SkillEvaluation(String name, Long actualRating, Long requiredRating, String statusMessage) {
         this.name = new SimpleStringProperty(name);
         this.actualRating = new SimpleLongProperty(actualRating);
         this.requiredRating = new SimpleLongProperty(requiredRating);
         this.statusMessage = new SimpleStringProperty(statusMessage);
+    }
+
+    public SkillEvaluation(String name) {
+        this(name, 0L, 0L, "");
     }
 
     public String getName() { return name.get(); }
