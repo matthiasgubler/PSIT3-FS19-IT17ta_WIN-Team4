@@ -148,7 +148,6 @@ public class Team extends IdUpdateableEntity<Team> {
         for(Map.Entry<String, Long> need : skillNeeds.entrySet()) {
             SkillEvaluation skillEvaluation = new SkillEvaluation(need.getKey());
             skillEvaluation.setRequiredRating(need.getValue());
-            skillEvaluation.setActualRating(0L);
 
             specificMemberSkills = memberSkills.get(need.getKey());
 
