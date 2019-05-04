@@ -8,10 +8,13 @@
     <BorderPane prefHeight="400.0" prefWidth="623.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
-            <fx:include fx:id="adminDevelopmentTable" source="AdminDevelopmentTableView.fxml"/>
+            <fx:include fx:id="adminProperty" source="AdminPropertyView.fxml"/>
         </top>
         <center>
-            <fx:include fx:id="adminEmployeeTable" source="AdminEmployeeTableView.fxml"/>
+            <fx:include fx:id="adminDevelopmentTable" source="AdminDevelopmentTableView.fxml"/>
         </center>
+        <bottom>
+            <fx:include fx:id="adminEmployeeTable" source="AdminEmployeeTableView.fxml"/>
+        </bottom>
     </BorderPane>
 </AnchorPane>

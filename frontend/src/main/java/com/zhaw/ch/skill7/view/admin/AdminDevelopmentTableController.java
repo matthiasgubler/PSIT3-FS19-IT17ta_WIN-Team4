@@ -1,17 +1,12 @@
 package com.zhaw.ch.skill7.view.admin;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
-import com.zhaw.ch.skill7.domain.model.DevelopmentRating;
 import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.model.SkillAdminDevelopmentUI;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
-import java.util.Arrays;
 import java.util.List;
 
 public class AdminDevelopmentTableController {
@@ -24,14 +19,7 @@ public class AdminDevelopmentTableController {
     @FXML
     private TableView<SkillAdminDevelopmentUI> tableView;
 
-    @FXML
-    private ComboBox<Integer> employeeCountComboBox;
-
-    @FXML
-    private ComboBox<DevelopmentRating> developmentRatingComboBox;
-
     private AdminEmployeeTableController adminEmployeeTableController;
-    private static final List<Integer> employeeCountSelection = Arrays.asList(0, 1, 2, 3, 4, 5);
 
     public AdminDevelopmentTableController() {
         this.company = new CompanyData();
@@ -43,33 +31,15 @@ public class AdminDevelopmentTableController {
 
     @FXML
     private void initialize() {
-        loadEmployeeCountComboBox();
-        employeeCountComboBox.getSelectionModel().select(CompanyData.THRESHOLD_COUNT_EMPLOYEES);
-        employeeCountComboBox.getSelectionModel().selectedItemProperty().addListener(observer -> employeeCountChanged());
-        loadDevelopmentRatingComboBox();
-        developmentRatingComboBox.getSelectionModel().select(CompanyData.THRESHOLD_DEVELOPMENT_RATING);
-        developmentRatingComboBox.getSelectionModel().selectedItemProperty().addListener(observer -> developmentRatingChanged());
         tableView.getSelectionModel().selectedItemProperty().addListener(observer -> reloadEmployeeTable());
         reloadTable();
     }
 
-    private void reloadTable() {
+    public void reloadTable() {
         Platform.runLater(() -> {
             developmentSkillUIObservableList.clear();
             loadAndMapSkills();
         });
-    }
-
-    private void loadEmployeeCountComboBox() {
-        ObservableList<Integer> count = FXCollections.observableArrayList();
-        count.addAll(employeeCountSelection);
-        employeeCountComboBox.setItems(count);
-    }
-
-    private void loadDevelopmentRatingComboBox() {
-        ObservableList<DevelopmentRating> ratings = FXCollections.observableArrayList();
-        ratings.addAll(DevelopmentRating.values());
-        developmentRatingComboBox.setItems(ratings);
     }
 
     private void loadAndMapSkills() {
@@ -81,24 +51,6 @@ public class AdminDevelopmentTableController {
 
     private Skill getSelectedSkill() {
         return tableView.getSelectionModel().getSelectedItem();
-    }
-
-    private int getSelectedEmployeeCount() {
-        return employeeCountComboBox.getSelectionModel().getSelectedItem();
-    }
-
-    private DevelopmentRating getSelectedDevelopmentRating() {
-        return developmentRatingComboBox.getSelectionModel().getSelectedItem();
-    }
-
-    private void employeeCountChanged() {
-        CompanyData.THRESHOLD_COUNT_EMPLOYEES = getSelectedEmployeeCount();
-        reloadTable();
-    }
-
-    private void developmentRatingChanged() {
-        CompanyData.THRESHOLD_DEVELOPMENT_RATING = getSelectedDevelopmentRating();
-        reloadTable();
     }
 
     private void reloadEmployeeTable() {

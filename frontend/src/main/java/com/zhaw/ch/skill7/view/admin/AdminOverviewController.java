@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 public class AdminOverviewController {
 
     @FXML
+    private AdminPropertyController adminPropertyController;
+
+    @FXML
     private AdminDevelopmentTableController adminDevelopmentTableController;
 
     @FXML
@@ -12,6 +15,7 @@ public class AdminOverviewController {
 
     @FXML
     private void initialize() {
+        adminPropertyController.setAdminDevelopmentTableController(adminDevelopmentTableController);
         adminDevelopmentTableController.setAdminEmployeeTableController(adminEmployeeTableController);
     }
 }
