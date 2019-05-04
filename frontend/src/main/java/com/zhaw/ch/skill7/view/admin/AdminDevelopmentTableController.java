@@ -11,9 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
-
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
 
 public class AdminDevelopmentTableController {
@@ -33,7 +31,6 @@ public class AdminDevelopmentTableController {
     private ComboBox<DevelopmentRating> developmentRatingComboBox;
 
     private AdminEmployeeTableController adminEmployeeTableController;
-
     private static final List<Integer> employeeCountSelection = Arrays.asList(0, 1, 2, 3, 4, 5);
 
     public AdminDevelopmentTableController() {
@@ -48,9 +45,11 @@ public class AdminDevelopmentTableController {
     private void initialize() {
         loadEmployeeCountComboBox();
         employeeCountComboBox.getSelectionModel().select(CompanyData.THRESHOLD_COUNT_EMPLOYEES);
+        employeeCountComboBox.getSelectionModel().selectedItemProperty().addListener(observer -> employeeCountChanged());
         loadDevelopmentRatingComboBox();
         developmentRatingComboBox.getSelectionModel().select(CompanyData.THRESHOLD_DEVELOPMENT_RATING);
-        tableView.getSelectionModel().selectedItemProperty().addListener(observer -> skillChanged());
+        developmentRatingComboBox.getSelectionModel().selectedItemProperty().addListener(observer -> developmentRatingChanged());
+        tableView.getSelectionModel().selectedItemProperty().addListener(observer -> reloadEmployeeTable());
         reloadTable();
     }
 
@@ -80,11 +79,30 @@ public class AdminDevelopmentTableController {
         }
     }
 
-    public Skill getSelectedSkill() {
+    private Skill getSelectedSkill() {
         return tableView.getSelectionModel().getSelectedItem();
     }
 
-    private void skillChanged() {
+    private int getSelectedEmployeeCount() {
+        return employeeCountComboBox.getSelectionModel().getSelectedItem();
+    }
+
+    private DevelopmentRating getSelectedDevelopmentRating() {
+        return developmentRatingComboBox.getSelectionModel().getSelectedItem();
+    }
+
+    private void employeeCountChanged() {
+        CompanyData.THRESHOLD_COUNT_EMPLOYEES = getSelectedEmployeeCount();
+        reloadTable();
+    }
+
+    private void developmentRatingChanged() {
+        CompanyData.THRESHOLD_DEVELOPMENT_RATING = getSelectedDevelopmentRating();
+        reloadTable();
+    }
+
+    private void reloadEmployeeTable() {
+
         adminEmployeeTableController.reloadTable(getSelectedSkill());
     }
 

@@ -14,8 +14,8 @@ public class CompanyData implements ICompany {
     private final IGenericDAO<Employee> employeeIGenericDAO;
     private final IGenericDAO<Team> teamIGenericDAO;
     private final IGenericDAO<Development> developmentIGenericDAO;
-    public static final int THRESHOLD_COUNT_EMPLOYEES = 3;
-    public static final DevelopmentRating THRESHOLD_DEVELOPMENT_RATING = DevelopmentRating.MEDIUM;
+    public static int THRESHOLD_COUNT_EMPLOYEES = 3;
+    public static DevelopmentRating THRESHOLD_DEVELOPMENT_RATING = DevelopmentRating.MEDIUM;
 
     /**
      * Konstruktor zur Instanzierung einer CompanyData / Unternehmung
