@@ -23,8 +23,6 @@ public class AdminEmployeeTableController {
     @FXML
     private TableView<EmployeeAdminDevelopmentUI> tableView;
 
-    private AdminDevelopmentTableController adminDevelopmentTableController;
-
     public AdminEmployeeTableController() {
         this.company = new CompanyData();
     }
@@ -38,23 +36,18 @@ public class AdminEmployeeTableController {
         adminEmployeeUIObservableList.clear();
     }
 
-    public void reloadTable() {
+    public void reloadTable(Skill skill) {
         Platform.runLater(() -> {
             adminEmployeeUIObservableList.clear();
-            loadAndMapEmployee();
+            loadAndMapEmployee(skill);
         });
     }
 
-    private void loadAndMapEmployee() {
-        Skill skill = adminDevelopmentTableController.getSelectedSkill();
+    private void loadAndMapEmployee(Skill skill) {
         List<Development> developmentList = company.getDevelopments().stream().filter(development -> development.getSkill().equals(skill)).collect(Collectors.toList());
         for (Development development : developmentList) {
             adminEmployeeUIObservableList.add(new EmployeeAdminDevelopmentUI(development.getEmployee(), development.getDevelopmentRating()));
         }
         adminEmployeeUIObservableList.sort(Comparator.comparing(Employee::getId));
-    }
-
-    public void setAdminDevelopmentTableController(AdminDevelopmentTableController adminDevelopmentTableController) {
-        this.adminDevelopmentTableController = adminDevelopmentTableController;
     }
 }

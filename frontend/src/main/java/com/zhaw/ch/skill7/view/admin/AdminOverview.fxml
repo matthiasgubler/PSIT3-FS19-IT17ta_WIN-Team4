@@ -13,8 +13,5 @@
         <center>
             <fx:include fx:id="adminEmployeeTable" source="AdminEmployeeTableView.fxml"/>
         </center>
-        <bottom>
-            <fx:include fx:id="adminDevelopmentBatch" source="AdminDevelopmentBatchView.fxml"/>
-        </bottom>
     </BorderPane>
 </AnchorPane>

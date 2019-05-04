@@ -55,7 +55,7 @@ public class AdminDevelopmentTableController {
     }
 
     private void skillChanged() {
-        adminEmployeeTableController.reloadTable();
+        adminEmployeeTableController.reloadTable(getSelectedSkill());
     }
 
     public void setAdminEmployeeTableController(AdminEmployeeTableController adminEmployeeTableController) {
