@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -8,8 +9,8 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="240.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhaw.ch.skill7.view.admin.AdminDevelopmentTableController">
-   <TableView fx:id="tableView" editable="true" layoutY="40.0" prefHeight="200.0" prefWidth="600.0">
+<AnchorPane prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhaw.ch.skill7.view.admin.AdminDevelopmentTableController">
+   <TableView fx:id="tableView" editable="true" layoutY="177.0" prefHeight="200.0" prefWidth="600.0">
       <columns>
          <TableColumn editable="false" prefWidth="75.0" text="ID">
             <cellValueFactory>
@@ -31,8 +32,17 @@
          <FXCollections fx:id="developmentSkillUIObservableList" fx:factory="observableArrayList" />
       </items>
    </TableView>
-   <Label layoutX="14.0" layoutY="14.0" text="Liste der Skills für einen Workshop">
+   <Label layoutX="14.0" layoutY="151.0" text="Liste der Skills für einen Workshop">
       <effect>
          <Blend />
       </effect></Label>
+   <Label layoutX="14.0" layoutY="14.0" prefHeight="34.0" prefWidth="575.0" text="Hier werden Skills angezeigt, welche folgende Schwellenwerte erreichen. Zusätzlich kann pro Skill eine Liste der Mitarbeiter eingesehen werden, welche einen Weiterbildungswunsch auf diesen eingetragen haben." wrapText="true">
+      <effect>
+         <Blend />
+      </effect>
+   </Label>
+   <ComboBox fx:id="developmentRatingComboBox" layoutX="14.0" layoutY="100.0" prefHeight="25.0" prefWidth="100.0" />
+   <Label layoutX="134.0" layoutY="104.0" text="Mindestrating eines Skills" />
+   <Label layoutX="134.0" layoutY="64.0" text="Mindestanzahl Mitarbeiter" />
+   <ComboBox fx:id="employeeCountComboBox" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="100.0" />
 </AnchorPane>
