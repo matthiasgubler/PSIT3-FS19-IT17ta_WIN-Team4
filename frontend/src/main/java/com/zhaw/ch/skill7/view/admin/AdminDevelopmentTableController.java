@@ -4,7 +4,6 @@ import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.model.SkillAdminDevelopmentUI;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 
@@ -32,30 +31,27 @@ public class AdminDevelopmentTableController {
 
     @FXML
     private void initialize() {
-        tableView.getSelectionModel().selectedItemProperty().addListener(observer -> skillChanged());
+        tableView.getSelectionModel().selectedItemProperty().addListener(observer -> reloadEmployeeTable());
         reloadTable();
     }
 
-    private void reloadTable() {
-        Platform.runLater(() -> {
-            developmentSkillUIObservableList.clear();
-            loadAndMapSkills();
-        });
+    public void reloadTable() {
+        developmentSkillUIObservableList.clear();
+        loadAndMapSkills();
     }
 
     private void loadAndMapSkills() {
-        List<Skill> skillList = company.getSkillsForDevelopmentWorkshop();
-        for (Skill skill : skillList) {
+        for (Skill skill : company.getSkillsForDevelopmentWorkshop()) {
             developmentSkillUIObservableList.add(new SkillAdminDevelopmentUI(skill, skill.getSkillDevelopmentCount()));
         }
     }
 
-    public Skill getSelectedSkill() {
+    private Skill getSelectedSkill() {
         return tableView.getSelectionModel().getSelectedItem();
     }
 
-    private void skillChanged() {
-        adminEmployeeTableController.reloadTable();
+    private void reloadEmployeeTable() {
+        adminEmployeeTableController.reloadTable(getSelectedSkill());
     }
 
     public void setAdminEmployeeTableController(AdminEmployeeTableController adminEmployeeTableController) {

@@ -112,7 +112,7 @@ public class Skill extends IdUpdateableEntity<Skill> {
      *
      * @return Liste Weiterbildungswünsche
      */
-    private List<Development> getDevelopments() {
+    public List<Development> getDevelopments() {
         return developmentIGenericDAO
                 .read()
                 .stream()
