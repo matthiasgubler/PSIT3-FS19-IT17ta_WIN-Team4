@@ -4,9 +4,9 @@ import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.model.SkillAdminDevelopmentUI;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+
 import java.util.List;
 
 public class AdminDevelopmentTableController {
@@ -36,15 +36,12 @@ public class AdminDevelopmentTableController {
     }
 
     public void reloadTable() {
-        Platform.runLater(() -> {
-            developmentSkillUIObservableList.clear();
-            loadAndMapSkills();
-        });
+        developmentSkillUIObservableList.clear();
+        loadAndMapSkills();
     }
 
     private void loadAndMapSkills() {
-        List<Skill> skillList = company.getSkillsForDevelopmentWorkshop();
-        for (Skill skill : skillList) {
+        for (Skill skill : company.getSkillsForDevelopmentWorkshop()) {
             developmentSkillUIObservableList.add(new SkillAdminDevelopmentUI(skill, skill.getSkillDevelopmentCount()));
         }
     }
@@ -54,7 +51,6 @@ public class AdminDevelopmentTableController {
     }
 
     private void reloadEmployeeTable() {
-
         adminEmployeeTableController.reloadTable(getSelectedSkill());
     }
 
