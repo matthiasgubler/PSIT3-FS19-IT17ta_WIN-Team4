@@ -4,6 +4,7 @@ import com.zhaw.ch.skill7.business.ServiceRegistry;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,6 @@ public class Team extends IdUpdateableEntity<Team> {
 
     private final IGenericDAO<Employee> employeeIGenericDAO;
 
-    private static final int EVALUATION_THRESHOLD = 2;
 
     public Team() {
         skillRatingIGenericDAO = ServiceRegistry.getInstance().getSkillTeamRatingDAO();
@@ -76,10 +76,6 @@ public class Team extends IdUpdateableEntity<Team> {
         skillRatingIGenericDAO.add(skillTeamRating);
     }
 
-    public SkillTeamRating createSkillRating(int rating, Skill skill) {
-        return new SkillTeamRating(rating, skill, this);
-    }
-
     @Override
     public void update(Team objectWithNewData) {
         this.setName(objectWithNewData.getName());
@@ -135,47 +131,35 @@ public class Team extends IdUpdateableEntity<Team> {
     /**
      * Evaluiert das Team-Objekt in Bezug auf dessen Skill-Needs und Skills der Mitglieder.
      *
-     * @return TeamEvaluation Objekt, welches eine Map<String, SkillEvaluation> enthält.
-     * Diese Map enthält die Evaluation jedes Skill-Needs des Teams.
+     * @return List, welche pro evaluiertem Skill je ein SkillTeamRating enthält.
      */
-    public TeamEvaluation evaluateTeam() {
-        TeamEvaluation teamEvaluation = new TeamEvaluation(this);
+    public List<SkillTeamRating> evaluateTeam() {
 
+        List<SkillTeamRating> teamEvaluation = new ArrayList<>();
         Map<String, Long> skillNeeds = getSkillNeeds();
         Map<String, Map<String, Long>> memberSkills = getMemberSkills();
         Map<String, Long> specificMemberSkills;
+        SkillTeamRating skillTeamRating;
 
         for(Map.Entry<String, Long> need : skillNeeds.entrySet()) {
-            SkillEvaluation skillEvaluation = new SkillEvaluation(need.getKey());
-            skillEvaluation.setRequiredRating(need.getValue());
 
+            Skill skill = new Skill(need.getKey());
+            Team team = this;
+            int requiredRating = need.getValue().intValue();
+
+            skillTeamRating = new SkillTeamRating(requiredRating, skill, team);
             specificMemberSkills = memberSkills.get(need.getKey());
 
             if(specificMemberSkills != null) {
                 for(Map.Entry<String, Long> specificSkill : specificMemberSkills.entrySet()) {
-                    Long rating = specificSkill.getValue();
-                    if(rating > skillEvaluation.getActualRating()) {
-                        skillEvaluation.setActualRating(specificSkill.getValue());
-                    }
+                    int rating = specificSkill.getValue().intValue();
+                    skillTeamRating.addIntermediateRating(rating);
                 }
             }
 
-            if(skillRequirementMet(skillEvaluation)) {
-                skillEvaluation.setStatusMessage(Semaphore.GREEN.toString());
-            } else if((skillEvaluation.getRequiredRating() - skillEvaluation.getActualRating() <= EVALUATION_THRESHOLD)) {
-                skillEvaluation.setStatusMessage(Semaphore.YELLOW.toString());
-            } else {
-                skillEvaluation.setStatusMessage(Semaphore.RED.toString());
-            }
-
-            teamEvaluation.addEvaluation(need.getKey(), skillEvaluation);
+            teamEvaluation.add(skillTeamRating);
         }
 
-
         return teamEvaluation;
-    }
-
-    private boolean skillRequirementMet(SkillEvaluation skillEvaluation) {
-        return skillEvaluation.getActualRating() >= skillEvaluation.getRequiredRating();
     }
 }

@@ -178,8 +178,8 @@ class TeamTest {
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
 
         //test
-        TeamEvaluation teamEvaluation1 = testee.evaluateTeam();
-        String actualStatusMessage = teamEvaluation1.getSkillEvaluations().get("1").getStatusMessage();
+        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeam();
+        String actualStatusMessage = teamEvaluation1.get(0).getSemaphoreString();
         assertEquals("YELLOW", actualStatusMessage);
     }
 
@@ -216,8 +216,8 @@ class TeamTest {
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
 
         //test
-        TeamEvaluation teamEvaluation1 = testee.evaluateTeam();
-        String actualStatusMessage = teamEvaluation1.getSkillEvaluations().get("1").getStatusMessage();
+        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeam();
+        String actualStatusMessage = teamEvaluation1.get(0).getSemaphoreString();
         assertEquals("RED", actualStatusMessage);
     }
 
@@ -255,8 +255,8 @@ class TeamTest {
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
 
         //test
-        TeamEvaluation teamEvaluation1 = testee.evaluateTeam();
-        String actualStatusMessage = teamEvaluation1.getSkillEvaluations().get("1").getStatusMessage();
+        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeam();
+        String actualStatusMessage = teamEvaluation1.get(0).getSemaphoreString();
         assertEquals("GREEN", actualStatusMessage);
     }
 }

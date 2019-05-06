@@ -4,6 +4,10 @@ public abstract class SkillRating<T> extends SkillReference<SkillRating> {
 
     private int rating;
 
+    SkillRating(Skill skill) {
+        super(skill);
+    }
+
     SkillRating(int rating, Skill skill) {
         super(skill);
         this.rating = rating;

@@ -2,11 +2,16 @@ package com.zhaw.ch.skill7.view.management;
 
 import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.domain.model.SkillEvaluation;
+import com.zhaw.ch.skill7.domain.model.SkillTeamRating;
 import com.zhaw.ch.skill7.domain.model.Team;
 import com.zhaw.ch.skill7.domain.model.TeamEvaluation;
 import com.zhaw.ch.skill7.interfaces.ICompany;
+import com.zhaw.ch.skill7.interfaces.ISimplePropertySkillTeamRating;
 import com.zhaw.ch.skill7.model.DummyTeam;
+import com.zhaw.ch.skill7.model.SkillTeamRatingAdapter;
 import com.zhaw.ch.skill7.model.TeamComboBoxConverter;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.List;
 import java.util.Map;
 
 public class TeamSkillEvaluationController extends TeamSelectorController{
@@ -22,15 +28,15 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
     private Team selectedTeam;
 
     @FXML
-    private TableView<SkillEvaluation> tableView;
+    private TableView<ISimplePropertySkillTeamRating> tableView;
     @FXML
-    private TableColumn<SkillEvaluation, String> skillNameColumn;
+    private TableColumn<ISimplePropertySkillTeamRating, SimpleStringProperty> skillNameColumn;
     @FXML
-    private TableColumn<SkillEvaluation, Long> skillActualRating;
+    private TableColumn<ISimplePropertySkillTeamRating, SimpleIntegerProperty> skillActualRating;
     @FXML
-    private TableColumn<SkillEvaluation, Long> skillRequiredRating;
+    private TableColumn<ISimplePropertySkillTeamRating, SimpleIntegerProperty> skillRequiredRating;
     @FXML
-    private TableColumn<SkillEvaluation, String> skillEvaluationStatus;
+    private TableColumn<ISimplePropertySkillTeamRating, SimpleStringProperty> skillEvaluationStatus;
 
     public TeamSkillEvaluationController() {
         super();
@@ -46,10 +52,10 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
     protected void initialize() {
         super.initialize();
 
-        skillNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        skillNameColumn.setCellValueFactory(new PropertyValueFactory<>("skill"));
         skillActualRating.setCellValueFactory(new PropertyValueFactory<>("actualRating"));
         skillRequiredRating.setCellValueFactory(new PropertyValueFactory<>("requiredRating"));
-        skillEvaluationStatus.setCellValueFactory(new PropertyValueFactory<>("statusMessage"));
+        skillEvaluationStatus.setCellValueFactory(new PropertyValueFactory<>("semaphore"));
     }
 
     protected void teamChanged(Team newTeam) {
@@ -69,15 +75,13 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
         teamList.addAll(company.getTeams());
     }
 
-    private ObservableList<SkillEvaluation> evaluateSelectedTeam() {
-        // call team
-        TeamEvaluation teamEvaluation = selectedTeam.evaluateTeam();
-        Map<String, SkillEvaluation> evaluations = teamEvaluation.getSkillEvaluations();
-        ObservableList<SkillEvaluation> observableSkillEvaluations = FXCollections.observableArrayList();
-        for(Map.Entry<String, SkillEvaluation> eval : evaluations.entrySet()) {
-            observableSkillEvaluations.add(eval.getValue());
+    private ObservableList<ISimplePropertySkillTeamRating> evaluateSelectedTeam() {
+        List<SkillTeamRating> teamEvaluation = selectedTeam.evaluateTeam();
+        ObservableList<ISimplePropertySkillTeamRating> observableSkillTeamRatings = FXCollections.observableArrayList();
+        for(SkillTeamRating rating : teamEvaluation) {
+            observableSkillTeamRatings.add(new SkillTeamRatingAdapter(rating));
         }
-        return observableSkillEvaluations;
+        return observableSkillTeamRatings;
     }
 
 }
