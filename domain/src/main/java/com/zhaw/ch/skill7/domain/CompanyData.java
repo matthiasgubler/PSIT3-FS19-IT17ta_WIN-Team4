@@ -5,10 +5,7 @@ import com.zhaw.ch.skill7.domain.model.*;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CompanyData implements ICompany {
@@ -17,6 +14,8 @@ public class CompanyData implements ICompany {
     private final IGenericDAO<Employee> employeeIGenericDAO;
     private final IGenericDAO<Team> teamIGenericDAO;
     private final IGenericDAO<Development> developmentIGenericDAO;
+    public static int THRESHOLD_COUNT_EMPLOYEES = 3;
+    public static DevelopmentRating THRESHOLD_DEVELOPMENT_RATING = DevelopmentRating.MEDIUM;
 
     /**
      * Konstruktor zur Instanzierung einer CompanyData / Unternehmung
@@ -55,7 +54,7 @@ public class CompanyData implements ICompany {
         return skillIGenericDAO.read();
     }
 
-    private List<Development> getDevelompents() {
+    public List<Development> getDevelopments() {
         return developmentIGenericDAO.read();
     }
 
@@ -93,14 +92,24 @@ public class CompanyData implements ICompany {
             List<SkillEmployeeRating> skillEmployeeRatingList = skill.getSkillEmployeeRatings();
             result.put(skill.getName(), Integer.valueOf(skillEmployeeRatingList.size()).longValue());
         }
-
         return result;
     }
 
     @Override
     public Map<String, Long> getDevelopmentDistribution() {
-        List<Development> develompentList = getDevelompents();
+        List<Development> develompentList = getDevelopments();
         return develompentList.stream().collect(Collectors.groupingBy(developmentDistribution -> developmentDistribution.getSkill().getName(), Collectors.counting()));
+    }
+
+    @Override
+    public List<Skill> getSkillsForDevelopmentWorkshop() {
+        List<Skill> skillList = getSkills()
+                .stream()
+                .filter(skill -> skill.getSkillDevelopmentCountByRating(THRESHOLD_DEVELOPMENT_RATING) >= THRESHOLD_COUNT_EMPLOYEES)
+                .collect(Collectors.toList());
+
+        skillList.sort(Comparator.comparing(Skill::getId));
+        return skillList;
     }
 
 }

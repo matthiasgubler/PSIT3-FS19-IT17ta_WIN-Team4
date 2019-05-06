@@ -4,8 +4,7 @@ import com.zhaw.ch.skill7.business.ServiceRegistry;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Skill extends IdUpdateableEntity<Skill> {
@@ -14,18 +13,23 @@ public class Skill extends IdUpdateableEntity<Skill> {
 
     private transient final IGenericDAO<SkillEmployeeRating> skillEmployeeRatingIGenericDAO;
 
+    private transient final IGenericDAO<Development> developmentIGenericDAO;
+
+
     private String name;
 
     public Skill() {
         super();
         this.skillIGenericDAO = ServiceRegistry.getInstance().getSkillDAO();
         this.skillEmployeeRatingIGenericDAO = ServiceRegistry.getInstance().getSkillEmployeeRatingDAO();
+        this.developmentIGenericDAO = ServiceRegistry.getInstance().getDevelopmentDAO();
     }
 
     private Skill(long id) {
         super(id);
         this.skillIGenericDAO = ServiceRegistry.getInstance().getSkillDAO();
         this.skillEmployeeRatingIGenericDAO = ServiceRegistry.getInstance().getSkillEmployeeRatingDAO();
+        this.developmentIGenericDAO = ServiceRegistry.getInstance().getDevelopmentDAO();
     }
 
     public Skill(String name) {
@@ -71,7 +75,49 @@ public class Skill extends IdUpdateableEntity<Skill> {
      * @return Die Liste der SkillEmployeeRatings
      */
     public List<SkillEmployeeRating> getSkillEmployeeRatings() {
-        return skillEmployeeRatingIGenericDAO.read().stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(this)).collect(Collectors.toList());
+        return skillEmployeeRatingIGenericDAO
+                .read()
+                .stream()
+                .filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(this))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Gibt die Anzahl der Mitarbeiter zurück die diesen Skill als Weiterbildungswunsch eingetragen haben.
+     *
+     * @return Anzahl Weiterbildungswünsche
+     */
+    public int getSkillDevelopmentCount() {
+        return getDevelopments().size();
+    }
+
+    /**
+     * Gibt die Anzahl der Mitarbeiter zurück die diesen Skill als Weiterbildungswunsch eingetragen haben und mindestens
+     * den mitgegebenen Rating Parameter entsprechen.
+     *
+     * @param developmentRating mindest Rating welches für die Rückgabe der Mitarbeiter berücksichtigt wird.
+     *
+     * @return Anzahl Weiterbildungswünsche
+     */
+    public int getSkillDevelopmentCountByRating(DevelopmentRating developmentRating) {
+        return getDevelopments()
+                .stream()
+                .filter(development -> development.getDevelopmentRating().getIntValue() >= developmentRating.getIntValue())
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    /**
+     * Gibt eine Liste von Weiterbildungswünschen zurück welche diesen Skill beinhalten
+     *
+     * @return Liste Weiterbildungswünsche
+     */
+    public List<Development> getDevelopments() {
+        return developmentIGenericDAO
+                .read()
+                .stream()
+                .filter(development -> development.getSkill().equals(this))
+                .collect(Collectors.toList());
     }
 
     public void update() {

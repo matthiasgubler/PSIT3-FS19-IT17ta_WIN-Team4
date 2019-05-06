@@ -104,7 +104,7 @@ public class Team extends IdUpdateableEntity<Team> {
      *
      * @return Map der Skills die ein Team benötigt. Der Key ist der Name des Skills als String und der Long ist die Bewertung der Wichtigkeit des Skills
      */
-    public Map<String, Long> getSkillNeeds() {
+    public Map getSkillNeeds() {
         return getSkillRatingList().stream().collect(Collectors.toMap(skillRating -> skillRating.getSkill().getName(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
     }
 

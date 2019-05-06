@@ -1,5 +1,6 @@
 package com.zhaw.ch.skill7.interfaces;
 
+import com.zhaw.ch.skill7.domain.model.Development;
 import com.zhaw.ch.skill7.domain.model.Employee;
 import com.zhaw.ch.skill7.domain.model.Skill;
 import com.zhaw.ch.skill7.domain.model.Team;
@@ -33,6 +34,13 @@ public interface ICompany {
      * @return Liste der Skills
      */
     List<Skill> getSkills();
+
+    /**
+     * Gibt eine Liste aller Weiterbildungswünsche der Unternehmnung zurück
+     *
+     * @return Liste der Weiterbildungswünsche
+     */
+    List<Development> getDevelopments();
 
     /**
      * Erstellt ein neues Team anhand des Teamnames
@@ -78,4 +86,10 @@ public interface ICompany {
      * @return Map&lt;String, Long&gt; der Entwicklungsbedürfnisse, wobei der Key der Name des Bedarfs ist und die Value die Anzahl der Interessenten
      */
     Map<String, Long> getDevelopmentDistribution();
+
+    /**
+     * Erstellt eine Liste von Skills welche Entwicklungsbedürfnisse haben.
+     * @return Liste mit Skills.
+     */
+    List<Skill> getSkillsForDevelopmentWorkshop();
 }

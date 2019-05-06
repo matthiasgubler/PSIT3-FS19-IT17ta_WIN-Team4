@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -129,7 +130,7 @@ class TeamTest {
         SkillEmployeeRating skillEmployeeRating3 = mock(SkillEmployeeRating.class);
         when(skillEmployeeRating3.getSkill()).thenReturn(skill1);
         when(skillEmployeeRating3.getEmployee()).thenReturn(employee2);
-        when(employee2.getSkillRatingList()).thenReturn(Arrays.asList(skillEmployeeRating3));
+        when(employee2.getSkillRatingList()).thenReturn(Collections.singletonList(skillEmployeeRating3));
 
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1, employee2));
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="340.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zhaw.ch.skill7.view.admin.AdminEmployeeTableController">
+   <TableView fx:id="tableView" editable="true" layoutY="40.0" prefHeight="300.0" prefWidth="600.0">
+      <columns>
+         <TableColumn editable="false" prefWidth="75.0" text="ID">
+            <cellValueFactory>
+               <PropertyValueFactory property="id" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn editable="false" prefWidth="225.0" text="Nachname">
+            <cellValueFactory>
+               <PropertyValueFactory property="lastname" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn editable="false" prefWidth="225.0" text="Vorname">
+            <cellValueFactory>
+               <PropertyValueFactory property="firstname" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn editable="false" prefWidth="75.0" text="Rating">
+            <cellValueFactory>
+               <PropertyValueFactory property="rating" />
+            </cellValueFactory>
+         </TableColumn>
+      </columns>
+      <items>
+         <FXCollections fx:id="adminEmployeeUIObservableList" fx:factory="observableArrayList" />
+      </items>
+   </TableView>
+   <Label layoutX="14.0" layoutY="14.0" text="Mitarbeiter die sich für diesen Skill interessieren">
+      <effect>
+         <Bloom>
+            <input>
+               <Blend />
+            </input>
+         </Bloom>
+      </effect>
+   </Label>
+</AnchorPane>

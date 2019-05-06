@@ -31,7 +31,7 @@ public class TeamSkillDistributionController {
     private TeamMemberSkillsController teamMemberSkillsViewController;
 
     @FXML
-    private ObservableList<Team> teamList = FXCollections.observableArrayList();
+    private final ObservableList<Team> teamList = FXCollections.observableArrayList();
 
     public TeamSkillDistributionController() {
         this.company = new CompanyData();
