@@ -31,7 +31,7 @@
                               <TableColumn fx:id="skillEvaluationStatus" prefWidth="142.0" text="Status" />
                           </columns>
                         </TableView>
-                        <TextArea prefHeight="200.0" prefWidth="200.0" text="Legend (Status)&#10;&#10;Green - Optimal&#10;&#10;Orange - Improvements needed&#10;&#10;Red - Critical | Team not operational" />
+                        <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="Skill: &#10;    Evaluerter Skill     &#10;&#10;Actual Rating:                                            &#10;    Erreichtes Rating des Teams bezüglich Skill.&#10;    Berechnet durch Median.&#10;&#10;Required Rating:&#10;    Benötigtes Rating des Teams bezüglich Skill.&#10;&#10;Status:&#10;    Ampel, welche den Status des Teams bezüglich Skill anzeigt.&#10;&#10;    GREEN: Team hat benötigtes Rating erreicht.&#10;    ****&#10;    YELLOW: Team hat benötigtes Rating nicht erreicht.&#10;    Team liegt jedoch innherhalb des Erlaubten Thresholds.&#10;    Aktueller Threshold = 2.&#10;    ****&#10;    RED: Team liegt unterhalb des erlaubten Thresholds.&#10;    Team ist nicht qualifiziert." wrapText="true" />
                      </children>
                   </VBox>
                </children>
