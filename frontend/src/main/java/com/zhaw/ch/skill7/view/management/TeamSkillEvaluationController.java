@@ -1,27 +1,21 @@
 package com.zhaw.ch.skill7.view.management;
 
-import com.zhaw.ch.skill7.domain.CompanyData;
-import com.zhaw.ch.skill7.domain.model.SkillEvaluation;
 import com.zhaw.ch.skill7.domain.model.SkillTeamRating;
 import com.zhaw.ch.skill7.domain.model.Team;
-import com.zhaw.ch.skill7.domain.model.TeamEvaluation;
 import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.interfaces.ISimplePropertySkillTeamRating;
 import com.zhaw.ch.skill7.model.DummyTeam;
 import com.zhaw.ch.skill7.model.SkillTeamRatingAdapter;
-import com.zhaw.ch.skill7.model.TeamComboBoxConverter;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.List;
-import java.util.Map;
 
 public class TeamSkillEvaluationController extends TeamSelectorController{
 
