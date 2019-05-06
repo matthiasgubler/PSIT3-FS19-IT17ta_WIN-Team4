@@ -17,13 +17,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Map;
 
-public class TeamSkillEvaluationController {
+public class TeamSkillEvaluationController extends TeamSelectorController{
 
-    private final ICompany company;
     private Team selectedTeam;
-
-    @FXML
-    private ComboBox<Team> teamComboBox;
 
     @FXML
     private TableView<SkillEvaluation> tableView;
@@ -35,31 +31,32 @@ public class TeamSkillEvaluationController {
     private TableColumn<SkillEvaluation, Long> skillRequiredRating;
     @FXML
     private TableColumn<SkillEvaluation, String> skillEvaluationStatus;
-    @FXML
-    private final ObservableList<Team> teamList = FXCollections.observableArrayList();
 
     public TeamSkillEvaluationController() {
-        this.company = new CompanyData();
+        super();
         this.selectedTeam = new DummyTeam();
     }
 
     public TeamSkillEvaluationController(ICompany company) {
-        this.company = company;
+        super();
         this.selectedTeam = new DummyTeam();
     }
 
     @FXML
-    private void initialize() {
-        teamComboBox.valueProperty().addListener((observable, oldValue, newValue) -> teamChanged(newValue));
-
-        reloadTeams();
-        teamComboBox.setItems(teamList);
-        teamComboBox.setConverter(new TeamComboBoxConverter(company));
+    protected void initialize() {
+        super.initialize();
 
         skillNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         skillActualRating.setCellValueFactory(new PropertyValueFactory<>("actualRating"));
         skillRequiredRating.setCellValueFactory(new PropertyValueFactory<>("requiredRating"));
         skillEvaluationStatus.setCellValueFactory(new PropertyValueFactory<>("statusMessage"));
+    }
+
+    protected void teamChanged(Team newTeam) {
+        if (newTeam != null) {
+            selectedTeam = newTeam;
+            tableView.setItems(evaluateSelectedTeam());
+        }
     }
 
     @FXML
@@ -70,13 +67,6 @@ public class TeamSkillEvaluationController {
     private void reloadTeams() {
         teamList.clear();
         teamList.addAll(company.getTeams());
-    }
-
-    private void teamChanged(Team newTeam) {
-        if (newTeam != null) {
-            selectedTeam = newTeam;
-            tableView.setItems(evaluateSelectedTeam());
-        }
     }
 
     private ObservableList<SkillEvaluation> evaluateSelectedTeam() {
