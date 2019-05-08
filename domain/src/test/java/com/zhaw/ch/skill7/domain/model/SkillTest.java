@@ -90,6 +90,9 @@ class SkillTest {
 
         assertEquals(2, developmentCountResult);
 
+        verify(development1).getSkill();
+        verify(development2).getSkill();
+        verify(developmentDifferent).getSkill();
         verify(developmentIGenericDAOMock).read();
     }
 
@@ -118,6 +121,9 @@ class SkillTest {
 
         assertEquals(2, developmentCountResult);
 
+        verify(development1).getSkill();
+        verify(development2).getSkill();
+        verify(developmentDifferent).getSkill();
         verify(developmentIGenericDAOMock).read();
         verify(development1).getDevelopmentRating();
         verify(development2).getDevelopmentRating();
