@@ -11,7 +11,6 @@ public class SkillTeamRating extends SkillRating {
     private List<Integer> intermediateRatings;
     private Semaphore semaphore;
     private static final int SEMAPHORE_THRESHOLD = 2;
-    private int requiredRating;
     private int actualRating;
     private boolean upToDate;
 
@@ -20,7 +19,6 @@ public class SkillTeamRating extends SkillRating {
         this.team = team;
         this.intermediateRatings = new ArrayList<>();
         this.semaphore = Semaphore.RED;
-        this.requiredRating = requiredRating;
         this.actualRating = 0;
         this.upToDate = true;
     }
@@ -45,7 +43,7 @@ public class SkillTeamRating extends SkillRating {
     }
 
     public int getRequiredRating() {
-        return this.requiredRating;
+        return this.getRating();
     }
 
     public int getActualRating() {
@@ -80,9 +78,9 @@ public class SkillTeamRating extends SkillRating {
     }
 
     private void calculateSemaphore() {
-        if(this.actualRating >= this.requiredRating) {
+        if(this.actualRating >= this.getRating()) {
             this.semaphore = Semaphore.GREEN;
-        } else if(this.requiredRating - this.actualRating <= SEMAPHORE_THRESHOLD) {
+        } else if(this.getRating() - this.actualRating <= SEMAPHORE_THRESHOLD) {
             this.semaphore = Semaphore.YELLOW;
         } else {
             this.semaphore = Semaphore.RED;
