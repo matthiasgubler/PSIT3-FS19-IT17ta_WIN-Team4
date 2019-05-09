@@ -4,7 +4,8 @@ import com.zhaw.ch.skill7.business.ServiceRegistry;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Skill extends IdUpdateableEntity<Skill> {
@@ -14,7 +15,6 @@ public class Skill extends IdUpdateableEntity<Skill> {
     private transient final IGenericDAO<SkillEmployeeRating> skillEmployeeRatingIGenericDAO;
 
     private transient final IGenericDAO<Development> developmentIGenericDAO;
-
 
     private String name;
 
@@ -120,7 +120,4 @@ public class Skill extends IdUpdateableEntity<Skill> {
                 .collect(Collectors.toList());
     }
 
-    public void update() {
-        skillIGenericDAO.update(this);
-    }
 }
