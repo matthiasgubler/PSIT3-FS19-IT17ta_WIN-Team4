@@ -1,5 +1,7 @@
 package com.zhaw.ch.skill7.domain.model;
 
+import com.zhaw.ch.skill7.helper.MathHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,16 +75,7 @@ public class SkillTeamRating extends SkillRating {
         } else if(intermediateRatings.size() == 1) {
             this.actualRating = this.intermediateRatings.get(0);
         } else {
-            this.actualRating = this.calculateMedian(this.intermediateRatings);
-        }
-    }
-
-    private int calculateMedian(List<Integer> m) {
-        int middle = m.size()/2;
-        if (m.size()%2 == 1) {
-            return m.get(middle);
-        } else {
-            return (m.get(middle-1) + m.get(middle)) / 2;
+            this.actualRating = MathHelper.calculateMedian(this.intermediateRatings);
         }
     }
 
