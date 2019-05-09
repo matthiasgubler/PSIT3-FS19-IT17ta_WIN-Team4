@@ -65,7 +65,7 @@ public class SkillTeamRating extends SkillRating {
 
     private void evaluateTeamRating() {
         this.calculateActualRating();
-        this.setSemaphore();
+        this.calculateSemaphore();
         this.upToDate = true;
     }
 
@@ -79,7 +79,7 @@ public class SkillTeamRating extends SkillRating {
         }
     }
 
-    private void setSemaphore() {
+    private void calculateSemaphore() {
         if(this.actualRating >= this.requiredRating) {
             this.semaphore = Semaphore.GREEN;
         } else if(this.requiredRating - this.actualRating <= SEMAPHORE_THRESHOLD) {
