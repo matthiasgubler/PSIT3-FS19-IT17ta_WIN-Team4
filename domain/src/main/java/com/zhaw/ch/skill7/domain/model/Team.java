@@ -69,15 +69,6 @@ public class Team extends IdUpdateableEntity<Team> {
         return skillRatingIGenericDAO.read().stream().filter(skillTeamRating -> skillTeamRating.getTeam().equals(this)).collect(Collectors.toList());
     }
 
-    public void addSkillRating(SkillTeamRating skillTeamRating) {
-        skillTeamRating.setTeam(this);
-        skillRatingIGenericDAO.add(skillTeamRating);
-    }
-
-    public SkillTeamRating createSkillRating(int rating, Skill skill) {
-        return new SkillTeamRating(rating, skill, this);
-    }
-
     @Override
     public void update(Team objectWithNewData) {
         this.setName(objectWithNewData.getName());

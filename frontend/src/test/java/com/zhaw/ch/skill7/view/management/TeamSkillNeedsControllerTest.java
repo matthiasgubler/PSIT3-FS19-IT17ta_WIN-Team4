@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,7 +24,7 @@ class TeamSkillNeedsControllerTest extends BaseJavaFXTest {
 
     @BeforeEach
     void setUp() {
-        testee = spy(new TeamSkillNeedsController(teamMock));
+        testee = new TeamSkillNeedsController(teamMock);
         testee.setBarChartDistributionView(barChartDistributionViewMock);
     }
 

@@ -4,7 +4,8 @@ import com.zhaw.ch.skill7.business.ServiceRegistry;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -146,4 +147,5 @@ public class Skill extends IdUpdateableEntity<Skill> {
                 .filter(development -> development.getSkill().equals(this))
                 .collect(Collectors.toList());
     }
+
 }
