@@ -27,13 +27,13 @@ class SkillTest {
     private IGenericDAO<Development> developmentIGenericDAOMock;
 
     @Mock
-    private Development development1 = mock(Development.class);
+    private Development development1;
     
     @Mock
-    private Development development2 = mock(Development.class);
+    private Development development2;
     
     @Mock
-    private Development developmentDifferent = mock(Development.class);
+    private Development developmentDifferent;
 
 
     @BeforeEach
@@ -90,10 +90,9 @@ class SkillTest {
 
         assertEquals(2, developmentCountResult);
 
+        verify(developmentIGenericDAOMock).read();
         verify(development1).getSkill();
         verify(development2).getSkill();
-        verify(developmentDifferent).getSkill();
-        verify(developmentIGenericDAOMock).read();
     }
 
     @Test
