@@ -39,6 +39,16 @@ public class AdminDevelopmentTableControllerTest extends BaseJavaFXTest {
     }
 
     @Test
+    void reloadTable_empty() {
+        when(companyMock.getSkillsForDevelopmentWorkshop()).thenReturn(Arrays.asList());
+
+        testee.reloadTable();
+
+        verify(companyMock).getSkillsForDevelopmentWorkshop();
+        verify(adminDevelopmentUIListMock).clear();
+    }
+
+    @Test
     void reloadTable() {
         when(skill1Mock.getSkillDevelopmentCount()).thenReturn(3);
         when(skill2Mock.getSkillDevelopmentCount()).thenReturn(5);

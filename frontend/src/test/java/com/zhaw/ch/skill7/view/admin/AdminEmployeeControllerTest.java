@@ -45,6 +45,17 @@ public class AdminEmployeeControllerTest extends BaseJavaFXTest {
     }
 
     @Test
+    void reloadTable_empty() {
+        when(skillMock.getDevelopments()).thenReturn(Arrays.asList());
+
+        testee.reloadTable(skillMock);
+
+        verify(skillMock).getDevelopments();
+        verify(adminEmployeeUIObservableListMock).clear();
+        verify(adminEmployeeUIObservableListMock).sort(any());
+    }
+
+    @Test
     void reloadTable() {
         when(skillMock.getDevelopments()).thenReturn(Arrays.asList(development1Mock, development2Mock));
         when(development1Mock.getEmployee()).thenReturn(employeeMock);
