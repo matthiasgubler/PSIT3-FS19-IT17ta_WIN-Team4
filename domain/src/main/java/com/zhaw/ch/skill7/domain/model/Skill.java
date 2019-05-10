@@ -147,5 +147,4 @@ public class Skill extends IdUpdateableEntity<Skill> {
                 .filter(development -> development.getSkill().equals(this))
                 .collect(Collectors.toList());
     }
-
 }
