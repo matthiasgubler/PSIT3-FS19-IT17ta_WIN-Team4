@@ -1,11 +1,9 @@
 package com.zhaw.ch.skill7.domain.model;
 
 import com.zhaw.ch.skill7.business.ServiceRegistry;
-import com.zhaw.ch.skill7.helper.MathHelper;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -146,7 +144,20 @@ public class Team extends IdUpdateableEntity<Team> {
      *
      * @return List, welche pro evaluiertem Skill je ein SkillTeamRating-Objekt enthält.
      */
-    public List<SkillTeamRating> evaluateTeam() {
+    public List<SkillTeamRating> evaluateTeamSkills() {
         return getSkillRatingList();
+    }
+
+    public Semaphore evaluateTeam() {
+        Semaphore teamStatus = Semaphore.GREEN;
+        for(SkillTeamRating teamRating : evaluateTeamSkills()) {
+            if(teamRating.getSemaphore() == Semaphore.YELLOW) {
+                teamStatus = Semaphore.YELLOW;
+            }
+            if(teamRating.getSemaphore() == Semaphore.RED) {
+                teamStatus = Semaphore.RED;
+            }
+        }
+        return teamStatus;
     }
 }

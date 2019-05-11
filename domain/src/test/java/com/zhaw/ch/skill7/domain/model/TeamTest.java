@@ -178,7 +178,7 @@ class TeamTest {
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
 
         //test
-        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeam();
+        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeamSkills();
         String actualStatusMessage = teamEvaluation1.get(0).getSemaphoreString();
         assertEquals("YELLOW", actualStatusMessage);
     }
@@ -216,7 +216,7 @@ class TeamTest {
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
 
         //test
-        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeam();
+        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeamSkills();
         String actualStatusMessage = teamEvaluation1.get(0).getSemaphoreString();
         assertEquals("RED", actualStatusMessage);
     }
@@ -255,7 +255,7 @@ class TeamTest {
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1));
 
         //test
-        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeam();
+        List<SkillTeamRating> teamEvaluation1 = testee.evaluateTeamSkills();
         String actualStatusMessage = teamEvaluation1.get(0).getSemaphoreString();
         assertEquals("GREEN", actualStatusMessage);
     }
