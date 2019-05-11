@@ -188,12 +188,12 @@ class CompanyDataTest {
         testee.THRESHOLD_COUNT_EMPLOYEES = 3;
         Skill skill1 = mock(Skill.class);
         when(skill1.getSkillDevelopmentCountByRating(any())).thenReturn(4);
-        when(skill1.getId()).thenReturn((long)6);
+        when(skill1.getId()).thenReturn(6L);
         Skill skillWithoutDevelopment = mock(Skill.class);
         when(skillWithoutDevelopment.getSkillDevelopmentCountByRating(any())).thenReturn(2);
         Skill skill2 = mock(Skill.class);
         when(skill2.getSkillDevelopmentCountByRating(any())).thenReturn(3);
-        when(skill2.getId()).thenReturn((long)3);
+        when(skill2.getId()).thenReturn(3L);
         when(skillIGenericDAOMock.read()).thenReturn(Arrays.asList(skill1, skillWithoutDevelopment, skill2));
 
         List<Skill> skillListResult = testee.getSkillsForDevelopmentWorkshop();
