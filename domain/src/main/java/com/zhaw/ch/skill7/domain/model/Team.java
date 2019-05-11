@@ -104,10 +104,13 @@ public class Team extends IdUpdateableEntity<Team> {
     }
 
     /**
-     * Lädt die Skills der Mitarbeiter im Team und bereitet diese als Map&lt;String, Map&lt;String, Long&gt;&gt; aufbereitet
+     * Lädt die Skills der Mitarbeiter im Team und bereitet diese als verschachtelte Map auf.
      *
-     * @return Verschachtelte Map der Mitarbeiter und deren Skills
-     * Der Key ist jeweils der Skill-Name als String um Value befindet sich eine weitere Map, dessen Key der Name des Mitarbeiters als String ist und der Value das SkillRating des Mitarbeiter ist.
+     * @return Map&lt;String, Map&lt;String, Long&gt;&gt;
+     * Der Key ist jeweils der Name eines Skills als String.
+     * Der Value ist eine MapMap&lt;String, Long&gt;
+     * Der Key der inneren Map ist der Name des Mitarbeiters als String.
+     * Der Value der inneren Map ist das Skill-Rating des Mitarbeiters als Long.
      */
     public Map<String, Map<String, Long>> getMemberSkillsAsMap() {
         Map<String, Map<String, Long>> result = new HashMap<>();
@@ -121,6 +124,13 @@ public class Team extends IdUpdateableEntity<Team> {
         return result;
     }
 
+    /**
+     * Lädt die Skills der Mitarbeiter im Team und bereitet diese als Map auf.
+     *
+     * @return Map&lt;Skill, List&lt;SkillEmployeeRating&gt;&gt;
+     * Der Key ist jeweils ein Skill des Teams.
+     * Der Value ist eine Liste der SkillEmployeeRatings aller Mitarbeiter des Teams in Relation zum Key.
+     */
     public Map<Skill, List<SkillEmployeeRating>> getMemberSkills() {
         Map<Skill, List<SkillEmployeeRating>> result = new HashMap<>();
 
@@ -140,28 +150,39 @@ public class Team extends IdUpdateableEntity<Team> {
     }
 
     /**
-     * Evaluiert das Team in Bezug auf dessen Skill-Needs und Member-Skills
+     * Evaluiert jeden Skill des Teams und bereitet eine Liste der einzelnen Resultate auf.
      *
-     * @return List, welche pro evaluiertem Skill je ein SkillTeamRating-Objekt enthält.
+     * @return List&lt;SkillTeamRating&gt;
+     * Jedes SkillTeamRating-Objekt der Liste repräsentiert einen spezifischen evaluerten Skill des Teams.
      */
     public List<SkillTeamRating> evaluateTeamSkills() {
         return getSkillRatingList();
     }
 
+    /**
+     * Evaluiert das Team auf Basis dessen einzelner evaluierten Skills
+     *
+     * @return Semaphore-Objekt, welches das Resultat enthält
+     * Das Resultat ist der schlechteste gefundene Skill-Status aller Skills des Teams:
+     * -Status GREEN wird nur erreicht, wenn alle Skills diesen Status haben.
+     * -Status YELLOW wird erreicht, sobald ein Skill diesen Status hat und kein Skill den Status RED hat.
+     * -Status RED wird wird erreicht, sobald ein Skill diesen Status hat.
+     * -Status WHITE wird erreicht, wenn keine Skills vorhanden sind im Team.
+     */
     public Semaphore evaluateTeam() {
         Semaphore teamStatus = Semaphore.WHITE;
+        boolean hasGreen = false;
+        boolean hasYellow = false;
+        boolean hasRed = false;
         for(SkillTeamRating teamRating : evaluateTeamSkills()) {
-            Semaphore status = teamRating.getSemaphore();
-            if(status == Semaphore.GREEN) {
-                teamStatus = status;
-            }
-            else if(status == Semaphore.YELLOW) {
-                teamStatus = status;
-            }
-            else if(status == Semaphore.RED) {
-                teamStatus = status;
-            }
+            teamStatus = teamRating.getSemaphore();
+            if(teamStatus == Semaphore.GREEN) { hasGreen = true; }
+            else if(teamStatus == Semaphore.YELLOW) { hasYellow = true; }
+            else if(teamStatus == Semaphore.RED) { hasRed = true; }
         }
+        if(hasRed) { teamStatus = Semaphore.RED; }
+        else if(hasYellow) { teamStatus = Semaphore.YELLOW; }
+        else if(hasGreen) { teamStatus = Semaphore.GREEN; }
         return teamStatus;
     }
 }
