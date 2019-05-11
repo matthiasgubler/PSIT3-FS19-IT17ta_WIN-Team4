@@ -53,7 +53,7 @@ public class TeamMemberSkillsController {
     }
 
     protected Map<String, Map<String, Long>> loadBarChartDataWithCount() {
-        return selectedTeam.getMemberSkills();
+        return selectedTeam.getMemberSkillsAsMap();
     }
 
     void teamChanged(Team newTeam) {

@@ -42,7 +42,8 @@ public class DatabaseInit {
         Team teamFooBar = new Team("FooBar");
         Team teamEForce = new Team("EForce");
         Team teamFred = new Team("Fred");
-        addAll(teamDAO, teamSkill7, teamFooBar, teamEForce, teamFred);
+        Team teamYellow = new Team("Yellow");
+        addAll(teamDAO, teamSkill7, teamFooBar, teamEForce, teamFred, teamYellow);
 
         AvailabilityPlan availabilityPlan1 = AvailabilityPlanBuilder.anAvailabilityPlan().withMondayAvailability(Availability.AFTERNOON).build();
         AvailabilityPlan availabilityPlan2 = AvailabilityPlanBuilder.anAvailabilityPlan().withMondayAvailability(Availability.NOT_AVAILABLE).build();
@@ -74,7 +75,11 @@ public class DatabaseInit {
         Employee employeeThomas = new Employee("Deutsch", "Thomas", teamEForce, availabilityPlan11);
         Employee employeeFred = new Employee("Heierli", "Fred", teamEForce, availabilityPlan12);
 
-        addAll(employeeDAO, employeeMischa, employeeNicolas, employeeOliver, employeeValentino, employeeMatthias, employeeJunior, employeeMarkus, employeePhilipp, employeeJames, employeeDaniela, employeeThomas, employeeFred);
+        Employee employeeAndreas = new Employee("Anders", "Andreas", teamYellow, availabilityPlan3);
+        Employee employeeBrigitte = new Employee("Buenzli", "Brigitte", teamYellow, availabilityPlan3);
+        Employee employeeClaudia = new Employee("Caballero", "Claudia", teamYellow, availabilityPlan3);
+
+        addAll(employeeDAO, employeeMischa, employeeNicolas, employeeOliver, employeeValentino, employeeMatthias, employeeJunior, employeeMarkus, employeePhilipp, employeeJames, employeeDaniela, employeeThomas, employeeFred, employeeAndreas, employeeBrigitte, employeeClaudia);
 
         Development development1 = new Development(skillReact, DevelopmentRating.HIGH, employeeMischa);
         Development development2 = new Development(skillReact, DevelopmentRating.LOW, employeeDaniela);
@@ -98,6 +103,7 @@ public class DatabaseInit {
         SkillTeamRating skillRatingTeam5 = new SkillTeamRating(10, skillJava, teamFooBar);
         SkillTeamRating skillRatingTeam6 = new SkillTeamRating(9, skillBlockchain, teamEForce);
         SkillTeamRating skillRatingTeam7 = new SkillTeamRating(5, skillReact, teamEForce);
+        SkillTeamRating skillTeamRating8 = new SkillTeamRating(4, skillCSharp,  teamYellow);
 
         SkillEmployeeRating skillRatingEmployee1 = new SkillEmployeeRating(9, skillJava, employeeMatthias);
         SkillEmployeeRating skillRatingEmployee2 = new SkillEmployeeRating(5, skillReact, employeeMatthias);
@@ -119,9 +125,12 @@ public class DatabaseInit {
         SkillEmployeeRating skillRatingEmployee14 = new SkillEmployeeRating(2, skillJava, employeeDaniela);
         SkillEmployeeRating skillRatingEmployee15 = new SkillEmployeeRating(9, skillJava, employeeThomas);
         SkillEmployeeRating skillRatingEmployee16 = new SkillEmployeeRating(6, skillJava, employeeFred);
+        SkillEmployeeRating skillRatingEmployee17 = new SkillEmployeeRating(2, skillCSharp, employeeAndreas);
+        SkillEmployeeRating skillRatingEmployee18 = new SkillEmployeeRating(2, skillCSharp, employeeBrigitte);
+        SkillEmployeeRating skillRatingEmployee19 = new SkillEmployeeRating(1, skillCSharp, employeeClaudia);
 
-        addAll(skillTeamRatingDAO, skillRatingTeam1, skillRatingTeam2, skillRatingTeam3, skillRatingTeam4, skillRatingTeam5, skillRatingTeam6, skillRatingTeam7);
-        addAll(skillEmployeeRatingDAO, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16, skillRatingEmployee41, skillRatingEmployee51, skillRatingEmployee61, skillRatingEmployee71);
+        addAll(skillTeamRatingDAO, skillRatingTeam1, skillRatingTeam2, skillRatingTeam3, skillRatingTeam4, skillRatingTeam5, skillRatingTeam6, skillRatingTeam7, skillTeamRating8);
+        addAll(skillEmployeeRatingDAO, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16, skillRatingEmployee17, skillRatingEmployee18, skillRatingEmployee19, skillRatingEmployee41, skillRatingEmployee51, skillRatingEmployee61, skillRatingEmployee71);
     }
 
     @SafeVarargs

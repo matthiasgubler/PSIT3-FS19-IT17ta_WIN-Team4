@@ -24,6 +24,11 @@
                         <fx:include source="TeamSkillDistributionView.fxml"/>
                     </content>
                 </TitledPane>
+                <TitledPane animated="false" text="Evaluation der Skills pro Team">
+                    <content>
+                        <fx:include source="TeamSkillEvaluationView.fxml"/>
+                    </content>
+                </TitledPane>
             </panes>
         </Accordion>
     </children>

@@ -11,12 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 
-public class TeamSkillDistributionController {
-
-    private final ICompany company;
-
-    @FXML
-    private ComboBox<Team> teamComboBox;
+public class TeamSkillDistributionController extends TeamSelectorController{
 
     @FXML
     private BarChartDistributionView teamSkillNeedsBarChart;
@@ -30,35 +25,23 @@ public class TeamSkillDistributionController {
     @FXML
     private TeamMemberSkillsController teamMemberSkillsViewController;
 
-    @FXML
-    private final ObservableList<Team> teamList = FXCollections.observableArrayList();
-
     public TeamSkillDistributionController() {
-        this.company = new CompanyData();
+        super();
     }
 
     public TeamSkillDistributionController(ICompany company) {
-        this.company = company;
+        super();
     }
 
-    @FXML
-    private void initialize() {
-        teamComboBox.valueProperty().addListener((observable, oldValue, newValue) -> teamChanged(newValue));
-
-        reloadTeams();
-        teamComboBox.setItems(teamList);
-        teamComboBox.setConverter(new TeamComboBoxConverter(company));
+    protected void teamChanged(Team newTeam) {
+        teamSkillNeedsBarChartController.teamChanged(newTeam);
+        teamMemberSkillsViewController.teamChanged(newTeam);
     }
 
     @FXML
     private void reloadButtonClicked() {
         reloadTeams();
         reloadSubviews();
-    }
-
-    private void teamChanged(Team newTeam) {
-        teamSkillNeedsBarChartController.teamChanged(newTeam);
-        teamMemberSkillsViewController.teamChanged(newTeam);
     }
 
     private void reloadSubviews() {

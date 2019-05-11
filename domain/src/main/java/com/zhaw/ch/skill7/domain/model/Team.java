@@ -16,6 +16,7 @@ public class Team extends IdUpdateableEntity<Team> {
 
     private final IGenericDAO<Employee> employeeIGenericDAO;
 
+
     public Team() {
         skillRatingIGenericDAO = ServiceRegistry.getInstance().getSkillTeamRatingDAO();
         employeeIGenericDAO = ServiceRegistry.getInstance().getEmployeeDAO();
@@ -69,6 +70,11 @@ public class Team extends IdUpdateableEntity<Team> {
         return skillRatingIGenericDAO.read().stream().filter(skillTeamRating -> skillTeamRating.getTeam().equals(this)).collect(Collectors.toList());
     }
 
+    public void addSkillRating(SkillTeamRating skillTeamRating) {
+        skillTeamRating.setTeam(this);
+        skillRatingIGenericDAO.add(skillTeamRating);
+    }
+
     /**
      * Speichtert die Daten des objectWithNewData in das aktuelle Team
      *
@@ -103,13 +109,35 @@ public class Team extends IdUpdateableEntity<Team> {
     }
 
     /**
-     * Lädt die Skills der Mitarbeiter im Team und bereitet diese als Map&lt;String, Map&lt;String, Long&gt;&gt; aufbereitet
+     * Lädt die Skills der Mitarbeiter im Team und bereitet diese als verschachtelte Map auf.
      *
-     * @return Verschachtelte Map der Mitarbeiter und deren Skills
-     * Der Key ist jeweils der Skill-Name als String um Value befindet sich eine weitere Map, dessen Key der Name des Mitarbeiters als String ist und der Value das SkillRating des Mitarbeiter ist.
+     * @return Map&lt;String, Map&lt;String, Long&gt;&gt;
+     * Der Key ist jeweils der Name eines Skills als String.
+     * Der Value ist eine MapMap&lt;String, Long&gt;
+     * Der Key der inneren Map ist der Name des Mitarbeiters als String.
+     * Der Value der inneren Map ist das Skill-Rating des Mitarbeiters als Long.
      */
-    public Map<String, Map<String, Long>> getMemberSkills() {
+    public Map<String, Map<String, Long>> getMemberSkillsAsMap() {
         Map<String, Map<String, Long>> result = new HashMap<>();
+
+        for (Skill skill : getMemberSkills().keySet()) {
+            List<SkillEmployeeRating> skillEmployeeRatings = getMemberSkills().get(skill);
+            result.put(skill.getName(), skillEmployeeRatings.stream().collect(Collectors.toMap(skillRating -> skillRating.getEmployee().getFirstname() + " " + skillRating.getEmployee().getLastname(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue())));
+
+        }
+
+        return result;
+    }
+
+    /**
+     * Lädt die Skills der Mitarbeiter im Team und bereitet diese als Map auf.
+     *
+     * @return Map&lt;Skill, List&lt;SkillEmployeeRating&gt;&gt;
+     * Der Key ist jeweils ein Skill des Teams.
+     * Der Value ist eine Liste der SkillEmployeeRatings aller Mitarbeiter des Teams in Relation zum Key.
+     */
+    public Map<Skill, List<SkillEmployeeRating>> getMemberSkills() {
+        Map<Skill, List<SkillEmployeeRating>> result = new HashMap<>();
 
         List<SkillEmployeeRating> allSkillEmployeeRatingList = new ArrayList<>();
         for (Employee employee : getEmployeeList()) {
@@ -118,11 +146,48 @@ public class Team extends IdUpdateableEntity<Team> {
 
         List<Skill> allSkillsInTeamList = allSkillEmployeeRatingList.stream().map(SkillEmployeeRating::getSkill).distinct().collect(Collectors.toList());
         for (Skill skill : allSkillsInTeamList) {
-            Map<String, Long> employeePerSkillRating = allSkillEmployeeRatingList.stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(skill)).collect(Collectors.toMap(skillRating -> skillRating.getEmployee().getFirstname() + " " + skillRating.getEmployee().getLastname(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
+            List<SkillEmployeeRating> employeePerSkillRating = allSkillEmployeeRatingList.stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(skill)).collect(Collectors.toList());
 
-            result.put(skill.getName(), employeePerSkillRating);
+            result.put(skill, employeePerSkillRating);
         }
 
         return result;
+    }
+
+    /**
+     * Evaluiert jeden Skill des Teams und bereitet eine Liste der einzelnen Resultate auf.
+     *
+     * @return List&lt;SkillTeamRating&gt;
+     * Jedes SkillTeamRating-Objekt der Liste repräsentiert einen spezifischen evaluerten Skill des Teams.
+     */
+    public List<SkillTeamRating> evaluateTeamSkills() {
+        return getSkillRatingList();
+    }
+
+    /**
+     * Evaluiert das Team auf Basis dessen einzelner evaluierten Skills
+     *
+     * @return Semaphore-Objekt, welches das Resultat enthält
+     * Das Resultat ist der schlechteste gefundene Skill-Status aller Skills des Teams:
+     * -Status GREEN wird nur erreicht, wenn alle Skills diesen Status haben.
+     * -Status YELLOW wird erreicht, sobald ein Skill diesen Status hat und kein Skill den Status RED hat.
+     * -Status RED wird wird erreicht, sobald ein Skill diesen Status hat.
+     * -Status WHITE wird erreicht, wenn keine Skills vorhanden sind im Team.
+     */
+    public Semaphore evaluateTeam() {
+        Semaphore teamStatus = Semaphore.WHITE;
+        boolean hasGreen = false;
+        boolean hasYellow = false;
+        boolean hasRed = false;
+        for(SkillTeamRating teamRating : evaluateTeamSkills()) {
+            teamStatus = teamRating.getSemaphore();
+            if(teamStatus == Semaphore.GREEN) { hasGreen = true; }
+            else if(teamStatus == Semaphore.YELLOW) { hasYellow = true; }
+            else if(teamStatus == Semaphore.RED) { hasRed = true; }
+        }
+        if(hasRed) { teamStatus = Semaphore.RED; }
+        else if(hasYellow) { teamStatus = Semaphore.YELLOW; }
+        else if(hasGreen) { teamStatus = Semaphore.GREEN; }
+        return teamStatus;
     }
 }
