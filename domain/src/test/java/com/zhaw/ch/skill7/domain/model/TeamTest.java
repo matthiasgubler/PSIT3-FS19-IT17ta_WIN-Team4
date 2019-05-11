@@ -100,7 +100,7 @@ class TeamTest {
 
     @Test
     void getMemberSkills_empty() {
-        Map<String, Map<String, Long>> result = testee.getMemberSkills();
+        Map<String, Map<String, Long>> result = testee.getMemberSkillsAsMap();
         assertEquals(0, result.size());
         verify(employeeIGenericDAOMock).read();
     }
@@ -134,7 +134,7 @@ class TeamTest {
 
         when(employeeIGenericDAOMock.read()).thenReturn(Arrays.asList(employee1, employee2));
 
-        Map<String, Map<String, Long>> result = testee.getMemberSkills();
+        Map<String, Map<String, Long>> result = testee.getMemberSkillsAsMap();
         Map<String, Long> resultSkill1 = result.get("1");
         Map<String, Long> resultSkill2 = result.get("2");
 

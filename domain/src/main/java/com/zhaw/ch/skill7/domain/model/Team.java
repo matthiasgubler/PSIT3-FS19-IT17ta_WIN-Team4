@@ -1,6 +1,7 @@
 package com.zhaw.ch.skill7.domain.model;
 
 import com.zhaw.ch.skill7.business.ServiceRegistry;
+import com.zhaw.ch.skill7.helper.MathHelper;
 import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
@@ -110,8 +111,20 @@ public class Team extends IdUpdateableEntity<Team> {
      * @return Verschachtelte Map der Mitarbeiter und deren Skills
      * Der Key ist jeweils der Skill-Name als String um Value befindet sich eine weitere Map, dessen Key der Name des Mitarbeiters als String ist und der Value das SkillRating des Mitarbeiter ist.
      */
-    public Map<String, Map<String, Long>> getMemberSkills() {
+    public Map<String, Map<String, Long>> getMemberSkillsAsMap() {
         Map<String, Map<String, Long>> result = new HashMap<>();
+
+        for (Skill skill : getMemberSkills().keySet()) {
+            List<SkillEmployeeRating> skillEmployeeRatings = getMemberSkills().get(skill);
+            result.put(skill.getName(), skillEmployeeRatings.stream().collect(Collectors.toMap(skillRating -> skillRating.getEmployee().getFirstname() + " " + skillRating.getEmployee().getLastname(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue())));
+
+        }
+
+        return result;
+    }
+
+    public Map<Skill, List<SkillEmployeeRating>> getMemberSkills() {
+        Map<Skill, List<SkillEmployeeRating>> result = new HashMap<>();
 
         List<SkillEmployeeRating> allSkillEmployeeRatingList = new ArrayList<>();
         for (Employee employee : getEmployeeList()) {
@@ -120,46 +133,20 @@ public class Team extends IdUpdateableEntity<Team> {
 
         List<Skill> allSkillsInTeamList = allSkillEmployeeRatingList.stream().map(SkillEmployeeRating::getSkill).distinct().collect(Collectors.toList());
         for (Skill skill : allSkillsInTeamList) {
-            Map<String, Long> employeePerSkillRating = allSkillEmployeeRatingList.stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(skill)).collect(Collectors.toMap(skillRating -> skillRating.getEmployee().getFirstname() + " " + skillRating.getEmployee().getLastname(), skillRating -> Integer.valueOf(skillRating.getRating()).longValue()));
+            List<SkillEmployeeRating> employeePerSkillRating = allSkillEmployeeRatingList.stream().filter(skillEmployeeRating -> skillEmployeeRating.getSkill().equals(skill)).collect(Collectors.toList());
 
-            result.put(skill.getName(), employeePerSkillRating);
+            result.put(skill, employeePerSkillRating);
         }
 
         return result;
     }
 
     /**
-     * Evaluiert das Team-Objekt in Bezug auf dessen Skill-Needs und Skills der Mitglieder.
+     * Evaluiert das Team in Bezug auf dessen Skill-Needs und Member-Skills
      *
-     * @return List, welche pro evaluiertem Skill je ein SkillTeamRating enthält.
+     * @return List, welche pro evaluiertem Skill je ein SkillTeamRating-Objekt enthält.
      */
     public List<SkillTeamRating> evaluateTeam() {
-
-        List<SkillTeamRating> teamEvaluation = new ArrayList<>();
-        Map<String, Long> skillNeeds = getSkillNeeds();
-        Map<String, Map<String, Long>> memberSkills = getMemberSkills();
-        Map<String, Long> specificMemberSkills;
-        SkillTeamRating skillTeamRating;
-
-        for(Map.Entry<String, Long> need : skillNeeds.entrySet()) {
-
-            Skill skill = new Skill(need.getKey());
-            Team team = this;
-            int requiredRating = need.getValue().intValue();
-
-            skillTeamRating = new SkillTeamRating(requiredRating, skill, team);
-            specificMemberSkills = memberSkills.get(need.getKey());
-
-            if(specificMemberSkills != null) {
-                for(Map.Entry<String, Long> specificSkill : specificMemberSkills.entrySet()) {
-                    int rating = specificSkill.getValue().intValue();
-                    skillTeamRating.addIntermediateRating(rating);
-                }
-            }
-
-            teamEvaluation.add(skillTeamRating);
-        }
-
-        return teamEvaluation;
+        return getSkillRatingList();
     }
 }

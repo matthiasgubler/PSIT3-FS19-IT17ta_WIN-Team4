@@ -4,6 +4,7 @@ import com.zhaw.ch.skill7.helper.MathHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SkillTeamRating extends SkillRating {
 
@@ -14,6 +15,13 @@ public class SkillTeamRating extends SkillRating {
     private int actualRating;
     private boolean upToDate;
 
+    /**
+     * Konstruktor der Klasse SkillTeamRating
+     *
+     * @param requiredRating Benötigtes Rating für bewerteten Skill
+     * @param skill          Skill der bewertet wird
+     * @param team           Team dessen Skill bewertet wird
+     */
     public SkillTeamRating(int requiredRating, Skill skill, Team team) {
         super(requiredRating, skill);
         this.team = team;
@@ -31,59 +39,41 @@ public class SkillTeamRating extends SkillRating {
         this.team = team;
     }
 
-
+    public Semaphore getSemaphore() {
+        return calculateSemaphore(getActualRating(), getRating());
+    }
 
     public String getSemaphoreString() {
-        if(this.upToDate) {
-            return this.semaphore.toString();
-        } else {
-            evaluateTeamRating();
-            return this.semaphore.toString();
-        }
+        return getSemaphore().toString();
     }
 
     public int getRequiredRating() {
         return this.getRating();
     }
 
-    public int getActualRating() {
-        if(this.upToDate) {
-            return this.actualRating;
-        } else {
-            //calculate current rating
-            evaluateTeamRating();
-            return this.actualRating;
+    public int getActualRating(){
+        Map<Skill, List<SkillEmployeeRating>> memberSkills = team.getMemberSkills();
+
+        List<SkillEmployeeRating> specificMemberSkills;
+
+        specificMemberSkills = memberSkills.get(this.getSkill());
+
+        List<Integer> employeeRatings = new ArrayList<>();
+        if (specificMemberSkills != null) {
+            for (SkillEmployeeRating specificMemberSkill : specificMemberSkills) {
+                employeeRatings.add(specificMemberSkill.getRating());
+            }
         }
+        return MathHelper.calculateMedian(employeeRatings);
     }
 
-    public void addIntermediateRating(int requiredRating) {
-        this.intermediateRatings.add(requiredRating);
-        this.upToDate = false;
-    }
-
-    private void evaluateTeamRating() {
-        this.calculateActualRating();
-        this.calculateSemaphore();
-        this.upToDate = true;
-    }
-
-    private void calculateActualRating() {
-        if(intermediateRatings.isEmpty()) {
-            this.actualRating = 0;
-        } else if(intermediateRatings.size() == 1) {
-            this.actualRating = this.intermediateRatings.get(0);
+    private static Semaphore calculateSemaphore(int actualRating, int expectedRating) {
+        if (actualRating >= expectedRating) {
+            return Semaphore.GREEN;
+        } else if (expectedRating - actualRating <= SEMAPHORE_THRESHOLD) {
+            return Semaphore.YELLOW;
         } else {
-            this.actualRating = MathHelper.calculateMedian(this.intermediateRatings);
-        }
-    }
-
-    private void calculateSemaphore() {
-        if(this.actualRating >= this.getRating()) {
-            this.semaphore = Semaphore.GREEN;
-        } else if(this.getRating() - this.actualRating <= SEMAPHORE_THRESHOLD) {
-            this.semaphore = Semaphore.YELLOW;
-        } else {
-            this.semaphore = Semaphore.RED;
+            return Semaphore.RED;
         }
     }
 

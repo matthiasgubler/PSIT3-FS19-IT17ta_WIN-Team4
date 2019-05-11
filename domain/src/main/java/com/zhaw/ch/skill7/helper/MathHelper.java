@@ -4,14 +4,15 @@ import java.util.List;
 
 public final class MathHelper {
 
-    private MathHelper() {}
+    private MathHelper() {
+    }
 
     public static int calculateMedian(List<Integer> m) {
-        int middle = m.size()/2;
-        if (m.size()%2 == 1) {
+        int middle = m.size() / 2;
+        if (m.size() % 2 == 1) {
             return m.get(middle);
         } else {
-            return (m.get(middle-1) + m.get(middle)) / 2;
+            return (m.get(middle - 1) + m.get(middle)) / 2;
         }
     }
 }

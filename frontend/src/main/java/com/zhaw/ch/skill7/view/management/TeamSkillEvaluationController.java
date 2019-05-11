@@ -70,7 +70,7 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
     }
 
     private ObservableList<ISimplePropertySkillTeamRating> evaluateSelectedTeam() {
-        List<SkillTeamRating> teamEvaluation = selectedTeam.evaluateTeam();
+        List<SkillTeamRating> teamEvaluation = selectedTeam.getSkillRatingList();
         ObservableList<ISimplePropertySkillTeamRating> observableSkillTeamRatings = FXCollections.observableArrayList();
         for(SkillTeamRating rating : teamEvaluation) {
             observableSkillTeamRatings.add(new SkillTeamRatingAdapter(rating));
