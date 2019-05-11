@@ -8,6 +8,9 @@ public final class MathHelper {
     }
 
     public static int calculateMedian(List<Integer> m) {
+        if(m.isEmpty()) {
+            return 0;
+        }
         int middle = m.size() / 2;
         if (m.size() % 2 == 1) {
             return m.get(middle);
