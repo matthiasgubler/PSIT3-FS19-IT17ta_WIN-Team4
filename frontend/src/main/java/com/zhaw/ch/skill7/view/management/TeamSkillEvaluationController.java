@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.List;
@@ -31,10 +32,13 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
     private TableColumn<ISimplePropertySkillTeamRating, SimpleIntegerProperty> skillRequiredRating;
     @FXML
     private TableColumn<ISimplePropertySkillTeamRating, SimpleStringProperty> skillEvaluationStatus;
+    @FXML
+    private TextField teamStatus;
 
     public TeamSkillEvaluationController() {
         super();
         this.selectedTeam = new DummyTeam();
+        teamStatus = new TextField();
     }
 
     public TeamSkillEvaluationController(ICompany company) {
@@ -55,6 +59,7 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
     protected void teamChanged(Team newTeam) {
         if (newTeam != null) {
             selectedTeam = newTeam;
+            teamStatus.setText(selectedTeam.evaluateTeam().toString());
             tableView.setItems(evaluateSelectedTeam());
         }
     }
