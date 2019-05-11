@@ -75,6 +75,11 @@ public class Team extends IdUpdateableEntity<Team> {
         skillRatingIGenericDAO.add(skillTeamRating);
     }
 
+    /**
+     * Speichtert die Daten des objectWithNewData in das aktuelle Team
+     *
+     * @param objectWithNewData Objekt mit den neuen Daten, die auf das Updateable Objekt übernommen werden
+     */
     @Override
     public void update(Team objectWithNewData) {
         this.setName(objectWithNewData.getName());

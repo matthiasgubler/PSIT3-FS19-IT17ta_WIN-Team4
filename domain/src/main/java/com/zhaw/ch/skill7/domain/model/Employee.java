@@ -7,6 +7,9 @@ import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Die Klasse Employee stellt einen Mitarbeiter einer Unternehmung dar
+ */
 public class Employee extends IdUpdateableEntity<Employee> {
 
     private final IGenericDAO<SkillEmployeeRating> skillRatingIGenericDAO;
@@ -80,6 +83,11 @@ public class Employee extends IdUpdateableEntity<Employee> {
         return new SkillEmployeeRating(rating, skill, this);
     }
 
+    /**
+     * Speichtert die Daten des objectWithNewData in den aktuellen Employee
+     *
+     * @param objectWithNewData Objekt mit den neuen Daten, die auf das Updateable Objekt übernommen werden
+     */
     @Override
     public void update(Employee objectWithNewData) {
         this.setFirstname(objectWithNewData.getFirstname());

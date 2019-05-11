@@ -1,11 +1,15 @@
 package com.zhaw.ch.skill7.domain.model;
 
+
 import com.zhaw.ch.skill7.helper.MathHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Referenzklasse zwischen einem Team und einem Skill inkl. Bewertung des Können/Skill/Rating
+ */
 public class SkillTeamRating extends SkillRating {
 
     private Team team;

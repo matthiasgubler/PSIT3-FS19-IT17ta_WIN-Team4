@@ -1,10 +1,8 @@
 package com.zhaw.ch.skill7.view.admin;
 
-import com.zhaw.ch.skill7.domain.CompanyData;
 import com.zhaw.ch.skill7.domain.model.Development;
 import com.zhaw.ch.skill7.domain.model.Employee;
 import com.zhaw.ch.skill7.domain.model.Skill;
-import com.zhaw.ch.skill7.interfaces.ICompany;
 import com.zhaw.ch.skill7.model.EmployeeAdminDevelopmentUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -16,17 +14,14 @@ public class AdminEmployeeTableController {
     @FXML
     private List<EmployeeAdminDevelopmentUI> adminEmployeeUIObservableList;
 
-    private final ICompany company;
-
     @FXML
     private TableView<EmployeeAdminDevelopmentUI> tableView;
 
     public AdminEmployeeTableController() {
-        this.company = new CompanyData();
     }
 
-    public AdminEmployeeTableController(ICompany company) {
-        this.company = company;
+    public AdminEmployeeTableController(List<EmployeeAdminDevelopmentUI> adminEmployeeUIObservableList) {
+        this.adminEmployeeUIObservableList = adminEmployeeUIObservableList;
     }
 
     @FXML

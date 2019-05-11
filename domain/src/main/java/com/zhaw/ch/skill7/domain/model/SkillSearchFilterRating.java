@@ -1,5 +1,8 @@
 package com.zhaw.ch.skill7.domain.model;
 
+/**
+ * Die Klasse SkillSearchFilterRating referenziert einen Skill inkl. Rating zu einem Suchfilter/SearchFilter
+ */
 public class SkillSearchFilterRating extends SkillRating{
 
     private SearchFilter searchFilter;

@@ -1,5 +1,9 @@
 package com.zhaw.ch.skill7.domain.model;
 
+/**
+ * Klasse für ein Entwicklungsbedürfniss.
+ * Hält die Referenz zwischen einem Employee und einem Skill zusammen mit einem DevelopmentRating
+ */
 public class Development extends SkillReference<Development> {
 
     private long id;
@@ -38,6 +42,11 @@ public class Development extends SkillReference<Development> {
         this.employee = employee;
     }
 
+    /**
+     * Speichtert die Daten des objectWithNewData in das aktuelle Development
+     *
+     * @param objectWithNewData Objekt mit den neuen Daten, die auf das Updateable Objekt übernommen werden
+     */
     @Override
     public void update(Development objectWithNewData) {
         this.setDevelopmentRating(objectWithNewData.getDevelopmentRating());

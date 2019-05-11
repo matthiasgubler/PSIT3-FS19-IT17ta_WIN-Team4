@@ -48,14 +48,14 @@ public class AdminPropertyController {
         ObservableList<Integer> count = FXCollections.observableArrayList();
         count.addAll(employeeCountSelection);
         employeeCountComboBox.setItems(count);
-        employeeCountComboBox.getSelectionModel().select(CompanyData.THRESHOLD_COUNT_EMPLOYEES);
+        employeeCountComboBox.getSelectionModel().select(CompanyData.thresholdCountEmployees);
     }
 
     private void loadDevelopmentRatingComboBox() {
         ObservableList<DevelopmentRating> ratings = FXCollections.observableArrayList();
         ratings.addAll(DevelopmentRating.values());
         developmentRatingComboBox.setItems(ratings);
-        developmentRatingComboBox.getSelectionModel().select(CompanyData.THRESHOLD_DEVELOPMENT_RATING);
+        developmentRatingComboBox.getSelectionModel().select(CompanyData.thresholdDevelopmentRating);
     }
 
     private int getSelectedEmployeeCount() {
@@ -67,12 +67,12 @@ public class AdminPropertyController {
     }
 
     private void employeeCountChanged() {
-        CompanyData.THRESHOLD_COUNT_EMPLOYEES = getSelectedEmployeeCount();
+        CompanyData.thresholdCountEmployees = getSelectedEmployeeCount();
         reloadDevelopmentTable();
     }
 
     private void developmentRatingChanged() {
-        CompanyData.THRESHOLD_DEVELOPMENT_RATING = getSelectedDevelopmentRating();
+        CompanyData.thresholdDevelopmentRating = getSelectedDevelopmentRating();
         reloadDevelopmentTable();
     }
 

@@ -152,4 +152,61 @@ class CompanyDataTest {
 
         verify(developmentIGenericDAOMock).read();
     }
+
+    @Test
+    void getSkillsForDevelopmentWorkshop_noSkill() {
+        when(skillIGenericDAOMock.read()).thenReturn(Arrays.asList());
+
+        List<Skill> skillListResult = testee.getSkillsForDevelopmentWorkshop();
+
+        assertEquals(true, skillListResult.isEmpty());
+
+        verify(skillIGenericDAOMock).read();
+    }
+
+    @Test
+    void getSkillsForDevelopmentWorkshop_noMatch() {
+        testee.thresholdCountEmployees = 3;
+        Skill skill1 = mock(Skill.class);
+        when(skill1.getSkillDevelopmentCountByRating(any())).thenReturn(1);
+        Skill skill2 = mock(Skill.class);
+        when(skill2.getSkillDevelopmentCountByRating(any())).thenReturn(2);
+
+        when(skillIGenericDAOMock.read()).thenReturn(Arrays.asList(skill1, skill2));
+
+        List<Skill> skillListResult = testee.getSkillsForDevelopmentWorkshop();
+
+        assertEquals(true, skillListResult.isEmpty());
+
+        verify(skillIGenericDAOMock).read();
+        verify(skill1).getSkillDevelopmentCountByRating(any());
+        verify(skill2).getSkillDevelopmentCountByRating(any());
+    }
+
+    @Test
+    void getSkillsForDevelopmentWorkshop() {
+        testee.thresholdCountEmployees = 3;
+        Skill skill1 = mock(Skill.class);
+        when(skill1.getSkillDevelopmentCountByRating(any())).thenReturn(4);
+        when(skill1.getId()).thenReturn(6L);
+        Skill skillWithoutDevelopment = mock(Skill.class);
+        when(skillWithoutDevelopment.getSkillDevelopmentCountByRating(any())).thenReturn(2);
+        Skill skill2 = mock(Skill.class);
+        when(skill2.getSkillDevelopmentCountByRating(any())).thenReturn(3);
+        when(skill2.getId()).thenReturn(3L);
+        when(skillIGenericDAOMock.read()).thenReturn(Arrays.asList(skill1, skillWithoutDevelopment, skill2));
+
+        List<Skill> skillListResult = testee.getSkillsForDevelopmentWorkshop();
+
+        assertEquals(2, skillListResult.size());
+        assertEquals(skill2, skillListResult.get(0));
+        assertEquals(skill1, skillListResult.get(1));
+
+        verify(skillIGenericDAOMock).read();
+        verify(skill1).getSkillDevelopmentCountByRating(any());
+        verify(skill1).getId();
+        verify(skill2).getSkillDevelopmentCountByRating(any());
+        verify(skill2).getId();
+        verify(skillWithoutDevelopment).getSkillDevelopmentCountByRating(any());
+    }
 }

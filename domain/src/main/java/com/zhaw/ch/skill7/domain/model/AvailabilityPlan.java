@@ -2,6 +2,9 @@ package com.zhaw.ch.skill7.domain.model;
 
 import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 
+/**
+ * Der AvailabilityPlan gibt die Verfügbarkeit während einer Arbeitswoche (Montag bis Freitag an)
+ */
 public class AvailabilityPlan extends IdUpdateableEntity<AvailabilityPlan> {
 
     private Availability mondayAvailability;
@@ -54,6 +57,11 @@ public class AvailabilityPlan extends IdUpdateableEntity<AvailabilityPlan> {
         this.fridayAvailability = fridayAvailability;
     }
 
+    /**
+     * Speichtert die Daten des objectWithNewData in den aktuellen AvailabilityPlan
+     *
+     * @param objectWithNewData Objekt mit den neuen Daten, die auf das Updateable Objekt übernommen werden
+     */
     @Override
     public void update(AvailabilityPlan objectWithNewData) {
         this.setMondayAvailability(objectWithNewData.getMondayAvailability());

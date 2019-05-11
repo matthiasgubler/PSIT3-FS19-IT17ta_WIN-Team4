@@ -35,14 +35,6 @@ public class SkillsTableController implements Observer {
     @FXML
     private void initialize() {
         reloadTable();
-        /*tableView.getSelectionModel()
-                .selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (observable != null &&
-                            observable.getValue() != null) {
-                        reloadTable();
-                    }
-                });*/
     }
 
     private void reloadTable() {
