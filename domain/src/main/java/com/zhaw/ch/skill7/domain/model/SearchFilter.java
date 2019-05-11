@@ -5,6 +5,9 @@ import com.zhaw.ch.skill7.model.IdUpdateableEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Speicherbarer Suchfilter / SearchFilter, mit welchem nach Skills (inkl. Bewertung) und Verfügbarkeiten eines Mitarbeiters gesucht werden kann
+ */
 public class SearchFilter extends IdUpdateableEntity<SearchFilter> {
 
     private String name;
@@ -37,6 +40,11 @@ public class SearchFilter extends IdUpdateableEntity<SearchFilter> {
         this.availabilityPlanList = availabilityPlanList;
     }
 
+    /**
+     * Speichtert die Daten des objectWithNewData in den aktuellen SearchFilter
+     *
+     * @param objectWithNewData Objekt mit den neuen Daten, die auf das Updateable Objekt übernommen werden
+     */
     @Override
     public void update(SearchFilter objectWithNewData) {
         this.setName(objectWithNewData.getName());

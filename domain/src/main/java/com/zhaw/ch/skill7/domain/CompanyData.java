@@ -8,14 +8,25 @@ import com.zhaw.ch.skill7.interfaces.IGenericDAO;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Die Klasse CompanyData repräsentiert das konkrete Unternehmen
+ */
 public class CompanyData implements ICompany {
 
     private final IGenericDAO<Skill> skillIGenericDAO;
     private final IGenericDAO<Employee> employeeIGenericDAO;
     private final IGenericDAO<Team> teamIGenericDAO;
     private final IGenericDAO<Development> developmentIGenericDAO;
-    public static int THRESHOLD_COUNT_EMPLOYEES = 3;
-    public static DevelopmentRating THRESHOLD_DEVELOPMENT_RATING = DevelopmentRating.MEDIUM;
+
+    /**
+     * Globale Steuerung, bei welchem Schwellwert von Anzahl der Mitarbeiter (Entwicklungsbedürfnisse) ein Workshop durchgeführt werden soll
+     */
+    public static int thresholdCountEmployees = 3;
+
+    /**
+     * Globale Steuerung, bei welchem Schwellwert von DevelopmentRating ein Workshop durchgeführt werden soll
+     */
+    public static DevelopmentRating thresholdDevelopmentRating = DevelopmentRating.MEDIUM;
 
     /**
      * Konstruktor zur Instanzierung einer CompanyData / Unternehmung
@@ -83,6 +94,11 @@ public class CompanyData implements ICompany {
         return employeeIGenericDAO.read();
     }
 
+    /**
+     * Liefert eine Map&lt;String, Long&gt; mit der Information über die einzelnen Skills im Unternehmen und wieviele Mitarbeiter diesen Skill besitzen.
+     *
+     * @return Map mit dem Skill-Name als Key und der Anzahl der Mitarbeiter die diesen Skill besitzen als Value
+     */
     @Override
     public Map<String, Long> getSkillDistribution() {
         Map<String, Long> result = new HashMap<>();
@@ -95,17 +111,26 @@ public class CompanyData implements ICompany {
         return result;
     }
 
+    /**
+     * Liefert eine Map&lt;String, Long&gt; mit der Information über die einzelnen Entwicklungsbedürfnisse im Unternehmen und wieviele Mitarbeiter dieses Entwicklungsbedürfnis besitzen.
+     * @return Map mit dem Skill-Name als Key und der Anzahl der Mitarbeiter die dieses Entwicklungsbedürfnis besitzen als Value
+     */
     @Override
     public Map<String, Long> getDevelopmentDistribution() {
         List<Development> develompentList = getDevelopments();
         return develompentList.stream().collect(Collectors.groupingBy(developmentDistribution -> developmentDistribution.getSkill().getName(), Collectors.counting()));
     }
 
+    /**
+     * Liefert eine List&lt;String&gt; mit allen Skills die in der Auswertung der Entwicklungsbedürfnisse auftreten.
+     *
+     * @return Liste der Skills, für welche eine Workshop vorgeschlagen wird
+     */
     @Override
     public List<Skill> getSkillsForDevelopmentWorkshop() {
         List<Skill> skillList = getSkills()
                 .stream()
-                .filter(skill -> skill.getSkillDevelopmentCountByRating(THRESHOLD_DEVELOPMENT_RATING) >= THRESHOLD_COUNT_EMPLOYEES)
+                .filter(skill -> skill.getSkillDevelopmentCountByRating(thresholdDevelopmentRating) >= thresholdCountEmployees)
                 .collect(Collectors.toList());
 
         skillList.sort(Comparator.comparing(Skill::getId));

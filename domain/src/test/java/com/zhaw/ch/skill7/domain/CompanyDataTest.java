@@ -166,7 +166,7 @@ class CompanyDataTest {
 
     @Test
     void getSkillsForDevelopmentWorkshop_noMatch() {
-        testee.THRESHOLD_COUNT_EMPLOYEES = 3;
+        testee.thresholdCountEmployees = 3;
         Skill skill1 = mock(Skill.class);
         when(skill1.getSkillDevelopmentCountByRating(any())).thenReturn(1);
         Skill skill2 = mock(Skill.class);
@@ -185,7 +185,7 @@ class CompanyDataTest {
 
     @Test
     void getSkillsForDevelopmentWorkshop() {
-        testee.THRESHOLD_COUNT_EMPLOYEES = 3;
+        testee.thresholdCountEmployees = 3;
         Skill skill1 = mock(Skill.class);
         when(skill1.getSkillDevelopmentCountByRating(any())).thenReturn(4);
         when(skill1.getId()).thenReturn(6L);

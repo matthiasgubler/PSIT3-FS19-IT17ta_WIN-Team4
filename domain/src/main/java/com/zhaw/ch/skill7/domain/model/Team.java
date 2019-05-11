@@ -69,6 +69,11 @@ public class Team extends IdUpdateableEntity<Team> {
         return skillRatingIGenericDAO.read().stream().filter(skillTeamRating -> skillTeamRating.getTeam().equals(this)).collect(Collectors.toList());
     }
 
+    /**
+     * Speichtert die Daten des objectWithNewData in das aktuelle Team
+     *
+     * @param objectWithNewData Objekt mit den neuen Daten, die auf das Updateable Objekt übernommen werden
+     */
     @Override
     public void update(Team objectWithNewData) {
         this.setName(objectWithNewData.getName());

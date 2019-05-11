@@ -21,7 +21,7 @@ public class Skill extends IdUpdateableEntity<Skill> {
      * Konstuktor eines Skills mit DAO's als Parameter
      *
      * @param skillEmployeeRatingIGenericDAO SkillEmployeeRating DAO für das Handling der Mitarbeiter-Ratings des Skills
-     * @param developmentIGenericDAO Development DAO für das Handling der Weiterbildungen des Skills
+     * @param developmentIGenericDAO         Development DAO für das Handling der Weiterbildungen des Skills
      */
     public Skill(IGenericDAO<SkillEmployeeRating> skillEmployeeRatingIGenericDAO, IGenericDAO<Development> developmentIGenericDAO) {
         super();
@@ -62,7 +62,7 @@ public class Skill extends IdUpdateableEntity<Skill> {
     /**
      * Instanziert ein Skill mit einer ID und einem Namen
      *
-     * @param id ID des Skills
+     * @param id   ID des Skills
      * @param name Name des Skills
      */
     public Skill(long id, String name) {
@@ -78,6 +78,11 @@ public class Skill extends IdUpdateableEntity<Skill> {
         this.name = name;
     }
 
+    /**
+     * Speichtert die Daten des objectWithNewData in den aktuellen Skill
+     *
+     * @param objectWithNewData Objekt mit den neuen Daten, die auf das Updateable Objekt übernommen werden
+     */
     @Override
     public void update(Skill objectWithNewData) {
         this.setName(objectWithNewData.getName());
@@ -124,7 +129,6 @@ public class Skill extends IdUpdateableEntity<Skill> {
      * den mitgegebenen Rating Parameter entsprechen.
      *
      * @param developmentRating mindest Rating welches für die Rückgabe der Mitarbeiter berücksichtigt wird.
-     *
      * @return Anzahl Weiterbildungswünsche
      */
     public int getSkillDevelopmentCountByRating(DevelopmentRating developmentRating) {

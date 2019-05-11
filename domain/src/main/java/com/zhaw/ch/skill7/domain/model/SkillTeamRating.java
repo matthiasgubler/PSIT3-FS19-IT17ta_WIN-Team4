@@ -1,5 +1,8 @@
 package com.zhaw.ch.skill7.domain.model;
 
+/**
+ * Referenzklasse zwischen einem Team und einem Skill inkl. Bewertung des Können/Skill/Rating
+ */
 public class SkillTeamRating extends SkillRating {
 
     private Team team;
