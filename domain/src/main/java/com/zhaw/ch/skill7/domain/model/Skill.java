@@ -8,35 +8,63 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Repräsentation eines Skills innerhalb einer Company
+ */
 public class Skill extends IdUpdateableEntity<Skill> {
 
-    private transient final IGenericDAO<Skill> skillIGenericDAO;
-
     private transient final IGenericDAO<SkillEmployeeRating> skillEmployeeRatingIGenericDAO;
-
     private transient final IGenericDAO<Development> developmentIGenericDAO;
-
     private String name;
 
+    /**
+     * Konstuktor eines Skills mit DAO's als Parameter
+     *
+     * @param skillEmployeeRatingIGenericDAO SkillEmployeeRating DAO für das Handling der Mitarbeiter-Ratings des Skills
+     * @param developmentIGenericDAO Development DAO für das Handling der Weiterbildungen des Skills
+     */
+    public Skill(IGenericDAO<SkillEmployeeRating> skillEmployeeRatingIGenericDAO, IGenericDAO<Development> developmentIGenericDAO) {
+        super();
+        this.skillEmployeeRatingIGenericDAO = skillEmployeeRatingIGenericDAO;
+        this.developmentIGenericDAO = developmentIGenericDAO;
+    }
+
+    /**
+     * Instanziert ein Skill ohne Parameter
+     */
     public Skill() {
         super();
-        this.skillIGenericDAO = ServiceRegistry.getInstance().getSkillDAO();
         this.skillEmployeeRatingIGenericDAO = ServiceRegistry.getInstance().getSkillEmployeeRatingDAO();
         this.developmentIGenericDAO = ServiceRegistry.getInstance().getDevelopmentDAO();
     }
 
+    /**
+     * Instanziert ein Skill mit einer bestimmten ID
+     *
+     * @param id ID des Skills
+     */
     private Skill(long id) {
         super(id);
-        this.skillIGenericDAO = ServiceRegistry.getInstance().getSkillDAO();
         this.skillEmployeeRatingIGenericDAO = ServiceRegistry.getInstance().getSkillEmployeeRatingDAO();
         this.developmentIGenericDAO = ServiceRegistry.getInstance().getDevelopmentDAO();
     }
 
+    /**
+     * Instanziert ein Skill mit einem Namen
+     *
+     * @param name Name des Skills
+     */
     public Skill(String name) {
         this();
         this.name = name;
     }
 
+    /**
+     * Instanziert ein Skill mit einer ID und einem Namen
+     *
+     * @param id ID des Skills
+     * @param name Name des Skills
+     */
     public Skill(long id, String name) {
         this(id);
         this.name = name;
@@ -119,5 +147,4 @@ public class Skill extends IdUpdateableEntity<Skill> {
                 .filter(development -> development.getSkill().equals(this))
                 .collect(Collectors.toList());
     }
-
 }

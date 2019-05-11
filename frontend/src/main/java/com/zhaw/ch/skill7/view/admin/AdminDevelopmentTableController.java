@@ -25,8 +25,9 @@ public class AdminDevelopmentTableController {
         this.company = new CompanyData();
     }
 
-    public AdminDevelopmentTableController(ICompany company) {
+    public AdminDevelopmentTableController(ICompany company, List<SkillAdminDevelopmentUI> developmentSkillUIObservableList) {
         this.company = company;
+        this.developmentSkillUIObservableList = developmentSkillUIObservableList;
     }
 
     @FXML
