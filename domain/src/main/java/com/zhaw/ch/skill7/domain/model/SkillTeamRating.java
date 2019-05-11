@@ -9,11 +9,7 @@ import java.util.Map;
 public class SkillTeamRating extends SkillRating {
 
     private Team team;
-    private List<Integer> intermediateRatings;
-    private Semaphore semaphore;
     private static final int SEMAPHORE_THRESHOLD = 2;
-    private int actualRating;
-    private boolean upToDate;
 
     /**
      * Konstruktor der Klasse SkillTeamRating
@@ -25,10 +21,6 @@ public class SkillTeamRating extends SkillRating {
     public SkillTeamRating(int requiredRating, Skill skill, Team team) {
         super(requiredRating, skill);
         this.team = team;
-        this.intermediateRatings = new ArrayList<>();
-        this.semaphore = Semaphore.RED;
-        this.actualRating = 0;
-        this.upToDate = true;
     }
 
     public Team getTeam() {
@@ -76,6 +68,4 @@ public class SkillTeamRating extends SkillRating {
             return Semaphore.RED;
         }
     }
-
-
 }
