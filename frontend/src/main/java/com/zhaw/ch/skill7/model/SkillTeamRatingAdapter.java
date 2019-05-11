@@ -1,11 +1,11 @@
 package com.zhaw.ch.skill7.model;
 
 import com.zhaw.ch.skill7.domain.model.SkillTeamRating;
-import com.zhaw.ch.skill7.interfaces.ISimplePropertySkillTeamRating;
+import com.zhaw.ch.skill7.interfaces.ISkillTeamRating;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class SkillTeamRatingAdapter implements ISimplePropertySkillTeamRating {
+public class SkillTeamRatingAdapter implements ISkillTeamRating {
 
     private SkillTeamRating skillTeamRating;
     private SimpleStringProperty skill;

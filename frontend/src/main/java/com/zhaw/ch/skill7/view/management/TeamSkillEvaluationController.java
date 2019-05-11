@@ -3,7 +3,7 @@ package com.zhaw.ch.skill7.view.management;
 import com.zhaw.ch.skill7.domain.model.SkillTeamRating;
 import com.zhaw.ch.skill7.domain.model.Team;
 import com.zhaw.ch.skill7.interfaces.ICompany;
-import com.zhaw.ch.skill7.interfaces.ISimplePropertySkillTeamRating;
+import com.zhaw.ch.skill7.interfaces.ISkillTeamRating;
 import com.zhaw.ch.skill7.model.DummyTeam;
 import com.zhaw.ch.skill7.model.SkillTeamRatingAdapter;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -23,15 +23,15 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
     private Team selectedTeam;
 
     @FXML
-    private TableView<ISimplePropertySkillTeamRating> tableView;
+    private TableView<ISkillTeamRating> tableView;
     @FXML
-    private TableColumn<ISimplePropertySkillTeamRating, SimpleStringProperty> skillNameColumn;
+    private TableColumn<ISkillTeamRating, SimpleStringProperty> skillNameColumn;
     @FXML
-    private TableColumn<ISimplePropertySkillTeamRating, SimpleIntegerProperty> skillActualRating;
+    private TableColumn<ISkillTeamRating, SimpleIntegerProperty> skillActualRating;
     @FXML
-    private TableColumn<ISimplePropertySkillTeamRating, SimpleIntegerProperty> skillRequiredRating;
+    private TableColumn<ISkillTeamRating, SimpleIntegerProperty> skillRequiredRating;
     @FXML
-    private TableColumn<ISimplePropertySkillTeamRating, SimpleStringProperty> skillEvaluationStatus;
+    private TableColumn<ISkillTeamRating, SimpleStringProperty> skillEvaluationStatus;
     @FXML
     private TextField teamStatus;
 
@@ -74,9 +74,9 @@ public class TeamSkillEvaluationController extends TeamSelectorController{
         teamList.addAll(company.getTeams());
     }
 
-    private ObservableList<ISimplePropertySkillTeamRating> evaluateSelectedTeam() {
+    private ObservableList<ISkillTeamRating> evaluateSelectedTeam() {
         List<SkillTeamRating> teamEvaluation = selectedTeam.getSkillRatingList();
-        ObservableList<ISimplePropertySkillTeamRating> observableSkillTeamRatings = FXCollections.observableArrayList();
+        ObservableList<ISkillTeamRating> observableSkillTeamRatings = FXCollections.observableArrayList();
         for(SkillTeamRating rating : teamEvaluation) {
             observableSkillTeamRatings.add(new SkillTeamRatingAdapter(rating));
         }
