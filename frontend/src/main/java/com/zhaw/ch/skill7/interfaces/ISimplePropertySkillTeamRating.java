@@ -2,11 +2,11 @@ package com.zhaw.ch.skill7.interfaces;
 
 public interface ISimplePropertySkillTeamRating {
 
-    public String getSkill();
+    String getSkill();
 
-    public int getActualRating();
+    int getActualRating();
 
-    public int getRequiredRating();
+    int getRequiredRating();
 
-    public String getSemaphore();
+    String getSemaphore();
 }
