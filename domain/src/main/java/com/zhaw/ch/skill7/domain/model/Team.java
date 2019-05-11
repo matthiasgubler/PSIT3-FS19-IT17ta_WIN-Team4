@@ -149,13 +149,17 @@ public class Team extends IdUpdateableEntity<Team> {
     }
 
     public Semaphore evaluateTeam() {
-        Semaphore teamStatus = Semaphore.GREEN;
+        Semaphore teamStatus = Semaphore.WHITE;
         for(SkillTeamRating teamRating : evaluateTeamSkills()) {
-            if(teamRating.getSemaphore() == Semaphore.YELLOW) {
-                teamStatus = Semaphore.YELLOW;
+            Semaphore status = teamRating.getSemaphore();
+            if(status == Semaphore.GREEN) {
+                teamStatus = status;
             }
-            if(teamRating.getSemaphore() == Semaphore.RED) {
-                teamStatus = Semaphore.RED;
+            else if(status == Semaphore.YELLOW) {
+                teamStatus = status;
+            }
+            else if(status == Semaphore.RED) {
+                teamStatus = status;
             }
         }
         return teamStatus;
