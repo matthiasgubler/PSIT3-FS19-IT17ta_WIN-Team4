@@ -42,8 +42,10 @@ public class DatabaseInit {
         Team teamFooBar = new Team("FooBar");
         Team teamEForce = new Team("EForce");
         Team teamFred = new Team("Fred");
+        Team teamGreen = new Team("Green");
         Team teamYellow = new Team("Yellow");
-        addAll(teamDAO, teamSkill7, teamFooBar, teamEForce, teamFred, teamYellow);
+        Team teamRed = new Team("Red");
+        addAll(teamDAO, teamSkill7, teamFooBar, teamEForce, teamFred, teamGreen, teamYellow, teamRed);
 
         AvailabilityPlan availabilityPlan1 = AvailabilityPlanBuilder.anAvailabilityPlan().withMondayAvailability(Availability.AFTERNOON).build();
         AvailabilityPlan availabilityPlan2 = AvailabilityPlanBuilder.anAvailabilityPlan().withMondayAvailability(Availability.NOT_AVAILABLE).build();
@@ -79,7 +81,15 @@ public class DatabaseInit {
         Employee employeeBrigitte = new Employee("Buenzli", "Brigitte", teamYellow, availabilityPlan3);
         Employee employeeClaudia = new Employee("Caballero", "Claudia", teamYellow, availabilityPlan3);
 
-        addAll(employeeDAO, employeeMischa, employeeNicolas, employeeOliver, employeeValentino, employeeMatthias, employeeJunior, employeeMarkus, employeePhilipp, employeeJames, employeeDaniela, employeeThomas, employeeFred, employeeAndreas, employeeBrigitte, employeeClaudia);
+        Employee employeeGreen1 = new Employee("Green", "Uno", teamGreen, availabilityPlan3);
+        Employee employeeGreen2 = new Employee("Green", "Dos", teamGreen, availabilityPlan3);
+        Employee employeeGreen3 = new Employee("Green", "Tres", teamGreen, availabilityPlan3);
+
+        Employee employeeRed1 = new Employee("Red", "One", teamRed, availabilityPlan3);
+        Employee employeeRed2 = new Employee("Red", "Two", teamRed, availabilityPlan3);
+        Employee employeeRed3 = new Employee("Red", "Three", teamRed, availabilityPlan3);
+
+        addAll(employeeDAO, employeeMischa, employeeNicolas, employeeOliver, employeeValentino, employeeMatthias, employeeJunior, employeeMarkus, employeePhilipp, employeeJames, employeeDaniela, employeeThomas, employeeFred, employeeAndreas, employeeBrigitte, employeeClaudia, employeeGreen1, employeeGreen2, employeeGreen3, employeeRed1, employeeRed2, employeeRed3);
 
         Development development1 = new Development(skillReact, DevelopmentRating.HIGH, employeeMischa);
         Development development2 = new Development(skillReact, DevelopmentRating.LOW, employeeDaniela);
@@ -103,7 +113,12 @@ public class DatabaseInit {
         SkillTeamRating skillRatingTeam5 = new SkillTeamRating(10, skillJava, teamFooBar);
         SkillTeamRating skillRatingTeam6 = new SkillTeamRating(9, skillBlockchain, teamEForce);
         SkillTeamRating skillRatingTeam7 = new SkillTeamRating(5, skillReact, teamEForce);
+        SkillTeamRating skillTeamRating9 = new SkillTeamRating(6, skillJava, teamYellow);
         SkillTeamRating skillTeamRating8 = new SkillTeamRating(4, skillCSharp,  teamYellow);
+        SkillTeamRating skillTeamRating10 = new SkillTeamRating(6, skillJava, teamGreen);
+        SkillTeamRating skillTeamRating11 = new SkillTeamRating(6, skillJava, teamRed);
+        SkillTeamRating skillTeamRating12 = new SkillTeamRating(6, skillCSharp, teamRed);
+        SkillTeamRating skillTeamRating13 = new SkillTeamRating(6, skillBlockchain, teamRed);
 
         SkillEmployeeRating skillRatingEmployee1 = new SkillEmployeeRating(9, skillJava, employeeMatthias);
         SkillEmployeeRating skillRatingEmployee2 = new SkillEmployeeRating(5, skillReact, employeeMatthias);
@@ -128,9 +143,24 @@ public class DatabaseInit {
         SkillEmployeeRating skillRatingEmployee17 = new SkillEmployeeRating(2, skillCSharp, employeeAndreas);
         SkillEmployeeRating skillRatingEmployee18 = new SkillEmployeeRating(2, skillCSharp, employeeBrigitte);
         SkillEmployeeRating skillRatingEmployee19 = new SkillEmployeeRating(1, skillCSharp, employeeClaudia);
+        SkillEmployeeRating skillRatingEmployee20 = new SkillEmployeeRating(8, skillJava, employeeAndreas);
+        SkillEmployeeRating skillRatingEmployee21 = new SkillEmployeeRating(6, skillJava, employeeBrigitte);
+        SkillEmployeeRating skillRatingEmployee22 = new SkillEmployeeRating(4, skillJava, employeeClaudia);
+        SkillEmployeeRating skillEmployeeRatingGreen1 = new SkillEmployeeRating(8, skillJava, employeeGreen1);
+        SkillEmployeeRating skillEmployeeRatingGreen2 = new SkillEmployeeRating(8, skillJava, employeeGreen2);
+        SkillEmployeeRating skillEmployeeRatingGreen3 = new SkillEmployeeRating(8, skillJava, employeeGreen3);
+        SkillEmployeeRating skillEmployeeRatingRed1 = new SkillEmployeeRating(8, skillJava, employeeRed1);
+        SkillEmployeeRating skillEmployeeRatingRed2 = new SkillEmployeeRating(8, skillJava, employeeRed2);
+        SkillEmployeeRating skillEmployeeRatingRed3 = new SkillEmployeeRating(8, skillJava, employeeRed3);
+        SkillEmployeeRating skillEmployeeRatingRed4 = new SkillEmployeeRating(8, skillCSharp, employeeRed1);
+        SkillEmployeeRating skillEmployeeRatingRed5 = new SkillEmployeeRating(4, skillCSharp, employeeRed2);
+        SkillEmployeeRating skillEmployeeRatingRed6 = new SkillEmployeeRating(2, skillCSharp, employeeRed3);
+        SkillEmployeeRating skillEmployeeRatingRed7 = new SkillEmployeeRating(10, skillBlockchain, employeeRed1);
+        SkillEmployeeRating skillEmployeeRatingRed8 = new SkillEmployeeRating(2, skillBlockchain, employeeRed1);
+        SkillEmployeeRating skillEmployeeRatingRed9 = new SkillEmployeeRating(1, skillBlockchain, employeeRed1);
 
-        addAll(skillTeamRatingDAO, skillRatingTeam1, skillRatingTeam2, skillRatingTeam3, skillRatingTeam4, skillRatingTeam5, skillRatingTeam6, skillRatingTeam7, skillTeamRating8);
-        addAll(skillEmployeeRatingDAO, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16, skillRatingEmployee17, skillRatingEmployee18, skillRatingEmployee19, skillRatingEmployee41, skillRatingEmployee51, skillRatingEmployee61, skillRatingEmployee71);
+        addAll(skillTeamRatingDAO, skillRatingTeam1, skillRatingTeam2, skillRatingTeam3, skillRatingTeam4, skillRatingTeam5, skillRatingTeam6, skillRatingTeam7, skillTeamRating8, skillTeamRating9, skillTeamRating10, skillTeamRating11, skillTeamRating12, skillTeamRating13);
+        addAll(skillEmployeeRatingDAO, skillRatingEmployee1, skillRatingEmployee2, skillRatingEmployee3, skillRatingEmployee4, skillRatingEmployee5, skillRatingEmployee6, skillRatingEmployee7, skillRatingEmployee8, skillRatingEmployee9, skillRatingEmployee10, skillRatingEmployee11, skillRatingEmployee12, skillRatingEmployee13, skillRatingEmployee14, skillRatingEmployee15, skillRatingEmployee16, skillRatingEmployee17, skillRatingEmployee18, skillRatingEmployee19, skillRatingEmployee20, skillRatingEmployee21, skillRatingEmployee22, skillEmployeeRatingGreen1, skillEmployeeRatingGreen2, skillEmployeeRatingGreen3, skillEmployeeRatingRed1, skillEmployeeRatingRed2, skillEmployeeRatingRed3, skillEmployeeRatingRed4, skillEmployeeRatingRed5, skillEmployeeRatingRed6, skillEmployeeRatingRed7, skillEmployeeRatingRed8, skillEmployeeRatingRed9, skillRatingEmployee41, skillRatingEmployee51, skillRatingEmployee61, skillRatingEmployee71);
     }
 
     @SafeVarargs
